@@ -4,10 +4,10 @@
 auto eth0
 iface eth0 inet static
 
-address		192.168.1.4
-netmask		255.255.255.0
-network		192.168.1.0
-broadcast	192.168.1.255
-gateway		192.168.1.1
+address		192.168.122.10
+netmask		255.255.255.240
+network		192.168.122.0
+broadcast	192.168.122.255
+gateway		192.168.122.1
 
 
