@@ -1,0 +1,25 @@
+$TTL 3D
+
+; The SOA Resource Record ++
+; name [ttl] 		[class]	rr	name-server				admin-email
+@			IN	SOA	OpenERP_NameServer.justtrade.net.  	admin.justtrade.net. (
+
+					2011121201	; Serial (usually YYYYMMDDnn) - increment after any change
+						8H	; Refresh
+						1H	; Retry
+						4W	; Expire
+						3H )	; NX -- TTL Negative Cache
+
+justtrade.net.		IN	NS	OpenERP_NameServer.justtrade.net.
+
+OpenERP_NameServer	IN	A	192.168.1.4
+openerpsrv		IN	A	192.168.122.21
+openerpweb		IN	A	192.168.122.126
+
+openerpns		IN	CNAME	OpenERP_NameServer
+openerpdbs		IN	CNAME	OpenERP_NameServer
+postgres		IN	CNAME	OpenERP_NameServer
+
+openerp			IN	CNAME	openerpsrv
+
+
