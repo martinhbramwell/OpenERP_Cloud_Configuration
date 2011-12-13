@@ -12,13 +12,13 @@ $TTL 3D
 
 warehouseman.com.		IN	NS	OpenERP-NameServer.warehouseman.com.
 
-OpenERP-NameServer	IN	A	192.168.1.4
-openerpsrv		IN	A	192.168.122.21
-openerpweb		IN	A	192.168.122.126
+OpenERP-NameServer	IN	A	192.168.122.10
+openerpdbs		IN	A	192.168.122.11
+openerpsrv		IN	A	192.168.122.12
+openerpweb		IN	A	192.168.122.13
 
 openerpns		IN	CNAME	OpenERP-NameServer
-openerpdbs		IN	CNAME	OpenERP-NameServer
-postgres		IN	CNAME	OpenERP-NameServer
+postgres		IN	CNAME	openerpdbs
 
 openerp			IN	CNAME	openerpsrv
 

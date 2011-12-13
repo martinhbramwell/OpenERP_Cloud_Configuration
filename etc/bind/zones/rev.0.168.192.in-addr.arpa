@@ -12,10 +12,12 @@ $TTL 3D
 
 
 			IN	NS	OpenERP-NameServer.warehouseman.com.
-4			IN	PTR	OpenERP-NameServer.warehouseman.com.
 
-21			IN	PTR	openerpsrv.warehouseman.com.
-126			IN	PTR	openerpweb.warehouseman.com.
-1			IN	PTR	gw.warehouseman.com.
+10			IN	PTR	OpenERP-NameServer.warehouseman.com.
+
+11			IN	PTR	openerpdbs.warehouseman.com.
+12			IN	PTR	openerpsrv.warehouseman.com.
+13			IN	PTR	openerpweb.warehouseman.com.
+
 
 
