@@ -2,7 +2,7 @@ $TTL 3D
 
 ; The SOA Resource Record 
 ; name [ttl] 		[class]	rr	name-server				admin-email
-@			IN	SOA	OpenERP-NameServer.justtrade.net.	admin.justtrade.net. (
+@			IN	SOA	OpenERP-NameServer.warehouseman.com.	admin.warehouseman.com. (
 
 					2011121201	; Serial (usually YYYYMMDDnn) - increment after any change
 						8H	; Refresh
@@ -11,11 +11,11 @@ $TTL 3D
 						3H )	; NX -- TTL Negative Cache
 
 
-			IN	NS	OpenERP-NameServer.justtrade.net.
-4			IN	PTR	OpenERP-NameServer.justtrade.net.
+			IN	NS	OpenERP-NameServer.warehouseman.com.
+4			IN	PTR	OpenERP-NameServer.warehouseman.com.
 
-21			IN	PTR	openerpsrv.justtrade.net.
-126			IN	PTR	openerpweb.justtrade.net.
-1			IN	PTR	gw.justtrade.net.
+21			IN	PTR	openerpsrv.warehouseman.com.
+126			IN	PTR	openerpweb.warehouseman.com.
+1			IN	PTR	gw.warehouseman.com.
 
 

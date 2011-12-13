@@ -1,0 +1,25 @@
+$TTL 3D
+
+; The SOA Resource Record ++
+; name [ttl] 		[class]	rr	name-server				admin-email
+@			IN	SOA	OpenERP-NameServer.warehouseman.com.  	admin.warehouseman.com. (
+
+					2011121201	; Serial (usually YYYYMMDDnn) - increment after any change
+						8H	; Refresh
+						1H	; Retry
+						4W	; Expire
+						3H )	; NX -- TTL Negative Cache
+
+warehouseman.com.		IN	NS	OpenERP-NameServer.warehouseman.com.
+
+OpenERP-NameServer	IN	A	192.168.1.4
+openerpsrv		IN	A	192.168.122.21
+openerpweb		IN	A	192.168.122.126
+
+openerpns		IN	CNAME	OpenERP-NameServer
+openerpdbs		IN	CNAME	OpenERP-NameServer
+postgres		IN	CNAME	OpenERP-NameServer
+
+openerp			IN	CNAME	openerpsrv
+
+
