@@ -1,7 +1,7 @@
-#############192.168.1.4	OpenERP_NameServer	# Added by NetworkManager
+#############192.168.1.4	OpenERP-NameServer	# Added by NetworkManager
 
-127.0.0.1	OpenERP_NameServer	localhost.localdomain	localhost
-127.0.1.1	OpenERP_NameServer
+127.0.0.1	OpenERP-NameServer	localhost.localdomain	localhost
+127.0.1.1	OpenERP-NameServer
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     localhost ip6-localhost ip6-loopback
