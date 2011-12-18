@@ -3,25 +3,32 @@
 # Begin
 # Get other name if not default to backup.
 #
+backUpDir="databaseBackups"
+#
 echo Default database is ${MyDatabaseName}
-echo -n "Is that the database you want to destroy and replace with an earlier version? [y/n]"
+echo -n "Is that the database you want to destroy and replace with an earlier version? [y/n] "
 read -esn 1 restoreDefault
 if [ ${restoreDefault} == "n" ]; then
 	echo -n "Type in the name of the database you wish to backup : "
 	read -e DB
-	local MyDatabaseName=${DB}
+	MyDatabaseName=${DB}
 fi
 #
-local prefix="OpenERP_"
-local separator="_"
-local bkYear="11"
-local bkMonth="12"
-local bkDay="17"
-local bkHour="14"
-local bkMin="34"
-local suffix=".backup"
+echo " "
+ls -l ~/${backUpDir}/
+echo " "
+echo -n " "
 #
-local oldArchive=${prefix}${MyDatabaseName}${separator}${bkYear}${bkMonth}${bkDay}${bkHour}${bkMin}${suffix}
+prefix="OpenERP_"
+separator="_"
+bkYear=$(date +%y)
+bkMonth=$(date +%m)
+bkDay=$(date +%d)
+bkHour=$(date +%H)
+bkMin=$(date +%M)
+suffix=".backup"
+#
+oldArchive=${prefix}${MyDatabaseName}${separator}${bkYear}${bkMonth}${bkDay}${bkHour}${bkMin}${suffix}
 #
 echo "."
 echo "."
@@ -32,21 +39,38 @@ echo "."
 echo "."
 echo "."
 echo "."
-echo "."
-echo "."
-echo "."
-echo "."
-local choice=-1
-local someOtherName=0
-local promptIs=""
-local promptLen=-1
+echo " "
+echo " "
+echo " "
+echo " "
+underscore="\033[0C----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.----"
+
+choice=-1
+someOtherName=0
+promptIs=""
+promptLen=-1
+non="X"
+RED="\033[0;31m"
+NO_COLOUR="\033[0m"
+
 while [ ${choice} != 0 ]; do
 
 	if [ ${someOtherName} == 0 ]; then
 		oldArchive=${prefix}${MyDatabaseName}${separator}${bkYear}${bkMonth}${bkDay}${bkHour}${bkMin}${suffix}
 	fi
 
-	echo -en "\033[14A----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.----"
+	ls -l ~/${backUpDir}/${oldArchive}  &> /dev/null
+	rslt=$?
+	if [ ${rslt} == 0 ]; then
+		non="pre-existing"
+	else
+		non="${RED}NON-existent${NO_COLOUR}"
+	fi
+
+
+	echo ""
+
+	echo -en "\033[14A${underscore}"
 	echo ""
 	echo "1) Prefix : ${prefix}"
 	echo "2) Separator : ${separator}"
@@ -58,13 +82,12 @@ while [ ${choice} != 0 ]; do
 	echo "8) Suffix : ${suffix}"
 	echo "9) Some other name completely"
 	echo "0) It's correct now"
+	echo -e "${underscore}"
 	echo "Type a number to indicate which element you want to edit:"
-	echo "----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.----"
-
-	promptIs="Ready to restore the file [${oldArchive}]. Choice : "  
+	promptIs="Ready to restore the ${non} file [${oldArchive}]. Choice : "  
    promptLen=$((${#promptIs}))
 
-	echo -n ${promptIs} " " 
+	echo -en ${promptIs} " " 
 	read -en 1 choice
 	echo -en "\033[1A\033[${promptLen}C"
 
@@ -81,23 +104,23 @@ while [ ${choice} != 0 ]; do
 	        ;;
 	    3*)
 			echo -n "3) Year : "
-			read -e bkYear
+			read -en 2 bkYear
 	        ;;
 	    4*)
 			echo -n "4) Month : "
-			read -e bkMonth
+			read -en 2 bkMonth
 	        ;;
 	    5*)
 			echo -n "5) Day : "
-			read -e bkDay
+			read -en 2 bkDay
 	        ;;
 	    6*)
 			echo -n "6) Hour : "
-			read -e bkHour
+			read -en 2 bkHour
 	        ;;
 	    7*)
 			echo -n "7) Min : "
-			read -e bkMin
+			read -en 2 bkMin
 	        ;;
 	    8*)
 			echo -n "8) Suffix : "
@@ -109,18 +132,29 @@ while [ ${choice} != 0 ]; do
 			someOtherName=1
 			echo -e "\033[0A                                                                                ]"
 	        ;;
+	    0*)
+			echo -en "Done."
+	        ;;
 	    *)
 			echo -n "Huh?"
 	        ;;
 	esac
-	echo -en "\033[1A\033[${promptLen}C                                             "
+	echo -en "\033[1A\033[${promptLen}C                      "
 	
 done
 
-echo -n "We're ready to do this.  Are you absolutely certain about replacing the contents of ${MyDatabaseName} with the backup file ${oldArchive}? [no/yes]"
+echo -n "                                                                              "
+echo ""
+echo "We're ready to do this."
+echo -e "Are you ${RED}absolutely${NO_COLOUR} certain about replacing the contents of "
+echo "                 ${MyDatabaseName} "
+echo "... with the backup file..."
+echo "                 ${oldArchive}"
+echo -n "     [no/yes] "
 read -e confirmation
+#
 if [ ${confirmation} == "yes" ]; then
-	echo -n "Ple"
-	exit
+	echo "Restoring ${oldArchive} into ${MyDatabaseName}."
+	pg_restore -c -Fc -d ${MyDatabaseName} -U ${MyDatabaseUserName}  -h ${MyDatabaseHost} -p ${MyDatabasePortNumber} ~/databaseBackups/${oldArchive}
 fi
 
