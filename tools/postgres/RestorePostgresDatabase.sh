@@ -6,30 +6,44 @@
 backUpDir="databaseBackups"
 #
 echo Default database is ${MyDatabaseName}
+OldDatabaseName=${MyDatabaseName}
+NewDatabaseName=${MyDatabaseName}
 echo -n "Is that the database you want to destroy and replace with an earlier version? [y/n] "
 read -esn 1 restoreDefault
-if [ ${restoreDefault} == "n" ]; then
+if [ ${restoreDefault} != "y" ]; then
 	echo -n "Type in the name of the database you wish to backup : "
 	read -e DB
-	MyDatabaseName=${DB}
+	NewDatabaseName=${DB}
 fi
 #
 echo " "
-ls -l ~/${backUpDir}/
+whoami=`whoami`
+BACKUPS=`ls ~/${backUpDir}/*`
+idx=0
+Files[${idx}]=""
+#
+for backup in ${BACKUPS} ;
+do
+	idx=$((1 + ${idx}))
+	echo " - ${idx}) - ${backup}"
+	Files[${idx}]=${backup}
+done
+
 echo " "
 echo -n " "
 #
 prefix="OpenERP_"
 separator="_"
-bkYear=$(date +%y)
-bkMonth=$(date +%m)
+bkYearMonth=$(date +%y%m)
 bkDay=$(date +%d)
-bkHour=$(date +%H)
-bkMin=$(date +%M)
+bkHourMin=$(date +%H%M)
 suffix=".backup"
+pick=1
 #
-oldArchive=${prefix}${MyDatabaseName}${separator}${bkYear}${bkMonth}${bkDay}${bkHour}${bkMin}${suffix}
+oldArchive=${prefix}${OldDatabaseName}${separator}${bkYearMonth}${bkDay}${bkHourMin}${suffix}
 #
+echo "."
+echo "."
 echo "."
 echo "."
 echo "."
@@ -45,6 +59,19 @@ echo " "
 echo " "
 underscore="\033[0C----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.---- ----.----"
 
+PrefixTitle="Prefix"
+SeparatorTitle="Separator"
+YearAndMonthTitle="Year & Month"
+DayTitle="Day"
+HourAndMinTitle="Hour & Min"
+DatabaseTitle="Database"
+SuffixTitle="Suffix"
+PickFromListAboveTitle="Pick from list above"
+SomeOtherNameCompletelyTitle="Some other name completely"
+ItsCorrectNowTitle="It's correct now"
+
+
+filePicked=""
 choice=-1
 someOtherName=0
 promptIs=""
@@ -56,10 +83,10 @@ NO_COLOUR="\033[0m"
 while [ ${choice} != 0 ]; do
 
 	if [ ${someOtherName} == 0 ]; then
-		oldArchive=${prefix}${MyDatabaseName}${separator}${bkYear}${bkMonth}${bkDay}${bkHour}${bkMin}${suffix}
+		oldArchive="/home/${whoami}/${backUpDir}/${prefix}${OldDatabaseName}${separator}${bkYearMonth}${bkDay}${bkHourMin}${suffix}"
 	fi
 
-	ls -l ~/${backUpDir}/${oldArchive}  &> /dev/null
+	ls -l ${oldArchive}  &> /dev/null
 	rslt=$?
 	if [ ${rslt} == 0 ]; then
 		non="pre-existing"
@@ -70,70 +97,79 @@ while [ ${choice} != 0 ]; do
 
 	echo ""
 
-	echo -en "\033[14A${underscore}"
+
+
+
+	echo -en "\033[16A${underscore}"
 	echo ""
-	echo "1) Prefix : ${prefix}"
-	echo "2) Separator : ${separator}"
-	echo "3) Year : ${bkYear}"
-	echo "4) Month : ${bkMonth}"
-	echo "5) Day : ${bkDay}"
-	echo "6) Hour : ${bkHour}"
-	echo "7) Min : ${bkMin}"
-	echo "8) Suffix : ${suffix}"
-	echo "9) Some other name completely"
-	echo "0) It's correct now"
+	echo "1) ${PrefixTitle} : ${prefix}                                 	"
+	echo "2) ${SeparatorTitle} : ${separator}                            "
+	echo "3) ${YearAndMonthTitle} : ${bkYearMonth}"
+	echo "4) ${DayTitle} : ${bkDay}"
+	echo "5) ${HourAndMinTitle} : ${bkHourMin}"
+	echo "6) ${DatabaseTitle} : ${OldDatabaseName}                       "
+	echo "7) ${SuffixTitle} : ${suffix}                                  "
+	echo "8) ${PickFromListAboveTitle} : ${pick} ${filePicked}"
+	echo "9) ${SomeOtherNameCompletelyTitle}                                             "
+	echo "0) ${ItsCorrectNowTitle}"
 	echo -e "${underscore}"
 	echo "Type a number to indicate which element you want to edit:"
-	promptIs="Ready to restore the ${non} file [${oldArchive}]. Choice : "  
+	promptIs="Ready to restore the ${non} file [${oldArchive}]. "  
    promptLen=$((${#promptIs}))
 
-	echo -en ${promptIs} " " 
+	echo "                                                                                "
+	echo -e "\033[2A${promptIs}                                                  " 
+	echo -ne "Choice : " 
 	read -en 1 choice
-	echo -en "\033[1A\033[${promptLen}C"
+	echo "                                                                                "
+	echo -en "\033[2A\033[10C"
+
 
 	someOtherName=0
 
 	case ${choice} in
-	    1*)
-			echo -n ") Prefix : "
+	   1*)
+			echo -n ") ${PrefixTitle} : "
 			read -e prefix
 	        ;;
-	    2*)
-			echo -n "2) Separator : "
+	   2*)
+			echo -n ") ${SeparatorTitle} : "
 			read -e separator
 	        ;;
-	    3*)
-			echo -n "3) Year : "
-			read -en 2 bkYear
+	   3*)
+			echo -n ") ${YearAndMonthTitle} : "
+			read -en 4 bkYearMonth
 	        ;;
-	    4*)
-			echo -n "4) Month : "
-			read -en 2 bkMonth
-	        ;;
-	    5*)
-			echo -n "5) Day : "
+	   4*)
+			echo -n ") ${DayTitle} : "
 			read -en 2 bkDay
 	        ;;
-	    6*)
-			echo -n "6) Hour : "
-			read -en 2 bkHour
+	   5*)
+			echo -n ") ${HourAndMinTitle} : "
+			read -en 4 bkHourMin
 	        ;;
-	    7*)
-			echo -n "7) Min : "
+	   6*)
+			echo -n ") ${DatabaseTitle} : "
 			read -en 2 bkMin
 	        ;;
-	    8*)
-			echo -n "8) Suffix : "
+	   7*)
+			echo -n ") ${SuffixTitle} : "
 			read -e suffix
 	        ;;
-	    9*)
-			echo -n "9) Some other name completely : "
+		8*)
+			echo -n ") ${PickFromListAboveTitle} : "
+			read -en 3 pick
+			someOtherName=1
+			oldArchive=${Files[${pick}]}
+	        ;;
+	   9*)
+			echo -n ") ${SomeOtherNameCompletelyTitle} : "
 			read -e oldArchive
 			someOtherName=1
 			echo -e "\033[0A                                                                                ]"
 	        ;;
-	    0*)
-			echo -en "Done."
+		0*)
+			echo -en "${ItsCorrectNowTitle}."
 	        ;;
 	    *)
 			echo -n "Huh?"
@@ -147,14 +183,14 @@ echo -n "                                                                       
 echo ""
 echo "We're ready to do this."
 echo -e "Are you ${RED}absolutely${NO_COLOUR} certain about replacing the contents of "
-echo "                 ${MyDatabaseName} "
+echo "                 ${NewDatabaseName} "
 echo "... with the backup file..."
 echo "                 ${oldArchive}"
 echo -n "     [no/yes] "
 read -e confirmation
 #
 if [ ${confirmation} == "yes" ]; then
-	echo "Restoring ${oldArchive} into ${MyDatabaseName}."
-	pg_restore -c -Fc -d ${MyDatabaseName} -U ${MyDatabaseUserName}  -h ${MyDatabaseHost} -p ${MyDatabasePortNumber} ~/databaseBackups/${oldArchive}
+	echo "Restoring ${oldArchive} into ${NewDatabaseName}."
+	pg_restore -c -Fc -d ${NewDatabaseName} -U ${MyDatabaseUserName}  -h ${MyDatabaseHost} -p ${MyDatabasePortNumber} ${oldArchive}
 fi
 
