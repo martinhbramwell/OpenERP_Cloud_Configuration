@@ -1,0 +1,13 @@
+# auto lo
+# iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+
+address		FixMe1.FixMe2
+netmask		255.255.255.240
+network		FixMe1.0
+broadcast	FixMe1.255
+gateway		FixMe1.1
+
+
