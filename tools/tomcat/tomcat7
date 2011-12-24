@@ -1,0 +1,19 @@
+# Tomcat auto-start
+#
+# description: Auto-starts tomcat
+# processname: tomcat
+# pidfile: /var/run/tomcat.pid
+
+case $1 in
+start)
+sh /usr/share/tomcat7/bin/startup.sh
+;;
+stop)
+sh /usr/share/tomcat7/bin/shutdown.sh
+;;
+restart)
+sh /usr/share/tomcat7/bin/shutdown.sh
+sh /usr/share/tomcat7/bin/startup.sh
+;;
+esac
+exit 0
