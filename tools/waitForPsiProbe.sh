@@ -2,13 +2,13 @@
 
 SERVICE="Psi Probe"
 service="probe"
-expect="HTTP/1.1 302 Moved Temporarily"
+expect="HTTP/1.1 200 OK"
 
 idx=0
 rslt=0
 while [ $idx -lt 10 ]
 do
-  rslt=$(curl -sI "http://jenkins.warehouseman.com/${service}" | grep -c "${expect}" )
+  rslt=$(curl -sI --user yourself:okok "http://jenkins.warehouseman.com/${service}/" | grep -c "${expect}" )
 
   if [ ${rslt} == 1 ]
   then
