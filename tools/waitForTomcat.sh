@@ -9,7 +9,7 @@ do
     exit 0
   fi
 
-  echo -ne "Waiting for TomCat to start (${idx}).\033[25C"
+  echo -n "Waiting for TomCat to start (${idx})."
   let "idx += 1"
   sleep 3
 
