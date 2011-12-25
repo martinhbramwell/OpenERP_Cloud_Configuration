@@ -1,21 +1,31 @@
 #!/bin/bash
+
+SERVICE="Psi Probe"
+service="probe"
+expect="HTTP/1.1 302 Moved Temporarily"
+
 idx=0
 rslt=0
 while [ $idx -lt 10 ]
 do
-  rslt=$(curl -sI http://jenkins.warehouseman.com/probe | grep -c X-Jenkins: )
+  rslt=$(curl -sI "http://jenkins.warehouseman.com/${service}" | grep -c "${expect}" )
+
   if [ ${rslt} == 1 ]
   then
+    echo "${SERVICE} is up and running,                                            "
     exit 0
   fi
 
+  echo -ne "Waiting for ${SERVICE} to start (${idx}).\033[100D"
   let "idx += 1"
-  echo -n "Waiting for Psi Probe to start (${idx})."
   sleep 3
 
 done
 
+echo "Got no answer from ${SERVICE}.                                                     "
+
 exit 1
+
 
 
 
