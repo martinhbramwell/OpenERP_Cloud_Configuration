@@ -1,0 +1,7 @@
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/share/maven/bin/"
+JAVA_HOME=/usr/lib/jvm/jdk1.7.0_02/jre
+M2_HOME=/usr/share/maven
+MAVEN_HOME=/usr/share/maven
+M2_REPO=/home/yourself/.m2/repository
+M2=/data/apache-maven/bin
+
