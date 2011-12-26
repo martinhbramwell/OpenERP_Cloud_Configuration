@@ -1,8 +1,9 @@
-JAVA_HOME=/usr/lib/jvm/jdk1.7.0_02
+JAVA_HOME=/usr/lib/jvm/jdk
 M2_HOME=/usr/share/maven
 MAVEN_HOME=/usr/share/maven
 M2_REPO=/home/yourself/.m2/repository
-M2=/data/apache-maven/bin 
+M2=/data/apache-maven/bin
+CATALINA_HOME=/usr/share/tomcat/
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/share/maven/bin/:/usr/lib/jvm/jdk1.7.0_02/bin"
 
 
