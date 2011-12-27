@@ -35,40 +35,39 @@ fi
 #
 [ ! -f ${LOG_FILE_NAME} ] && echo "${LOG_FILE_NAME} : File not found!" && exit 1
 
-echo Found -d ${DELAY} -l ${LOG_FILE_NAME} -p ${SEARCH_PATTERN}
+echo Will wait ${DELAY} seconds for ${LOG_FILE_NAME} to show successful download of ${SEARCH_PATTERN}.
+echo ""
 #exit 1
 
 # Input validated
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
 
 idx=0
 rslt=0
 while [ $idx -lt ${DELAY} ]
 do
-#  echo [1]
+  rslt=$( tail -n 4 ${LOG_FILE_NAME} | grep -c "ERROR"   )
+  if [ ${rslt} -gt 0 ]
+  then
+    tail -n 4 ${LOG_FILE_NAME}
+    exit 0
+  fi
+
   rslt=$( cat ${LOG_FILE_NAME} | grep -c "${SEARCH_PATTERN}[0-9A-Za-z'\.\-]* saved"   )
+
   if [ ${rslt} -eq 1 ]
   then
     echo "${SEARCH_PATTERN} arrived after ${idx} seconds.                                            "
     exit 0
   fi
 
-  echo -ne ".\033[4A\033[100D "
+  echo -ne ".\033[1A\033[100D "
   echo -ne "Waiting for ${SEARCH_PATTERN} download to complete (${idx})"
   echo " "
-  tail -n 3 ${LOG_FILE_NAME}
   let "idx += 1"
   sleep 1
 
 done
 
 echo "${SEARCH_PATTERN} did not complete in ${DELAY} seconds.                                                     "
-
-echo [2]
-echo [3]
 
 exit 1
