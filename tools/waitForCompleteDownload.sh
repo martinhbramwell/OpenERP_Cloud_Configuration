@@ -46,7 +46,7 @@ while [ $idx -lt ${DELAY} ]
 do
 #  echo [1]
   rslt=$( cat ${LOG_FILE_NAME} | grep -c "${srch}[0-9A-Za-z'\.\-]* saved"   )
-  if [ ${rslt} -gt 2 ]
+  if [ ${rslt} -gt 0 ]
   then
     echo "${SEARCH_PATTERN} arrived after ${idx} seconds.                                            "
     exit 0
