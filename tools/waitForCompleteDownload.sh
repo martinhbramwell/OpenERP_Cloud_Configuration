@@ -39,6 +39,11 @@ echo Found -d ${DELAY} -l ${LOG_FILE_NAME} -p ${SEARCH_PATTERN}
 #exit 1
 
 # Input validated
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
 
 idx=0
 rslt=0
@@ -52,8 +57,10 @@ do
     exit 0
   fi
 
-  tail -n 2 ${LOG_FILE_NAME}
-  echo -ne "Waiting for ${SEARCH_PATTERN} download to complete (${idx}).\033[100D"
+  echo -ne ".\033[4A\033[100D "
+  echo -ne "Waiting for ${SEARCH_PATTERN} download to complete (${idx})"
+  echo " "
+  tail -n 3 ${LOG_FILE_NAME}
   let "idx += 1"
   sleep 1
 
@@ -65,5 +72,3 @@ echo [2]
 echo [3]
 
 exit 1
-
-
