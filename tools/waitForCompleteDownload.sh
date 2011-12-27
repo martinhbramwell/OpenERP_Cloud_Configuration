@@ -52,6 +52,7 @@ do
     exit 0
   fi
 
+  tail -n 2 ${LOG_FILE_NAME}
   echo -ne "Waiting for ${SEARCH_PATTERN} download to complete (${idx}).\033[100D"
   let "idx += 1"
   sleep 1
