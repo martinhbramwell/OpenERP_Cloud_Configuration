@@ -1,6 +1,6 @@
---- Tomcat7.sh	2011-12-29 05:49:54.784771831 -0500
-+++ Tomcat7.sh.new	2011-12-29 05:56:00.448914042 -0500
-@@ -16,6 +16,20 @@
+--- Tomcat7.sh	2011-12-29 09:49:06.712820212 -0500
++++ Tomcat7.sh.new	2011-12-29 09:52:21.748992008 -0500
+@@ -16,6 +16,19 @@
  # limitations under the License.
  #
  # resolve links - $0 may be a softlink
@@ -8,16 +8,16 @@
 +# ==========================Patched Section ===========================
 +# This patch is added to provide the Java Service Wrapper with
 +#  the environment variables that would normally be picked up from
-+#  a shell profile.  Since this start befores shells start they need to
-+#  be provided expolicitly
++#  a shell profile.  Since the Wrapper starts before the start of 
++#  shells start they need to be provided explicitly.
 +#
-+JAVA_HOME=/usr/lib/jvm/jdk
-+CATALINA_HOME=/usr/share/tomcat
-+TOMCAT_USER=jenkins
++JAVA_HOME=XXXjdkXXX
++CATALINA_HOME=XXXtchXXX
++TOMCAT_USER=XXXtcuXXX
 +#
 +# ====================== End of Patched Section =======================
 +
-+
  ARG0="$0"
  while [ -h "$ARG0" ]; do
+   ls=`ls -ld "$ARG0"`
 
