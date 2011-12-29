@@ -11,9 +11,9 @@
 +#  a shell profile.  Since this start befores shells start they need to
 +#  be provided expolicitly
 +#
-+JAVA_HOME=/usr/lib/jvm/jdk
-+CATALINA_HOME=/usr/share/tomcat
-+TOMCAT_USER=jenkins
++JAVA_HOME=XXXjdkXXX
++CATALINA_HOME=XXXtchXXX
++TOMCAT_USER=XXXtcuXXX
 +#
 +# ====================== End of Patched Section =======================
 +
