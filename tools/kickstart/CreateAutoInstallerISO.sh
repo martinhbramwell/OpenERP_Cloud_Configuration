@@ -47,13 +47,24 @@ else
 fi
 
 echo "Adding our customizations"
+
+rm -f ~/Desktop/Oneiric64Image/preseed/Oneiric64-minimalvm.seed
+wget -P ~/Desktop/Oneiric64Image/preseed/ $SRV_CONFIG$KCKSTRT_DIR/Oneiric64-minimalvm.seed
+if [ -f ~/Desktop/Oneiric64Image/preseed/Oneiric64-minimalvm.seed ]; then
+   echo "Preseed file recorded."
+else
+   echo "Failed to get preseed file.";
+   exit 1;
+fi
+
+
 rm -f ~/Desktop/Oneiric64Image/ks.cfg
 wget -P ~/Desktop/Oneiric64Image/ $SRV_CONFIG$KCKSTRT_DIR/ks.cfg
 if [ -f ~/Desktop/Oneiric64Image/ks.cfg ]; then
    echo "Kickstart config recorded."
 else
    echo "Failed to get Kickstart config file.";
-#   exit 1;
+   exit 1;
 fi
 
 rm -f ~/Desktop/Oneiric64Image/isolinux/txt.cfg.*
@@ -65,6 +76,9 @@ else
    echo "Failed to get Kickstart menu file.";
    exit 1;
 fi
+
+
+
 
 DSK_LABEL=“Ubu64b1110”
 IMG_NAME=isolinux/isolinux.bin
