@@ -1,6 +1,4 @@
 
-./test.sh
-
 echo "- - - - - - - - - - - - - - - - - - - - "
 echo "Check we have one at all..."
 
