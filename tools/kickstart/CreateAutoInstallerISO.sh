@@ -1,103 +1,54 @@
-cd ~/
-
-if [ -f ./Downloads/ubuntu-11.10-server-amd64.iso ]; then
-   echo "Found the ISO file."
-else
-   echo "ISO image not found";
-   exit 1;
-fi
-
-echo "Mounting it."
-
-sudo mkdir -p /mnt/isoMount
-sudo mount -o loop /home/hasan/Downloads/ubuntu-11.10-server-amd64.iso /mnt/isoMount
-
-if [ -f /mnt/isoMount/md5sum.txt ]; then
-   echo "ISO file now mounted read-only."
-else
-   echo "ISO image did not mount";
-   exit 1;
-fi
-
-SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
-KCKSTRT_DIR="/tools/kickstart"
-
-echo "Making a read/write copy of the ISO"
-mkdir -p ~/Desktop/Oneiric64Image
-rm -fr ~/Desktop/Oneiric64Image
-echo "Copying ..."
-rsync -a /mnt/isoMount/ ~/Desktop/Oneiric64Image
-sudo chmod -R 777 ~/Desktop/Oneiric64Image
-if [ -f ~/Desktop/Oneiric64Image/md5sum.txt ]; then
-   echo "Oneiric64Image Successfully Recorded.";
-else
-   echo "Could not copy ISO image.";
-   exit 1;
-fi
+# These may be replaced by  ConfigureVariables.sh  below !!
+export KCKSTRT_DIR=/tools/kickstart
+export TOOLS_DIR=/home/hasan/projects/OpenERP_Cloud_Configuration$KCKSTRT_DIR
+export WORKING_DIR=~/Desktop/ISOwork
+# These may be replaced by  ConfigureVariables.sh  below !!
 
 
-echo "Unmounting read-only image."
-sudo umount /mnt/isoMount
+mkdir -p $WORKING_DIR
+cd $WORKING_DIR
 
-if [ -f /mnt/isoMount/md5sum.txt ]; then
-   echo "ISO image did not unmount successfully.";
-   exit 1;
-else
-   echo "ISO file no longer mounted."
-fi
+echo "Get the sudo stuff out of the way."
+sudo pwd
+
+cp $TOOLS_DIR/GetRequiredFiles.sh .
+./GetRequiredFiles.sh
+
+
+# These may replace the three variables set at the top !!
+source ./ConfigureVariables.sh
+# These may replace the three variables set at the top !!
+
+echo "Exposing the target location"
+./Unpack_UbunutuInstallerISO.sh
+./Unpack_Initrd.sh
+
+# if [ 0 = 1 ]; then
+# fi
+
 
 echo "Adding our customizations"
+mv $REPLACEMENT_SEED_FILE $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE
+mv $REPLACEMENT_BOOTLOADER $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER
 
-rm -f ~/Desktop/Oneiric64Image/preseed/Oneiric64-minimalvm.seed
-wget -P ~/Desktop/Oneiric64Image/preseed/ $SRV_CONFIG$KCKSTRT_DIR/Oneiric64-minimalvm.seed
-if [ -f ~/Desktop/Oneiric64Image/preseed/Oneiric64-minimalvm.seed ]; then
-   echo "Preseed file recorded."
-else
-   echo "Failed to get preseed file.";
-   exit 1;
+echo "Restore ownership to root"
+sudo chown -R root:root $WORKING_IMAGE
+
+echo "Close up the target location"
+./Repack_Initrd.sh
+./Repack_UbunutuInstallerISO.sh
+
+echo "Instantiate the new VM"
+./InstantiateVM.sh
+
+
+if [ 0 = 1 ]; then
+
+	exit 0;
+
+	cd $WORKING_DIR/..
+	rm -fr $WORKING_DIR
+
 fi
-
-
-rm -f ~/Desktop/Oneiric64Image/ks.cfg
-wget -P ~/Desktop/Oneiric64Image/ $SRV_CONFIG$KCKSTRT_DIR/ks.cfg
-if [ -f ~/Desktop/Oneiric64Image/ks.cfg ]; then
-   echo "Kickstart config recorded."
-else
-   echo "Failed to get Kickstart config file.";
-   exit 1;
-fi
-
-rm -f ~/Desktop/Oneiric64Image/isolinux/txt.cfg.*
-mv ~/Desktop/Oneiric64Image/isolinux/txt.cfg ~/Desktop/Oneiric64Image/isolinux/txt.cfg.original
-wget -P ~/Desktop/Oneiric64Image/isolinux $SRV_CONFIG$KCKSTRT_DIR/txt.cfg
-if [ -f ~/Desktop/Oneiric64Image/isolinux/txt.cfg ]; then
-   echo "Kickstart menu recorded."
-else
-   echo "Failed to get Kickstart menu file.";
-   exit 1;
-fi
-
-
-
-
-DSK_LABEL=“Ubu64b1110”
-IMG_NAME=isolinux/isolinux.bin
-IMG_CAT=isolinux/boot.cat
-TARGET=~/Desktop/OneiricServer64_autoins.iso
-
-echo "Creating new ISO image"
-cd ~/Desktop/Oneiric64Image/
-mkisofs -D -r -V "$DSK_LABEL" -cache-inodes -J -l -b $IMG_NAME -c $IMG_CAT \
-  -no-emul-boot -boot-load-size 4 -boot-info-table -o $TARGET .
-
-if [ -f "$TARGET" ]; then
-   echo "*** $TARGET Successfully Recorded ***"
-else
-   echo "*** $TARGET Writing Failed ***";
-   exit 1;
-fi
-
-exit 0;
-
 
 
