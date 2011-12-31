@@ -8,16 +8,21 @@ export WORKING_DIR=~/Desktop/ISOwork
 mkdir -p $WORKING_DIR
 cd $WORKING_DIR
 
-echo "Get the sudo stuff out of the way."
+echo "Getting the sudo stuff out of the way."
 sudo pwd
 
+#
+#
+# These may replace the three variables set at the top !!
+echo "Getting the other scripts."
 cp $TOOLS_DIR/GetRequiredFiles.sh .
 ./GetRequiredFiles.sh
-
-
-# These may replace the three variables set at the top !!
+#
+echo "Making all the variables available to all the scripts."
 source ./ConfigureVariables.sh
 # These may replace the three variables set at the top !!
+#
+#
 
 echo "Exposing the target location"
 ./Unpack_UbunutuInstallerISO.sh
@@ -27,9 +32,15 @@ echo "Exposing the target location"
 # fi
 
 
+####################      Begin installer customization       ###############
+#                                                                           #
 echo "Adding our customizations"
 mv $REPLACEMENT_SEED_FILE $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE
 mv $REPLACEMENT_BOOTLOADER $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER
+#                                                                           #
+####################     End of installer customization       ###############
+
+
 
 echo "Restore ownership to root"
 sudo chown -R root:root $WORKING_IMAGE

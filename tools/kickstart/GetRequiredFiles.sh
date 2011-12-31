@@ -1,13 +1,24 @@
+## ======================================
 
+echo "Getting ConfigureVariables.sh"
 cp $TOOLS_DIR/ConfigureVariables.sh .
+
+source ./ConfigureVariables.sh
+
+echo "Getting Unpack_UbunutuInstallerISO.sh"
 cp $TOOLS_DIR/Unpack_UbunutuInstallerISO.sh .
+echo "Getting Unpack_Initrd.sh"
 cp $TOOLS_DIR/Unpack_Initrd.sh .
 
+echo "Getting Repack_Initrd.sh"
 cp $TOOLS_DIR/Repack_Initrd.sh .
+echo "Getting Repack_UbunutuInstallerISO.sh"
 cp $TOOLS_DIR/Repack_UbunutuInstallerISO.sh .
+echo "Getting InstantiateVM.sh"
 cp $TOOLS_DIR/InstantiateVM.sh .
 
 
+## ======================================
 
 rm -f $REPLACEMENT_SEED_FILE
 cp $TOOLS_DIR/$REPLACEMENT_SEED_FILE .
@@ -30,4 +41,5 @@ else
    exit 1;
 fi
 
+## ======================================
 
