@@ -3,6 +3,9 @@
 
 source ./ConfigureVariables.sh
 
+virsh -q destroy $VIRTUAL_MACHINE_NAME 2>/dev/null
+virsh -q undefine $VIRTUAL_MACHINE_NAME 2>/dev/null
+
 cd ~/Desktop
 sudo virt-install \
 --connect qemu:///system \
