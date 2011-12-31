@@ -1,15 +1,115 @@
 # Always install the virtual kernel, with no headers.
-d-i	base-installer/kernel/override-image	string linux-virtual
-d-i	base-installer/kernel/headers	boolean false
-
-# Don't even install the standard task.
-tasksel	tasksel/skip-tasks	string standard
+d-i base-installer/kernel/override-image	string linux-virtual
+d-i base-installer/kernel/headers	boolean false
 
 # Only install basic language packs. Let tasksel ask about tasks.
-d-i	pkgsel/language-pack-patterns	string
+d-i pkgsel/language-pack-patterns	string
 
 # No language support packages.
-d-i	pkgsel/install-language-support	boolean false
+d-i pkgsel/install-language-support	boolean false
+
+### Localization
+# Locale sets language and country.
+d-i debian-installer/locale string en_US
+
+# Keyboard selection.
+# Disable automatic (interactive) keymap detection.
+d-i console-setup/ask_detect boolean false
+d-i console-setup/layoutcode string latam
+
+
+
+### Partitioning
+# If the system has free space you can choose to only partition that space.
+# Alternatives: custom, some_device, some_device_crypto, some_device_lvm.
+d-i partman-auto/init_automatically_partition select biggest_free
+d-i partman-auto/method string lvm
+d-i partman/default_filesystem string ext4
+# Automatically partition without confirmation.
+d-i partman-md/confirm boolean true
+d-i partman/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+
+# Partitioning recipe:
+d-i partman-auto/choose_recipe select multi
+
+
+
+### Network configuration
+# netcfg will choose an interface that has link if possible. This makes it
+# skip displaying a list if there is more than one interface.
+d-i netcfg/choose_interface select auto
+
+# If you prefer to configure the network manually, uncomment this line and
+# the static network configuration below.
+d-i netcfg/disable_dhcp boolean true
+
+# Static network configuration.
+d-i netcfg/get_nameservers string 192.168.122.10
+d-i netcfg/get_ipaddress string 192.168.122.3
+d-i netcfg/get_netmask string 255.255.255.240
+d-i netcfg/get_gateway string 192.168.122.1
+d-i netcfg/confirm_static boolean true
+
+# Any hostname and domain names assigned from dhcp take precedence over
+# values set here. However, setting the values still prevents the questions
+# from being shown, even if values come from dhcp.
+d-i netcfg/get_hostname string continuous
+d-i netcfg/get_domain string warehouseman.com
+
+
+
+### Account setup
+
+# To create a normal user account.
+d-i passwd/user-fullname string Yourself
+d-i passwd/username string yourself
+#
+# Normal user's password, either in clear text
+d-i passwd/user-password password okok
+d-i passwd/user-password-again password okok
+d-i user-setup/allow-password-weak boolean true
+#
+# or encrypted using an MD5 hash.
+#d-i passwd/user-password-crypted password [MD5 hash]
+#d-i passwd/user-password-crypted password $1$PNb68Fe1$8jcYutNswbMKCxFJQsy4O0
+
+# Add user to standard initial groups.
+d-i passwd/user-default-groups string admin
+
+
+### Package selection
+tasksel tasksel/first multiselect OpenSSH server
+
+d-i pkgsel/include string git-core
+d-i pkgsel/include string make
+d-i pkgsel/include string autoconf
+d-i pkgsel/include string gcc
+d-i pkgsel/include string unzip
+d-i pkgsel/include string curl
+
+# Policy for applying updates. May be "none" (no automatic updates),
+# "unattended-upgrades" (install security updates automatically), or
+# "landscape" (manage system with Landscape).
+d-i pkgsel/update-policy select unattended-upgrades
+
+# Update the system's locate database after installer has finished
+d-i pkgsel/updatedb boolean true
+
+
+### Boot loader installation
+# Install grub automatically to the MBR if no other 
+# operating system is detected on the machine.
+d-i grub-installer/only_debian boolean true
+d-i grub-installer/with_other_os boolean true
+# Wait for two seconds in grub
+d-i	grub-installer/timeout	string 10
+
+# Avoid that last message about the install being complete.
+d-i finish-install/reboot_in_progress note
+
+
 
 # Only ask the UTC question if there are other operating systems installed.
 d-i	clock-setup/utc-auto	boolean true
@@ -21,8 +121,11 @@ d-i	debian-installer/splash	boolean false
 # Install the debconf oem-config frontend (if in OEM mode).
 d-i	oem-config-udeb/frontend	string debconf
 
-# Wait for two seconds in grub
-d-i	grub-installer/timeout	string 2
 
 # Add the network and tasks oem-config steps by default.
 oem-config	oem-config/steps	multiselect language, timezone, keyboard, user, network, tasks
+
+
+# Disable that annoying WEP key dialog.
+d-i netcfg/wireless_wep string
+
