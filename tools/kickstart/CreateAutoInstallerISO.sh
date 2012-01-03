@@ -23,31 +23,29 @@ source ./ConfigureVariables.sh
 # These may replace the three variables set at the top !!
 #
 #
+if [ 1 = 1 ]; then
 
-echo "Exposing the target location"
-./Unpack_UbunutuInstallerISO.sh
-./Unpack_Initrd.sh
+	echo "Exposing the target location"
+	./Unpack_UbunutuInstallerISO.sh
+	./Unpack_Initrd.sh
+ 	if [ 1 = 1 ]; then
+		####################      Begin installer customization       ###############
+		#                                                                           #
+		echo "Adding our customizations"
+		mv $REPLACEMENT_SEED_FILE $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE
+		mv $REPLACEMENT_BOOTLOADER $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER
+		#                                                                           #
+		####################     End of installer customization       ###############
+	fi
 
-# if [ 0 = 1 ]; then
-# fi
+	echo "Restore ownership to root"
+	sudo chown -R root:root $WORKING_IMAGE
 
+	echo "Close up the target location"
+	./Repack_Initrd.sh
+	./Repack_UbunutuInstallerISO.sh
 
-####################      Begin installer customization       ###############
-#                                                                           #
-echo "Adding our customizations"
-mv $REPLACEMENT_SEED_FILE $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE
-mv $REPLACEMENT_BOOTLOADER $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER
-#                                                                           #
-####################     End of installer customization       ###############
-
-
-
-echo "Restore ownership to root"
-sudo chown -R root:root $WORKING_IMAGE
-
-echo "Close up the target location"
-./Repack_Initrd.sh
-./Repack_UbunutuInstallerISO.sh
+fi
 
 echo "Instantiate the new VM"
 ./InstantiateVM.sh
