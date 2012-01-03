@@ -1,9 +1,9 @@
 # Characteristics of the final target VM
-export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM_tmp
+export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
 #export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
 export VIRTUAL_RAM_SIZE=512
 
-export VIRTUAL_DISK_NAME=OO64ExpVDK_tmp
+export VIRTUAL_DISK_NAME=OO64ExpVDK
 #export VIRTUAL_DISK_NAME=OO64ExpVDK
 export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
 export VIRTUAL_DISK_SIZE=2.5
