@@ -5,10 +5,19 @@
 
 case "$1" in
 start)
-   mkdir /home/tmp
+#
+	mkdir -p /home/yourself
+	cd /home/yourself
+
    whoami > /home/tmp/pwd.txt
    pwd >> /home/tmp/pwd.txt
+   cd ~/
+   pwd >> /home/tmp/pwd.txt
    cat /home/tmp/pwd.txt
+
+#	rm -f ./First*
+#	wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh
+#	chmod +x ./FirstBootConfigurations.sh
 
 ;;
 
