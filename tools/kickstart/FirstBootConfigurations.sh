@@ -1,11 +1,12 @@
 #!/bin/sh
 # Starts simple test
 #
-# Complete the installation with all updates & upgrades
+echo "Complete the installation with all updates & upgrades"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 #
-# Temoporarily set some environment variables pertinent only for the currently executing scripts.
+echo "Temporarily set some environment variables pertinent only for the currently executing scripts."
+#
 echo "if [ -f ~/.bashrc ]; then"  >> .bash_profile
 echo "   source ~/.bashrc"  >> .bash_profile
 echo "fi"  >> .bash_profile
@@ -17,7 +18,7 @@ echo "export SRV_CONFIG=\"https://raw.github.com/martinhbramwell/OpenERP_Cloud_C
 # Now make them available immediately
 source .bash_profile
 #
-# Ensure JAVA_HOME can be detected by root !
+echo "Ensure JAVA_HOME can be detected by root !"
 # Create a sudoers extension file and authorize passing JAVA_HOME & M2_HOME into new environment
 cd ~/
 rm -f neededBy* 
@@ -28,7 +29,7 @@ sudo mv neededByTomCat /etc/sudoers.d/
 # vi visudo
 # #   Defaults:yourself timestamp_timeout=-1
 #
-# Prepare some variables for later use
+echo "Prepare some variables for later use."
 #
 cd ~/
 # Make a place to keep installers "just in case..."
@@ -46,7 +47,7 @@ echo "export FAILURE_NOTICE='______*** Looks like it failed ***______'" >> .bash
 source .bashrc
 #
 #
-# Obtain remotely customized environment variables .
+echo "Obtain remotely customized environment variables."
 # Prepare
 cd ~/programs
 # Get the master files of environment variables
@@ -71,7 +72,7 @@ wget ${SRV_CONFIG}/tools/MakeEnvironment.sh
 chmod +x ./MakeEnvironment.sh
 #
 #
-# Generate a new environment file
+echo "Generate a new environment file"
 # Prepare
 mkdir -p $TMP
 cd $TMP
@@ -98,8 +99,8 @@ sudo mv environment /etc/
 rm -fr $TMP
 #
 #
-# Networking
-# Set up static addressing with these steps :
+echo "Networking"
+echo "Set up static addressing with these steps :"
 # Define new settings
 vFixMe=continuous
 vFixMe1=192.168.122
@@ -123,13 +124,12 @@ sed s/FixMe1/$vFixMe1/ <interfaces_FixMe >tmp
 sed s/FixMe2/$vFixMe2/ <tmp >./etc/network/interfaces
 #
 #
-# Overwrite existing networking definitions
+echo "Overwrite existing networking definitions"
 sudo cp -R ./etc/* /etc
 # sudo ifdown eth0; sudo ifup eth0
 #
-# clean up
+echo "Clean up."
 cd ~/
 rm -fr $TMP
 
-
-
+echo "Done."
