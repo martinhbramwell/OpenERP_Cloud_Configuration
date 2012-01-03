@@ -6,8 +6,8 @@
 case "$1" in
 start)
 #
-	mkdir -p /home/yourself
-	cd /home/yourself
+	mkdir -p /home/yourself/tmp
+	cd /home/yourself/tmp
 
    whoami > /home/yourself/tmp/pwd.txt
    pwd >> /home/yourself/tmp/pwd.txt
