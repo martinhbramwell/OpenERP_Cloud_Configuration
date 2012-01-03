@@ -1,3 +1,15 @@
+# Characteristics of the final target VM
+export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM_tmp
+#export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
+export VIRTUAL_RAM_SIZE=512
+
+export VIRTUAL_DISK_NAME=OO64ExpVDK_tmp
+#export VIRTUAL_DISK_NAME=OO64ExpVDK
+export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
+export VIRTUAL_DISK_SIZE=2.5
+
+
+
 export WORKING_DIR=~/Desktop/ISOwork
 export WORKING_IMAGE=$WORKING_DIR/Oneiric64Image
 
@@ -16,6 +28,40 @@ export REPLACEMENT_BOOTLOADER=fullyAutomatic_isolinux.cfg
 export BOOTLOADER_TEMPORARY_HOME=$WORKING_IMAGE/isolinux
 
 export TARGET_SEED_FILE=preseed.cfg
+
+export SEED_FILE_TEMPORARY_HOME=$WORKING_IMAGE/install/initrd.unpacked
+
+export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
+export KCKSTRT_DIR=/tools/kickstart
+
+export VIRTINSTALL_MAJORVERSION=0.600.0
+export VIRTINSTALL_MINORVERSION="-2"
+export VIRTINSTALL_VERSION=$VIRTINSTALL_MAJORVERSION$VIRTINSTALL_MINORVERSION
+
+export VIRTMANAGER_MAJORVERSION=0.9.0
+export VIRTMANAGER_MINORVERSION="-2"
+export VIRTMANAGER_VERSION=$VIRTMANAGER_MAJORVERSION$VIRTMANAGER_MINORVERSION
+
+export VIRTINST_PKG="virtinst_$VIRTINSTALL_VERSION~natty1_all.deb"
+export VIRTMAN_PKG="virt-manager_$VIRTMANAGER_VERSION~natty1_all.deb"
+export VIRTMANAGER_TEAM_SITE=https://launchpad.net/~ukplc-team/+archive/ppa/+files/
+
+export TOOLS_DIR=/home/hasan/projects/OpenERP_Cloud_Configuration$KCKSTRT_DIR
+
+export DSK_LABEL=“Ubu64b1110”
+export IMG_NAME=isolinux/isolinux.bin
+export IMG_CAT=isolinux/boot.cat
+
+export TARGET_ISO=OneiricServer64_autoins.iso
+export FINAL_DESTINATION=~/Desktop
+export TARGET=$FINAL_DESTINATION/$TARGET_ISO
+
+#export INSTALL_MEDIA_REPO=~/Desktop
+#export VM_INSTALL_MEDIA=OneiricServer64_autoins.iso
+export INSTALL_MEDIA_REPO=$FINAL_DESTINATION
+export VM_INSTALL_MEDIA=$TARGET_ISO
+export SOURCE_ISO=$INSTALL_MEDIA_REPO/$VM_INSTALL_MEDIA
+
 
 export REPLACEMENT_SEED_FILE=Oneiric64-minimalvm.seed
 #export REPLACEMENT_SEED_FILE=Oneiric64-cloud.seed
@@ -74,46 +120,5 @@ export REPLACEMENT_SEED_FILE=Oneiric64-minimalvm.seed
 # Install GRUB? <Enter>
 # Finish up? <Enter>
 
-
-
-export SEED_FILE_TEMPORARY_HOME=$WORKING_IMAGE/install/initrd.unpacked
-
-export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
-export KCKSTRT_DIR=/tools/kickstart
-
-export VIRTINSTALL_MAJORVERSION=0.600.0
-export VIRTINSTALL_MINORVERSION="-2"
-export VIRTINSTALL_VERSION=$VIRTINSTALL_MAJORVERSION$VIRTINSTALL_MINORVERSION
-
-export VIRTMANAGER_MAJORVERSION=0.9.0
-export VIRTMANAGER_MINORVERSION="-2"
-export VIRTMANAGER_VERSION=$VIRTMANAGER_MAJORVERSION$VIRTMANAGER_MINORVERSION
-
-export VIRTINST_PKG="virtinst_$VIRTINSTALL_VERSION~natty1_all.deb"
-export VIRTMAN_PKG="virt-manager_$VIRTMANAGER_VERSION~natty1_all.deb"
-export VIRTMANAGER_TEAM_SITE=https://launchpad.net/~ukplc-team/+archive/ppa/+files/
-
-export TOOLS_DIR=/home/hasan/projects/OpenERP_Cloud_Configuration$KCKSTRT_DIR
-
-export DSK_LABEL=“Ubu64b1110”
-export IMG_NAME=isolinux/isolinux.bin
-export IMG_CAT=isolinux/boot.cat
-
-export TARGET_ISO=OneiricServer64_autoins.iso
-export FINAL_DESTINATION=~/Desktop
-export TARGET=$FINAL_DESTINATION/$TARGET_ISO
-
-#export INSTALL_MEDIA_REPO=~/Desktop
-#export VM_INSTALL_MEDIA=OneiricServer64_autoins.iso
-export INSTALL_MEDIA_REPO=$FINAL_DESTINATION
-export VM_INSTALL_MEDIA=$TARGET_ISO
-export SOURCE_ISO=$INSTALL_MEDIA_REPO/$VM_INSTALL_MEDIA
-
-export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
-export VIRTUAL_RAM_SIZE=512
-
-export VIRTUAL_DISK_NAME=OO64ExpVDK
-export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
-export VIRTUAL_DISK_SIZE=2.5
 
 
