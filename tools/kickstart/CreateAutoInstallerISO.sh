@@ -36,7 +36,7 @@ if [ 1 = 1 ]; then
 		echo "Added $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE."
 		mv $REPLACEMENT_BOOTLOADER $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER
 		echo "Added $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER."
-		mv $FINAL_STAGE_CONFIGURATION $WORKING_IMAGE
+		mv $FINAL_STAGE_CONFIGURATION $WORKING_IMAGE/preseed
 		echo "Added $WORKING_IMAGE."
 		#                                                                           #
 		####################     End of installer customization       ###############

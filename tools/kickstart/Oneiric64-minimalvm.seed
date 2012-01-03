@@ -325,9 +325,7 @@ d-i	debian-installer/exit/poweroff				boolean true
 # still a usable /target directory. You can chroot to /target and use it
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
-d-i		late_command			string cp -a /cdrom/InitialBootConfigurations.sh /target/etc/init.d/; in-target chmod +x /target/etc/init.d/InitialBootConfigurations.sh; in-target ln -s /etc/init.d/InitialBootConfigurations.sh /etc/rc3.d/S99ibc
-#d-i		late_command			string cp -a /cdrom/InitialBootConfigurations.sh /target/etc/init.d; in-target chmod 777 /usr/sbin/test.sh; in-target /usr/sbin/test.sh;
+d-i	preseed/late_command			string cp -a /cdrom/preseed/InitialBootConfigurations.sh /target/etc/init.d/; in-target chmod +x /etc/init.d/InitialBootConfigurations.sh; in-target ln -s /etc/init.d/InitialBootConfigurations.sh /etc/rc2.d/S99xibc
 #d-i	preseed/late_command			string in-target cd /home; in-target wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh; in-target chmod +x FirstBootConfigurations.sh; ./FirstBootConfigurations.sh
-#d-i	preseed/late_command			string in-target cd /home && in-target wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh
-#d-i	preseed/late_command			string wget http://www3232u.sakura.ne.jp/preseed/preseed.sh -O /target/tmp/preseed.sh; in-target chmod +x /tmp/preseed.sh; in-target /tmp/preseed.sh
+#d-i	preseed/late_command			string in-target cd /etc/init.d; in-target wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/InitialBootConfigurations.sh; in-target chmod +x InitialBootConfigurations.sh
 
