@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Starts simple test
 #
 echo "Complete the installation with all updates & upgrades"
