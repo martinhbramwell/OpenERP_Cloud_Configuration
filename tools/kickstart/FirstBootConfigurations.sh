@@ -1,18 +1,24 @@
 #!/bin/bash
 # Starts simple test
 #
+#
+ADMIN_USERZ_UID=yourself
+ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
+#
+#
 echo "Complete the installation with all updates & upgrades"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 #
 echo "Temporarily set some environment variables pertinent only for the currently executing scripts."
 #
-echo "if [ -f ~/.bashrc ]; then"  >> .bash_profile
-echo "   source ~/.bashrc"  >> .bash_profile
+cd $ADMIN_USERZ_HOME/
+echo "if [ -f ./.bashrc ]; then"  >> .bash_profile
+echo "   source ./.bashrc"  >> .bash_profile
 echo "fi"  >> .bash_profile
 #
 echo "#"  >> .bashrc
-echo "export TMP=~/tmp"  >> .bashrc
+echo "export TMP=./tmp"  >> .bashrc
 echo "export SRV_CONFIG=\"https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master\""  >> .bashrc
 #
 # Now make them available immediately
@@ -20,7 +26,7 @@ source .bash_profile
 #
 echo "Ensure JAVA_HOME can be detected by root !"
 # Create a sudoers extension file and authorize passing JAVA_HOME & M2_HOME into new environment
-cd ~/
+cd $ADMIN_USERZ_HOME/
 rm -f neededBy* 
 echo 'Defaults env_keep+="JAVA_HOME M2_HOME CATALINA_HOME TOMCAT_USER"' > neededByTomCat
 chmod 0440 neededByTomCat 
@@ -31,13 +37,13 @@ sudo mv neededByTomCat /etc/sudoers.d/
 #
 echo "Prepare some variables for later use."
 #
-cd ~/
+cd $ADMIN_USERZ_HOME/
 # Make a place to keep installers "just in case..."
-mkdir -p ~/installers
+mkdir -p $ADMIN_USERZ_HOME/installers
 echo export "INS=/home/yourself/installers" >> .bash_aliases
 #
 # Make a place to keep programs
-mkdir -p ~/programs
+mkdir -p $ADMIN_USERZ_HOME/programs
 echo "export PRG=/home/yourself/programs" >> .bash_aliases
 #
 # A test result variable
@@ -49,7 +55,7 @@ source .bashrc
 #
 echo "Obtain remotely customized environment variables."
 # Prepare
-cd ~/programs
+cd $ADMIN_USERZ_HOME/programs
 # Get the master files of environment variables
 rm -f ./ConfigRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/ConfigRequiredVars.sh
@@ -78,13 +84,13 @@ mkdir -p $TMP
 cd $TMP
 #
 # Generate a new environment
-source ~/programs/ConfigRequiredVars.sh
-source ~/programs/MavenRequiredVars.sh
-source ~/programs/TomcatRequiredVars.sh
-source ~/programs/JenkinsRequiredVars.sh
+source $ADMIN_USERZ_HOME/programs/ConfigRequiredVars.sh
+source $ADMIN_USERZ_HOME/programs/MavenRequiredVars.sh
+source $ADMIN_USERZ_HOME/programs/TomcatRequiredVars.sh
+source $ADMIN_USERZ_HOME/programs/JenkinsRequiredVars.sh
 #
 # Generate a new environment file
-~/programs/MakeEnvironment.sh
+$ADMIN_USERZ_HOME/programs/MakeEnvironment.sh
 #
 # Make the variables available immediately
 source environment
@@ -129,7 +135,7 @@ sudo cp -R ./etc/* /etc
 # sudo ifdown eth0; sudo ifup eth0
 #
 echo "Clean up."
-cd ~/
+cd $ADMIN_USERZ_HOME/
 rm -fr $TMP
 
 echo "Done."
