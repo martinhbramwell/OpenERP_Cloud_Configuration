@@ -24,6 +24,8 @@ d-i 	pkgsel/language-pack-patterns				string
 # No language support packages.
 d-i 	pkgsel/install-language-support				boolean false
 #
+# Language pack selection
+d-i	pkgsel/language-packs multiselect
 
 ############   Keyboard  ###############
 # Disable automatic (interactive) keymap detection.
@@ -143,7 +145,7 @@ d-i	partman-partitioning/confirm_write_new_label		boolean true
 # - atomic: all files in one partition
 # - home:   separate /home partition
 # - multi:  separate /home, /usr, /var, and /tmp partitions
-d-i	partman-auto/choose_recipe				select multi
+d-i	partman-auto/choose_recipe				select home
 
 # Partitioning recipe:
 
@@ -246,15 +248,13 @@ d-i 	pkgsel/upgrade						select	safe-upgrade
 #d-i debian-installer/allow_unauthenticated string true
 
 ### Package selection
-tasksel tasksel/first multiselect standard, OpenSSH server
+tasksel	tasksel/first						multiselect standard, OpenSSH server
 #tasksel tasksel/first multiselect lamp-server, print-server
 #tasksel tasksel/first multiselect kubuntu-desktop
 
 # Individual additional packages to install
-d-i pkgsel/include string build-essential, git-core, unzip, pkg-config, sqlite3, libsqlite3-dev
-
-# Language pack selection
-d-i pkgsel/language-packs multiselect
+#d-i pkgsel/include string build-essential, git-core, unzip, pkg-config, sqlite3, libsqlite3-dev
+d-i 	pkgsel/include 						string build-essential, wget, unzip, pkg-config
 
 ############### Boot loader installation ##################
 
@@ -267,11 +267,11 @@ d-i pkgsel/language-packs multiselect
 
 # This is fairly safe to set, it makes grub install automatically to the MBR
 # if no other operating system is detected on the machine.
-d-i grub-installer/only_debian boolean true
+d-i	grub-installer/only_debian				boolean true
 
 # This one makes grub-installer install to the MBR if it also finds some other
 # OS, which is less safe as it might not be able to boot that other OS.
-d-i grub-installer/with_other_os boolean true
+d-i	grub-installer/with_other_os				boolean true
 
 # Alternatively, if you want to install to a location other than the mbr,
 # uncomment and edit these lines:
@@ -290,7 +290,7 @@ d-i grub-installer/with_other_os boolean true
 
 #####################  Finishing up  ######################
 # Avoid that last message about the install being complete.
-d-i finish-install/reboot_in_progress note
+d-i	finish-install/reboot_in_progress			note
 
 # This will prevent the installer from ejecting the CD during the reboot,
 # which is useful in some situations.
@@ -300,7 +300,7 @@ d-i finish-install/reboot_in_progress note
 # reboot into the installed system.
 #d-i debian-installer/exit/halt boolean true
 # This will power off the machine instead of just halting it.
-d-i debian-installer/exit/poweroff boolean true
+d-i	debian-installer/exit/poweroff				boolean true
 
 
 ###################  Advanced options  ####################
@@ -325,6 +325,9 @@ d-i debian-installer/exit/poweroff boolean true
 # still a usable /target directory. You can chroot to /target and use it
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
-d-i	preseed/late_command			string mkdir -p /home/hasan/boot && echo "Success..." > /home/hasan/boot/result.txt
+d-i		late_command			string cp -a /cdrom/InitialBootConfigurations.sh /target/etc/init.d/; in-target chmod +x /target/etc/init.d/InitialBootConfigurations.sh; in-target ln -s /etc/init.d/InitialBootConfigurations.sh /etc/rc3.d/S99ibc
+#d-i		late_command			string cp -a /cdrom/InitialBootConfigurations.sh /target/etc/init.d; in-target chmod 777 /usr/sbin/test.sh; in-target /usr/sbin/test.sh;
+#d-i	preseed/late_command			string in-target cd /home; in-target wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh; in-target chmod +x FirstBootConfigurations.sh; ./FirstBootConfigurations.sh
+#d-i	preseed/late_command			string in-target cd /home && in-target wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh
 #d-i	preseed/late_command			string wget http://www3232u.sakura.ne.jp/preseed/preseed.sh -O /target/tmp/preseed.sh; in-target chmod +x /tmp/preseed.sh; in-target /tmp/preseed.sh
 

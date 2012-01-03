@@ -26,14 +26,18 @@ source ./ConfigureVariables.sh
 if [ 1 = 1 ]; then
 
 	echo "Exposing the target location"
-	./Unpack_UbunutuInstallerISO.sh
+	./Unpack_UbuntuInstallerISO.sh
 	./Unpack_Initrd.sh
  	if [ 1 = 1 ]; then
 		####################      Begin installer customization       ###############
 		#                                                                           #
 		echo "Adding our customizations"
 		mv $REPLACEMENT_SEED_FILE $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE
+		echo "Added $SEED_FILE_TEMPORARY_HOME/$TARGET_SEED_FILE."
 		mv $REPLACEMENT_BOOTLOADER $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER
+		echo "Added $BOOTLOADER_TEMPORARY_HOME/$ORIGINAL_BOOTLOADER."
+		mv $FINAL_STAGE_CONFIGURATION $WORKING_IMAGE
+		echo "Added $WORKING_IMAGE."
 		#                                                                           #
 		####################     End of installer customization       ###############
 	fi
@@ -43,7 +47,7 @@ if [ 1 = 1 ]; then
 
 	echo "Close up the target location"
 	./Repack_Initrd.sh
-	./Repack_UbunutuInstallerISO.sh
+	./Repack_UbuntuInstallerISO.sh
 
 fi
 

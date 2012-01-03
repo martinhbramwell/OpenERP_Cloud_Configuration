@@ -2,21 +2,33 @@
 
 echo "Getting ConfigureVariables.sh"
 cp $TOOLS_DIR/ConfigureVariables.sh .
+chmod +x ConfigureVariables.sh
 
 source ./ConfigureVariables.sh
 
-echo "Getting Unpack_UbunutuInstallerISO.sh"
-cp $TOOLS_DIR/Unpack_UbunutuInstallerISO.sh .
+echo "Getting Unpack_UbuntuInstallerISO.sh"
+cp $TOOLS_DIR/Unpack_UbuntuInstallerISO.sh .
+chmod +x Unpack_UbuntuInstallerISO.sh
+#
 echo "Getting Unpack_Initrd.sh"
 cp $TOOLS_DIR/Unpack_Initrd.sh .
+chmod +x Unpack_Initrd.sh
 
 echo "Getting Repack_Initrd.sh"
 cp $TOOLS_DIR/Repack_Initrd.sh .
-echo "Getting Repack_UbunutuInstallerISO.sh"
-cp $TOOLS_DIR/Repack_UbunutuInstallerISO.sh .
+chmod +x Repack_Initrd.sh
+#
+echo "Getting Repack_UbuntuInstallerISO.sh"
+cp $TOOLS_DIR/Repack_UbuntuInstallerISO.sh .
+chmod +x Repack_UbuntuInstallerISO.sh
+#
 echo "Getting InstantiateVM.sh"
 cp $TOOLS_DIR/InstantiateVM.sh .
+chmod +x InstantiateVM.sh
 
+echo "Getting InitialBootConfigurations.sh"
+cp $TOOLS_DIR/InitialBootConfigurations.sh .
+chmod +x InitialBootConfigurations.sh
 
 ## ======================================
 

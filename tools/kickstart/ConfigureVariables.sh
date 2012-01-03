@@ -31,6 +31,8 @@ export TARGET_SEED_FILE=preseed.cfg
 
 export SEED_FILE_TEMPORARY_HOME=$WORKING_IMAGE/install/initrd.unpacked
 
+export FINAL_STAGE_CONFIGURATION=InitialBootConfigurations.sh
+
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 export KCKSTRT_DIR=/tools/kickstart
 
