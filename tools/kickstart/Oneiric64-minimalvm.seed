@@ -1,131 +1,330 @@
-# Always install the virtual kernel, with no headers.
-d-i base-installer/kernel/override-image	string linux-virtual
-d-i base-installer/kernel/headers	boolean false
+########  Prelimiary notes   ########### 
+## Format is : <owner> <question name> <question type> <value>
+## Answers to questions with other owners are placed in debconf database of target system
+##   d-i is the owner of questions related to installation
+## * CAUTION * : Only use one whitespace character between type and value!
+## * Hints * : 
+##	1) Discover <owner> possibilities with		-- sudo debconf-show
+##	2) Check format with				-- sudo debconf-set-selections -c  preseed.cfg
+##	3) Discover <question name> possibilities with	-- sudo debconf-get-selections 
+##                Example : debconf-get-selections --installer | grep passwd
+##   *** Those tools are to be had with sudo apt-get install debconf-utils ***
+#
+###########  Locale Stuff   #############
+# Verbose output and no boot splash screen.
+d-i	debian-installer/quiet					boolean false
+d-i	debian-installer/splash					boolean false
+d-i	debian-installer/language				string en
+d-i	debian-installer/country				string US
+d-i	debian-installer/locale					select en_US.UTF-8
 
 # Only install basic language packs. Let tasksel ask about tasks.
-d-i pkgsel/language-pack-patterns	string
+d-i 	pkgsel/language-pack-patterns				string
 
 # No language support packages.
-d-i pkgsel/install-language-support	boolean false
+d-i 	pkgsel/install-language-support				boolean false
+#
 
-### Localization
-# Locale sets language and country.
-d-i debian-installer/locale string en_US
-
-# Keyboard selection.
+############   Keyboard  ###############
 # Disable automatic (interactive) keymap detection.
-d-i console-setup/ask_detect boolean false
-d-i console-setup/layoutcode string latam
+d-i 	console-setup/ask_detect 				boolean false # false=don't ask the user to mess with typing possible keys
+d-i 	console-setup/detected					note
+
+d-i	keyboard-configuration/layoutcode			string	latam
+d-i	keyboard-configuration/modelcode			string	pc105
+d-i	keyboard-configuration/optionscode			string	
+d-i	keyboard-configuration/variantcode			string	
+d-i	keyboard-configuration/unsupported_config_layout	boolean	true
+d-i	keyboard-configuration/unsupported_options		boolean	true
+d-i	keyboard-configuration/unsupported_layout		boolean	true
+d-i	keyboard-configuration/store_defaults_in_debconf_db	boolean	true
+d-i	keyboard-configuration/ctrl_alt_bksp			boolean	false
+d-i	keyboard-configuration/model				select	
+d-i	keyboard-configuration/layout				select	
+d-i	keyboard-configuration/variant				select	
+d-i	keyboard-configuration/toggle				select	No toggling
+d-i	keyboard-configuration/compose				select	No compose key
+d-i	keyboard-configuration/switch				select	No temporary switch
+d-i	keyboard-configuration/altgr				select	The default for the keyboard layout # in
 
 
-
-### Partitioning
-# If the system has free space you can choose to only partition that space.
-# Alternatives: custom, some_device, some_device_crypto, some_device_lvm.
-d-i partman-auto/init_automatically_partition select biggest_free
-d-i partman-auto/method string lvm
-d-i partman/default_filesystem string ext4
-# Automatically partition without confirmation.
-d-i partman-md/confirm boolean true
-d-i partman/confirm_write_new_label boolean true
-d-i partman/choose_partition select finish
-d-i partman/confirm boolean true
-
-# Partitioning recipe:
-d-i partman-auto/choose_recipe select multi
-
-
-
-### Network configuration
+########   Network configuration  #########
 # netcfg will choose an interface that has link if possible. This makes it
 # skip displaying a list if there is more than one interface.
-d-i netcfg/choose_interface select auto
+d-i	netcfg/choose_interface					select auto
 
 # If you prefer to configure the network manually, uncomment this line and
 # the static network configuration below.
-d-i netcfg/disable_dhcp boolean true
+d-i	netcfg/disable_dhcp					boolean true
 
-# Static network configuration.
-d-i netcfg/get_nameservers string 192.168.122.10
-d-i netcfg/get_ipaddress string 192.168.122.3
-d-i netcfg/get_netmask string 255.255.255.240
-d-i netcfg/get_gateway string 192.168.122.1
-d-i netcfg/confirm_static boolean true
+# If you want the preconfiguration file to work on systems both with and
+# without a dhcp server, uncomment these lines and the static network
+# configuration below.
+d-i	netcfg/dhcp_failed					note
+d-i	netcfg/dhcp_options					select Configure network manually
+
+# Static network configuration.	
+d-i	netcfg/get_nameservers					string 192.168.122.10
+d-i	netcfg/get_ipaddress					string 192.168.122.7
+d-i	netcfg/get_netmask					string 255.255.255.240
+d-i	netcfg/get_gateway					string 192.168.122.1
+d-i	netcfg/confirm_static					boolean true
 
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
 # from being shown, even if values come from dhcp.
-d-i netcfg/get_hostname string continuous
-d-i netcfg/get_domain string warehouseman.com
+d-i	netcfg/get_hostname					string continuous
+d-i	netcfg/get_domain					string warehouseman.com
+
+# Mirror servers
+# If you select ftp, the mirror/country string does not need to be set.
+#d-i mirror/protocol string ftp
+#d-i	mirror/country						string manual
+#d-i	mirror/http/hostname					string jp.archive.ubuntu.com
+#d-i	mirror/http/directory					string /ubuntu/
+choose-mirror-bin	mirror/http/proxy			string http://192.168.122.10:3142/
+d-i			mirror/http/proxy			string http://192.168.122.10:3142/
+#d-i	mirror/ftp/proxy					string ftp://192.168.122.10:3142/
+# Suite to install.
+#d-i mirror/suite string &releasename;
+# Suite to use for loading installer components (optional).
+#d-i mirror/udeb/suite string &releasename;
+# Components to use for loading installer components (optional).
+#d-i mirror/udeb/components multiselect main, restricted
+
+###########   Time and Date  #############
+# Controls whether or not the hardware clock is set to UTC.
+d-i	clock-setup/utc						boolean true
+#
+# NTP server to use. The default is almost always fine here.
+d-i	clock-setup/ntp						boolean true
+d-i	clock-setup/ntp-server					string	ntp.ubuntu.com
+#
+# You may set this to any valid setting for $TZ; see the contents of
+# /usr/share/zoneinfo/ for valid values.
+d-i	time/zone						string America/Guayaquil
+
+############  Partitioning  #############
+
+# If the system has free space you can choose to only partition that space.
+# Alternatives: custom, some_device, some_device_crypto, some_device_lvm.
+#d-i	partman-auto/init_automatically_partition select	biggest_free
+#
+# Alternatively, you can specify a disk to partition. The device name must
+# be given in traditional non-devfs format.
+# Note: A disk must be specified, unless the system has only one disk.
+# For example, to use the first SCSI/SATA hard disk:
+#d-i	partman-auto/disk					string /dev/sda
+# In addition, you'll need to specify the method to use.
+# The presently available methods are: "regular", "lvm" and "crypto"
+d-i	partman-auto/method					string lvm
+
+# If one of the disks that are going to be automatically partitioned
+# contains an old LVM configuration, the user will normally receive a
+# warning. This can be preseeded away...
+d-i	partman-lvm/device_remove_lvm				boolean true
+# The same applies to pre-existing software RAID array:
+#d-i partman-md/device_remove_md boolean true
+# And the same goes for the confirmation to write the lvm partitions.
+d-i	partman-lvm/confirm_nooverwrite				boolean true
+d-i	partman-lvm/confirm					boolean true
+
+# For LVM partitioning, you can select how much of the volume group to use
+# for logical volumes.
+d-i	partman-auto-lvm/guided_size				string max
+#d-i	partman-auto-lvm/guided_size				string 10GB
+#d-i	partman-auto-lvm/guided_size				string 50%
+d-i	partman-auto-lvm/no_boot				boolean true
+#
+d-i	partman-partitioning/confirm_write_new_label		boolean true
+#
+
+# You can choose one of the three predefined partitioning recipes:
+# - atomic: all files in one partition
+# - home:   separate /home partition
+# - multi:  separate /home, /usr, /var, and /tmp partitions
+d-i	partman-auto/choose_recipe				select multi
+
+# Partitioning recipe:
+
+d-i	partman/default_filesystem				string ext4
+
+# These makes partman automatically partition without confirmation, provided
+# that you told it what to do using one of the methods above.
+d-i	partman/confirm_write_new_label				boolean true
+d-i	partman/choose_partition				select finish
+d-i	partman/confirm_nooverwrite				boolean true
+d-i	partman/confirm						boolean true
+
+# Software RAID partitions
+#d-i	partman-md/confirm					boolean false
+#d-i	partman-md/device_remove_md				boolean true
 
 
+############  Account Setup  #############
 
-### Account setup
+# Don't create a root user account.
+d-i	passwd/root-login					boolean	false
 
 # To create a normal user account.
-d-i passwd/user-fullname string Yourself
-d-i passwd/username string yourself
+d-i	passwd/user-fullname					string Yourself
+d-i	passwd/username						string yourself
 #
 # Normal user's password, either in clear text
-d-i passwd/user-password password okok
-d-i passwd/user-password-again password okok
-d-i user-setup/allow-password-weak boolean true
-#
-# or encrypted using an MD5 hash.
-#d-i passwd/user-password-crypted password [MD5 hash]
-#d-i passwd/user-password-crypted password $1$PNb68Fe1$8jcYutNswbMKCxFJQsy4O0
+d-i	passwd/user-password					password okok
+d-i	passwd/user-password-again				password okok
+d-i 	user-setup/allow-password-weak				boolean true
 
-# Add user to standard initial groups.
-d-i passwd/user-default-groups string admin
+# Set to true if you want to encrypt the first user's home directory.
+d-i	user-setup/encrypt-home					boolean false
+# user-setup-udeb	user-setup/encrypt-home			boolean false  ????
+
+############   Miscellaneous  ##############
+
+# Always install the virtual kernel, with no headers.
+d-i	base-installer/kernel/override-image			string linux-virtual
+d-i	base-installer/kernel/headers				boolean false
+
+# Don't even install the standard task.
+tasksel	tasksel/skip-tasks					string standard
+
+# Only ask the UTC question if there are other operating systems installed.
+d-i	clock-setup/utc-auto					boolean true
+
+# Install the debconf oem-config frontend (if in OEM mode).
+#d-i	oem-config-udeb/frontend				string debconf
+
+# Wait for two seconds in grub
+d-i	grub-installer/timeout					string 2
+
+# Add the network and tasks oem-config steps by default.
+#oem-config	oem-config/steps	multiselect language, timezone, keyboard, user, network, tasks
 
 
-### Package selection
-tasksel tasksel/first multiselect OpenSSH server
-
-d-i pkgsel/include string git-core
-d-i pkgsel/include string make
-d-i pkgsel/include string autoconf
-d-i pkgsel/include string gcc
-d-i pkgsel/include string unzip
-d-i pkgsel/include string curl
-
+########   Advanced Packaging Tool ##########
 # Policy for applying updates. May be "none" (no automatic updates),
 # "unattended-upgrades" (install security updates automatically), or
 # "landscape" (manage system with Landscape).
-d-i pkgsel/update-policy select unattended-upgrades
+d-i	pkgsel/update-policy					select unattended-upgrades
 
-# Update the system's locate database after installer has finished
-d-i pkgsel/updatedb boolean true
+# By default, the system's locate database will be updated after the
+# installer has finished installing most packages. This may take a while, so
+# if you don't want it, you can set this to "false" to turn it off.
+d-i	pkgsel/updatedb						boolean false
 
+# Whether to upgrade packages after debootstrap.
+# Allowed values: none, safe-upgrade, full-upgrade
+d-i 	pkgsel/upgrade						select	safe-upgrade
 
-### Boot loader installation
-# Install grub automatically to the MBR if no other 
-# operating system is detected on the machine.
+# You can choose to install restricted and universe software, or to install
+# software from the backports repository.
+#d-i apt-setup/restricted boolean true
+#d-i apt-setup/universe boolean true
+#d-i apt-setup/backports boolean true
+# Uncomment this if you don't want to use a network mirror.
+#d-i apt-setup/use_mirror boolean false
+# Select which update services to use; define the mirrors to be used.
+# Values shown below are the normal defaults.
+#d-i apt-setup/services-select multiselect security
+#d-i apt-setup/security_host string security.ubuntu.com
+#d-i apt-setup/security_path string /ubuntu
+
+# Additional repositories, local[0-9] available
+#d-i apt-setup/local0/repository string \
+#       http://local.server/ubuntu &releasename; main
+#d-i apt-setup/local0/comment string local server
+# Enable deb-src lines
+#d-i apt-setup/local0/source boolean true
+# URL to the public key of the local repository; you must provide a key or
+# apt will complain about the unauthenticated repository and so the
+# sources.list line will be left commented out
+#d-i apt-setup/local0/key string http://local.server/key
+
+# By default the installer requires that repositories be authenticated
+# using a known gpg key. This setting can be used to disable that
+# authentication. Warning: Insecure, not recommended.
+#d-i debian-installer/allow_unauthenticated string true
+
+### Package selection
+tasksel tasksel/first multiselect standard, OpenSSH server
+#tasksel tasksel/first multiselect lamp-server, print-server
+#tasksel tasksel/first multiselect kubuntu-desktop
+
+# Individual additional packages to install
+d-i pkgsel/include string build-essential, git-core, unzip, pkg-config, sqlite3, libsqlite3-dev
+
+# Language pack selection
+d-i pkgsel/language-packs multiselect
+
+############### Boot loader installation ##################
+
+# Grub is the default boot loader (for x86). If you want lilo installed
+# instead, uncomment this:
+#d-i grub-installer/skip boolean true
+# To also skip installing lilo, and install no bootloader, uncomment this
+# too:
+#d-i lilo-installer/skip boolean true
+
+# This is fairly safe to set, it makes grub install automatically to the MBR
+# if no other operating system is detected on the machine.
 d-i grub-installer/only_debian boolean true
-d-i grub-installer/with_other_os boolean true
-# Wait for two seconds in grub
-d-i	grub-installer/timeout	string 10
 
+# This one makes grub-installer install to the MBR if it also finds some other
+# OS, which is less safe as it might not be able to boot that other OS.
+d-i grub-installer/with_other_os boolean true
+
+# Alternatively, if you want to install to a location other than the mbr,
+# uncomment and edit these lines:
+#d-i grub-installer/only_debian boolean false
+#d-i grub-installer/with_other_os boolean false
+#d-i grub-installer/bootdev  string (hd0,0)
+# To install grub to multiple disks:
+#d-i grub-installer/bootdev  string (hd0,0) (hd1,0) (hd2,0)
+
+# Optional password for grub, either in clear text
+#d-i grub-installer/password password r00tme
+#d-i grub-installer/password-again password r00tme
+# or encrypted using an MD5 hash, see grub-md5-crypt(8).
+#d-i grub-installer/password-crypted password [MD5 hash]
+
+
+#####################  Finishing up  ######################
 # Avoid that last message about the install being complete.
 d-i finish-install/reboot_in_progress note
 
+# This will prevent the installer from ejecting the CD during the reboot,
+# which is useful in some situations.
+#d-i cdrom-detect/eject boolean false
+
+# This is how to make the installer shutdown when finished, but not
+# reboot into the installed system.
+#d-i debian-installer/exit/halt boolean true
+# This will power off the machine instead of just halting it.
+d-i debian-installer/exit/poweroff boolean true
 
 
-# Only ask the UTC question if there are other operating systems installed.
-d-i	clock-setup/utc-auto	boolean true
+###################  Advanced options  ####################
+### Running custom commands during the installation
+# d-i preseeding is inherently not secure. Nothing in the installer checks
+# for attempts at buffer overflows or other exploits of the values of a
+# preconfiguration file like this one. Only use preconfiguration files from
+# trusted locations! To drive that home, and because it's generally useful,
+# here's a way to run any shell command you'd like inside the installer,
+# automatically.
 
-# Verbose output and no boot splash screen.
-d-i	debian-installer/quiet	boolean false
-d-i	debian-installer/splash	boolean false
+# This first command is run as early as possible, just after
+# preseeding is read.
+#d-i preseed/early_command string anna-install some-udeb
 
-# Install the debconf oem-config frontend (if in OEM mode).
-d-i	oem-config-udeb/frontend	string debconf
+# This command is run immediately before the partitioner starts. It may be
+# useful to apply dynamic partitioner preseeding that depends on the state
+# of the disks (which may not be visible when preseed/early_command runs).
+#d-i partman/early_command string debconf-set partman-auto/disk "$(list-devices disk | head -n1)"
 
-
-# Add the network and tasks oem-config steps by default.
-oem-config	oem-config/steps	multiselect language, timezone, keyboard, user, network, tasks
-
-
-# Disable that annoying WEP key dialog.
-d-i netcfg/wireless_wep string
+# This command is run just before the install finishes, but when there is
+# still a usable /target directory. You can chroot to /target and use it
+# directly, or use the apt-install and in-target commands to easily install
+# packages and run commands in the target system.
+d-i	preseed/late_command			string mkdir -p /home/hasan/boot && echo "Success..." > /home/hasan/boot/result.txt
+#d-i	preseed/late_command			string wget http://www3232u.sakura.ne.jp/preseed/preseed.sh -O /target/tmp/preseed.sh; in-target chmod +x /tmp/preseed.sh; in-target /tmp/preseed.sh
 
