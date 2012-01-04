@@ -254,7 +254,7 @@ tasksel	tasksel/first						multiselect standard, OpenSSH server
 
 # Individual additional packages to install
 #d-i pkgsel/include string build-essential, git-core, unzip, pkg-config, sqlite3, libsqlite3-dev
-d-i 	pkgsel/include 						string build-essential, wget, unzip, pkg-config
+d-i 	pkgsel/include 						string build-essential, wget, unzip, pkg-config, curl, unzip, gcc, autoconf, make, git-core
 
 ############### Boot loader installation ##################
 
