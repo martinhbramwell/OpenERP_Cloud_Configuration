@@ -102,50 +102,44 @@ $ADMIN_USERZ_HOME/programs/MakeEnvironment.sh
 # Make the variables available immediately
 source environment
 #
-if [ 1 == 0 ]
-then
-	#  Give over to root's ownership
-	sudo chown root:root environment
-	#
-	# Make the variables available permanently
-	sudo mv environment /etc/
-	#
-	# Clean up
-	rm -fr $ADMIN_USERZ_WORK_DIR
-	#
-	#
-	echo "Networking"
-	echo "Set up static addressing with these steps :"
-	# Define new settings
-	vFixMe=continuous
-	vFixMe1=192.168.122
-	vFixMe2=3
-	#
-	# Make a place to work
-	mkdir -p $ADMIN_USERZ_WORK_DIR/etc/network
-	cd $ADMIN_USERZ_WORK_DIR
-	#
-	# Get the fresh files
-	wget ${SRV_CONFIG}/etc/resolv.conf
-	wget ${SRV_CONFIG}/etc/hosts_FixMe
-	wget ${SRV_CONFIG}/etc/hostname_FixMe
-	wget ${SRV_CONFIG}/etc/network/interfaces_FixMe
-	#
-	# Make the changes
-	mv resolv.conf ./etc
-	sed s/FixMe/$vFixMe/ <hostname_FixMe >./etc/hostname
-	sed s/FixMe/$vFixMe/ <hosts_FixMe >./etc/hosts
-	sed s/FixMe1/$vFixMe1/ <interfaces_FixMe >tmp
-	sed s/FixMe2/$vFixMe2/ <tmp >./etc/network/interfaces
-	#
-	#
-	echo "Overwrite existing networking definitions"
-	sudo cp -R ./etc/* /etc
-	# sudo ifdown eth0; sudo ifup eth0
-	#
-	echo "Clean up."
-	cd $ADMIN_USERZ_HOME/
-	rm -fr $ADMIN_USERZ_WORK_DIR/
+#  Give over to root's ownership
+sudo chown root:root environment
+#
+# Make the variables available permanently
+sudo mv environment /etc/
+#
+# Clean up
+rm -fr $ADMIN_USERZ_WORK_DIR
+#
+#
+echo "Networking"
+echo "Set up static addressing with these steps :"
+# Define new settings
+vFixMe=continuous
+vFixMe1=192.168.122
+vFixMe2=3
+#
+# Make a place to work
+mkdir -p $ADMIN_USERZ_WORK_DIR/etc/network
+cd $ADMIN_USERZ_WORK_DIR
+#
+# Get the fresh files
+wget ${SRV_CONFIG}/etc/resolv.conf
+wget ${SRV_CONFIG}/etc/hosts_FixMe
+wget ${SRV_CONFIG}/etc/hostname_FixMe
+wget ${SRV_CONFIG}/etc/network/interfaces_FixMe
+#
+# Make the changes
+mv resolv.conf ./etc
+sed s/FixMe/$vFixMe/ <hostname_FixMe >./etc/hostname
+sed s/FixMe/$vFixMe/ <hosts_FixMe >./etc/hosts
+sed s/FixMe1/$vFixMe1/ <interfaces_FixMe >tmp
+sed s/FixMe2/$vFixMe2/ <tmp >./etc/network/interfaces
+#
+#
+echo "=======   Overwrite existing networking definitions  ======="
+echo "============================================================"
+sudo cp -R ./etc/* /etc
+# sudo ifdown eth0; sudo ifup eth0
+#
 
-	echo "Done."
-fi
