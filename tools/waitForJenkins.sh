@@ -8,7 +8,7 @@ idx=0
 rslt=0
 while [ $idx -lt 10 ]
 do
-  rslt=$(curl -sI "http://jenkins.warehouseman.com/${service}/" | grep -c "${expect}" )
+  rslt=$(curl -sI "http://localhost/${service}/" | grep -c "${expect}" )
 
   if [ ${rslt} == 1 ]
   then
