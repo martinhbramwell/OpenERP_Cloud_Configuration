@@ -6,7 +6,7 @@ export VIRTUAL_RAM_SIZE=512
 export VIRTUAL_DISK_NAME=OO64ExpVDK
 #export VIRTUAL_DISK_NAME=OO64ExpVDK
 export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
-export VIRTUAL_DISK_SIZE=2.5
+export VIRTUAL_DISK_SIZE=4
 
 
 
