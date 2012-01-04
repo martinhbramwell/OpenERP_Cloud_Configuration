@@ -18,7 +18,8 @@ openerpdbs		IN	A	192.168.122.11
 openerpapp		IN	A	192.168.122.12
 openerpweb		IN	A	192.168.122.13
 
-continuous		IN	A	192.168.122.2
+continuous		IN	A	192.168.122.3
+test			IN	A	192.168.122.4
 
 openerpns		IN	CNAME	OpenERP-NameServer
 postgres		IN	CNAME	openerpdbs
