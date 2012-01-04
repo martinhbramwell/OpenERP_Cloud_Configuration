@@ -19,7 +19,8 @@ $TTL 3D
 12			IN	PTR	openerpapp.warehouseman.com.
 13			IN	PTR	openerpweb.warehouseman.com.
 
-2			IN	PTR	continuous.warehouseman.com.
+3			IN	PTR	continuous.warehouseman.com.
+4			IN	PTR	      test.warehouseman.com.
 
 
 
