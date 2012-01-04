@@ -150,6 +150,107 @@ echo "Stop it again."
 sudo $CATALINA_HOME/bin/shutdown.sh
 #
 #
+echo ""
+echo "Ensure TomCat Starts During Machine Boot Up"
+echo ""
+echo ""
+echo "To avoid running TomCat as root on port 80 in requires the jsvc service wrapper"
+echo " * * * http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Unix_daemon * * *"
+echo ""
+# Extract commons-daemon
+cd $CATALINA_HOME/bin
+sudo tar xvfz commons-daemon-native.tar.gz
+cd commons-daemon-1.0.7-native-src/unix
+#
+# Build it
+sudo ./configure
+sudo make
+#
+# Put it in the bin directory
+sudo cp jsvc ../..
+echo ""
+echo "We need to patch in a few TomCat required environment variables."
+echo ""
+# Prepare a place to work on the file
+mkdir -p $ADMIN_USERZ_WORK_DIR
+cd $ADMIN_USERZ_WORK_DIR
+# Get the master files of environment variables
+rm -f ./PatchTomcat7ToProvideVars.diff*
+wget ${SRV_CONFIG}/tools/PatchTomcat7ToProvideVars.diff
+mv ./PatchTomcat7ToProvideVars.diff ./PatchTomcat7ToProvideVars.diff.old
+# 
+# Get a copy of Tomcat7.sh to work on 
+cp $CATALINA_HOME/bin/commons-daemon-1.0.7-native-src/unix/samples/Tomcat7.sh .
+#
+cat PatchTomcat7ToProvideVars.diff.old \
+ | sed -e "s|XXXjdkXXX|$JAVA_HOME|g" \
+ | sed -e "s|XXXtchXXX|$CATALINA_HOME|g" \
+ | sed -e "s|XXXtcuXXX|$TOMCAT_USER|g" \
+  > PatchTomcat7ToProvideVars.diff
+#
+# Update the Tomcat7 init file
+patch -d . < PatchTomcat7ToProvideVars.diff      
+# 
+# Put it in the system init area
+sudo cp Tomcat7.sh /etc/init.d/
+# 
+# Clean up
+cd $ADMIN_USERZ_HOME
+rm -fr $ADMIN_USERZ_WORK_DIR
+echo ""
+echo "You’ll need to make the script executable by running the chmod command..."
+echo ""
+# Set privileges
+cd /etc/init.d/
+sudo chmod 755 Tomcat7.sh
+sudo chown root:root Tomcat7.sh
+cd $ADMIN_USERZ_HOME
+echo ""
+echo "These last commands link the script to the startup folders with a symbolic link."
+echo ""
+# Link start script to system start scripts
+echo ""
+cd /etc/rc2.d
+sudo rm -f S99tomcat
+sudo ln -sf ../init.d/Tomcat7.sh S99tomcat
+#
+cd /etc/rc1.d
+sudo rm -f K99tomcat
+sudo ln -sf ../init.d/Tomcat7.sh K99tomcat
+#
+cd $ADMIN_USERZ_HOME
+echo ""
+echo ""
+echo "Since we set TOMCAT_USER=jenkins in /etc/environment we must create that user now"
+echo ""
+# Create user jenkins
+# (notice : no sudoer capability)
+sudo useradd -Um -c "Jenkins" jenkins
+#
+# Now we make jenkins owner of the whole TomCat installation
+cd /usr/share
+sudo chown -R jenkins:jenkins ./tomcat
+sudo chown -R jenkins:jenkins ./apache-tomcat-7.0.23/
+echo ""
+echo ""
+echo "Start TomCat running ..."
+echo ""
+#  Start TomCat
+sudo /etc/rc2.d/S99tomcat start
+echo ""
+echo ""
+echo "... check that it worked."
+echo ""
+#  Check it worked
+cd ${PRG}
+if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
+chmod a+x waitForTomcat.sh
+./waitForTomcat.sh
+#
+echo ""
+echo ""
+echo ""
+echo ""
 echo " * * * Psi Probe * * * "
 echo "Get Psi Probe"
 #
