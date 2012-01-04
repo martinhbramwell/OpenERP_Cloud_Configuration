@@ -62,7 +62,7 @@ sudo tar zxvf ${INS}/jdk-7u2-linux-x64.tar.gz
 sudo ln -sf jdk1.7.0_02/ jdk
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk/jre/bin/java 1
 sudo update-alternatives --config java
-cd ~/
+cd $ADMIN_USERZ_HOME
 #
 echo "Expect :"
 echo " java version \"1.7.0_02\""
@@ -103,7 +103,7 @@ export CATALINA_HOME=/usr/share/tomcat
 #
 echo "Configure TomCat"
 # Operate out of Port 80
-cd ~/
+cd $ADMIN_USERZ_HOME
 sudo cp $CATALINA_HOME/conf/server.xml server.xml.tmp
 sudo chown yourself:yourself server.xml.tmp
 sed 's|Connector port="8080" |Connector port="80" URIEncoding="UTF-8" |' <server.xml.tmp >server.xml
@@ -112,17 +112,148 @@ sudo cp server.xml $CATALINA_HOME/conf
 sudo rm -f server.xml*
 #
 echo "Restart it."
- # Start it up
- sudo $CATALINA_HOME/bin/startup.sh
- #
+# Start it up
+sudo $CATALINA_HOME/bin/startup.sh
+#
 echo "Check it's ok."
- #  Check it worked
- cd ${PRG}
- if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
- chmod a+x waitForTomcat.sh
- ./waitForTomcat.sh
+#  Check it worked
+cd ${PRG}
+if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
+chmod a+x waitForTomcat.sh
+./waitForTomcat.sh
 echo "Stop it again."
- # Shut it down.
- sudo $CATALINA_HOME/bin/shutdown.sh
- #
+# Shut it down.
+sudo $CATALINA_HOME/bin/shutdown.sh
+#
+echo "Configure TomCat"
+# Operate out of Port 80
+cd $ADMIN_USERZ_WORK_DIR
+sudo cp $CATALINA_HOME/conf/server.xml server.xml.tmp
+sudo chown yourself:yourself server.xml.tmp
+sed 's|Connector port="8080" |Connector port="80" URIEncoding="UTF-8" |' <server.xml.tmp >server.xml
+sudo chown root:root server.xml
+sudo cp server.xml $CATALINA_HOME/conf
+sudo rm -f server.xml*
+#
+echo "Restart it."
+# Start it up
+sudo $CATALINA_HOME/bin/startup.sh
+#
+echo "Check it's ok."
+#  Check it worked
+cd ${PRG}
+if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
+chmod a+x waitForTomcat.sh
+./waitForTomcat.sh
+echo "Stop it again."
+# Shut it down.
+sudo $CATALINA_HOME/bin/shutdown.sh
+#
+#
+echo " * * * Psi Probe * * * "
+echo "Get Psi Probe"
+#
+# Use Psi Probe obtained earlier
+# wget -cNb --output-file=dldProbe.log http://psi-probe.googlecode.com/files/probe-2.3.0.zip
+cd ${INS}
+${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldProbe.log -p probe-2.3.0
+#
+mkdir -p $ADMIN_USERZ_WORK_DIR
+cd $ADMIN_USERZ_WORK_DIR
+rm -f probe.war
+rm -f Changelog.txt
+unzip ${INS}/probe-2.3.0.zip 
+sudo mv probe.war $CATALINA_HOME/webapps/
+#
+echo " * * * Psi Probe is way better than TomCat's 'Manager'"
+echo "Configure Psi Probe"
+#
+# Add the access role
+sudo cp $CATALINA_HOME/conf/tomcat-users.xml tu.x
+sudo chown yourself:yourself tu.x
+#
+MARK="<\/tomcat-users>"
+ROLE="<role rolename=\"manager\"\/>"
+USER="<user username=\"yourself\" password=\"okok\" roles=\"manager\"\/>"
+SUBS="  $ROLE\\n  $USER\\n$MARK"   ##  "
+#
+sed "s|$MARK|$SUBS|"  <tu.x >tomcat-users.xml
+#
+sudo chown root:root tomcat-users.xml
+sudo mv tomcat-users.xml $CATALINA_HOME/conf/
+cd $ADMIN_USERZ_HOME/
+rm -fr $ADMIN_USERZ_WORK_DIR
+#
+# Restart Tomcat
+sudo /etc/rc2.d/S99tomcat stop
+sudo /etc/rc2.d/S99tomcat start
+#
+# Checked it worked
+cd ${PRG}
+if [ ! -f "waitForPsiProbe.sh" ]; then wget ${SRV_CONFIG}/tools/waitForPsiProbe.sh; fi
+chmod a+x waitForPsiProbe.sh
+./waitForPsiProbe.sh
+cd $ADMIN_USERZ_WORK_DIR
+#
+echo "Jenkins will need to know where Git resides. Apt puts it at : '/usr/bin/git'"
+echo "It will also expect Git to have been configured. Jenkins requires this to be done AS the jenkins user, so do the following ..."
+echo "Configure Git so Jenkins can use it :"
+#
+sudo -sHu jenkins
+cd /home/jenkins
+git config --global user.name "yourself"
+git config --global user.email "yourself@warehouseman.com"
+git config --global push.default "matching"
+exit
+
+echo "Jenkins Continuous Integration"
+echo "Obtain Jenkins"
+#
+# Use Jenkins Web Archive file obtained earlier
+# wget -cNb --output-file=dldJenkinsWar.log http://mirrors.jenkins-ci.org/war/latest/jenkins.war
+cd ${INS}
+${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldJenkinsWar.log -p jenkins.war
+#
+echo "Move the war into TomCat's webapps directory ..."
+#
+# Move war to TomCat
+sudo mv jenkins.war $CATALINA_HOME/webapps/
+#
+echo "... and confirm that it's working :"
+#
+# Checked it worked
+cd $ADMIN_USERZ_WORK_DIR
+if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
+chmod a+x waitForJenkins.sh
+./waitForJenkins.sh
+#
+echo " * * * Prepare Jenkins * * * "
+echo "Install plugins"
+echo " "
+echo "For automated install of plugins, the download site for the plugins is here : http://updates.jenkins-ci.org/download/plugins/"
+echo " "
+echo "Here is the script for automating that :"
+echo " "
+# Extract the Jenkins Command Line Interface
+cd ${PRG}
+wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
+#
+# Health check
+JNKNSVRSN=$(java -jar jenkins-cli.jar version)
+RSLT=$(echo "$JNKNSVRSN" | grep -c "$JENKINS_VERSION")
+test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAILURE_NOTICE
+#
+# Restart Tomcat
+sudo /etc/rc2.d/S99tomcat stop
+sudo /etc/rc2.d/S99tomcat start
+#
+# Install our various needed plugins
+java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
+java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
+#
+# Restart Jenkins
+java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
+
+echo "Restart as described above and turn to the Manage Jenkins >> Configure System page."
+
 
