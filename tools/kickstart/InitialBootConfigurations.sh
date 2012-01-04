@@ -9,8 +9,9 @@ start)
    mkdir -p /home/yourself/
    cd /home/yourself
 
-   rm -f ./First*
+   rm -f ./FirstBoot*
 
+   export CAN_WE_SEE_THIS_INSIDE_THE_SCRIPTS="YES WE CAN!"
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh
    chmod +x ./FirstBootConfigurations.sh
 #
@@ -28,7 +29,7 @@ start)
 ;;
 
 *)
-        echo "Usage: $0 {start|stop|restart|status}"
+        echo "Usage: $0 {start}"
         exit 1
 esac
 
