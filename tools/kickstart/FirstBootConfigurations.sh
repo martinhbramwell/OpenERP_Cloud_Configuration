@@ -115,9 +115,9 @@ rm -fr $ADMIN_USERZ_WORK_DIR
 echo "Networking"
 echo "Set up static addressing with these steps :"
 # Define new settings
-vFixMe=continuous
+vFixMe=test
 vFixMe1=192.168.122
-vFixMe2=3
+vFixMe2=4
 #
 # Make a place to work
 mkdir -p $ADMIN_USERZ_WORK_DIR/etc/network
