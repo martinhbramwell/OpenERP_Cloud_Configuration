@@ -47,6 +47,10 @@ wget -cNb --output-file=dldJenkinsWar.log ${SRV_JENKINS}/war/latest/jenkins.war
 # 
 sudo apt-get -y install curl unzip gcc autoconf make git-core
 #
+echo " "
+echo -n "Connect terminal to :: " &&  ip addr show eth0 | grep "inet "
+echo " "
+#
 echo "Install Oracle's Java JDK 7"
 # Use JDK 7 obtained earlier 
 # wget -cNb --output-file=dldJdk.log http://download.oracle.com/otn-pub/java/jdk/7u2-b13/jdk-7u2-linux-x64.tar.gz
