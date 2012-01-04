@@ -140,6 +140,7 @@ sed s/FixMe2/$vFixMe2/ <tmp >./etc/network/interfaces
 echo "=======   Overwrite existing networking definitions  ======="
 echo "============================================================"
 sudo cp -R ./etc/* /etc
-# sudo ifdown eth0; sudo ifup eth0
+echo "          Restarting networking..."
+sudo ifdown eth0; sudo ifup eth0
 #
 
