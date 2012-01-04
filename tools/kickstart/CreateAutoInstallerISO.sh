@@ -64,4 +64,8 @@ if [ 0 = 1 ]; then
 
 fi
 
+################
+# TODO :
+# * Direct wget and curl to squid.warehouseman.com
+# * Add test.warehouseman.com & squid.warehouseman.com to DNS
 
