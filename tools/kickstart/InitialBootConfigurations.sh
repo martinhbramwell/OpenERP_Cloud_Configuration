@@ -12,6 +12,7 @@ start)
    rm -f ./FirstBoot*
 
    export CAN_WE_SEE_THIS_INSIDE_THE_SCRIPTS="YES WE CAN!"
+   export http_proxy=http://openerpns.warehouseman.com:3128/
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh
    chmod +x ./FirstBootConfigurations.sh
 #
