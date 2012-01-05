@@ -161,8 +161,8 @@ echo "This is JAVA_HOME currently : [$JAVA_HOME]"
 export JAVA_HOME=/usr/lib/jvm/jdk
 echo "Setting it to $JAVA_HOME in case sudo can't see it."
 echo "This is TOMCAT_USER currently : [$TOMCAT_USER]"
-export $TOMCAT_USER=jenkins
-export $TOMCAT_USER_UC=Jenkins
+export TOMCAT_USER=jenkins
+export TOMCAT_USER_UC=Jenkins
 echo "Setting it to $TOMCAT_USER in case sudo can't see it."
 
 #
