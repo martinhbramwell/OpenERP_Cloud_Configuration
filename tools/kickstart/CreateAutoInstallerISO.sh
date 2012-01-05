@@ -12,6 +12,7 @@ echo "Getting the sudo stuff out of the way."
 sudo pwd
 
 #
+date
 #
 # These may replace the three variables set at the top !!
 echo "Getting the other scripts."
@@ -51,6 +52,8 @@ if [ 1 = 1 ]; then
 
 fi
 
+date
+
 echo "Instantiate the new VM"
 ./InstantiateVM.sh
 
@@ -63,6 +66,8 @@ if [ 0 = 1 ]; then
 	rm -fr $WORKING_DIR
 
 fi
+
+date
 
 ################
 # TODO :
