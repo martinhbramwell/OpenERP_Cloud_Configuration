@@ -308,7 +308,7 @@ cd $ADMIN_USERZ_WORK_DIR
 rm -f probe.war
 rm -f Changelog.txt
 unzip ${INS}/probe-2.3.0.zip 
-sudo chown $TOMCAT_USER;$TOMCAT_USER probe.war
+sudo chown $TOMCAT_USER:$TOMCAT_USER probe.war
 sudo mv probe.war $CATALINA_HOME/webapps/
 #
 echo " * * * Psi Probe is way better than TomCat's 'Manager'"
@@ -365,7 +365,7 @@ echo "Move the war into TomCat's webapps directory ..."
 #
 # Move war to TomCat
 
-sudo chown $TOMCAT_USER;$TOMCAT_USER jenkins.war
+sudo chown $TOMCAT_USER:$TOMCAT_USER jenkins.war
 sudo mv jenkins.war $CATALINA_HOME/webapps/
 #
 echo "... and confirm that it's working :"
