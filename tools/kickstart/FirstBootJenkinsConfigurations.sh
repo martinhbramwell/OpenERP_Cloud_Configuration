@@ -157,6 +157,11 @@ echo ""
 echo "To avoid running TomCat as root on port 80 in requires the jsvc service wrapper"
 echo " * * * http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Unix_daemon * * *"
 echo ""
+echo "This is JAVA_HOME currently : [$JAVA_HOME]"
+echo "Setting it to /usr/lib/jvm/jdk in case sudo can't see it."
+#
+export JAVA_HOME=/usr/lib/jvm/jdk
+#
 # Extract commons-daemon
 cd $CATALINA_HOME/bin
 sudo tar xvfz commons-daemon-native.tar.gz
@@ -225,7 +230,7 @@ echo "Since we set TOMCAT_USER=jenkins in /etc/environment we must create that u
 echo ""
 # Create user jenkins
 # (notice : no sudoer capability)
-sudo useradd -Um -c "Jenkins" jenkins
+sudo useradd -Um -p "saEV5F6cIIjT2" -c "Jenkins" jenkins # saEV5F6cIIjT2 --> password okok
 #
 # Now we make jenkins owner of the whole TomCat installation
 cd /usr/share
@@ -306,7 +311,7 @@ git config --global user.name "yourself"
 git config --global user.email "yourself@warehouseman.com"
 git config --global push.default "matching"
 exit
-
+#
 echo "Jenkins Continuous Integration"
 echo "Obtain Jenkins"
 #
