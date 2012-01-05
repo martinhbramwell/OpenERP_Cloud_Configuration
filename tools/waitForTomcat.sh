@@ -14,8 +14,9 @@ do
     echo "${SERVICE} is up and running,                                            "
     exit 0
   fi
-
+  
   echo -ne "Waiting for ${SERVICE} to start (${idx}).\033[100D"
+  curl -sI http://localhost/
   let "idx += 1"
   sleep 3
 
