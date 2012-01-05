@@ -158,7 +158,13 @@ echo "To avoid running TomCat as root on port 80 in requires the jsvc service wr
 echo " * * * http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Unix_daemon * * *"
 echo ""
 echo "This is JAVA_HOME currently : [$JAVA_HOME]"
-echo "Setting it to /usr/lib/jvm/jdk in case sudo can't see it."
+export JAVA_HOME=/usr/lib/jvm/jdk
+echo "Setting it to $JAVA_HOME in case sudo can't see it."
+echo "This is TOMCAT_USER currently : [$TOMCAT_USER]"
+export $TOMCAT_USER=jenkins
+export $TOMCAT_USER_UC=Jenkins
+echo "Setting it to $TOMCAT_USER in case sudo can't see it."
+
 #
 export JAVA_HOME=/usr/lib/jvm/jdk
 #
@@ -230,12 +236,12 @@ echo "Since we set TOMCAT_USER=jenkins in /etc/environment we must create that u
 echo ""
 # Create user jenkins
 # (notice : no sudoer capability)
-sudo useradd -Um -p "saEV5F6cIIjT2" -c "Jenkins" jenkins # saEV5F6cIIjT2 --> password okok
+sudo useradd -Um -p "saEV5F6cIIjT2" -c "\"$TOMCAT_USER_UC\"" "$TOMCAT_USER" # saEV5F6cIIjT2 --> password okok
 #
 # Now we make jenkins owner of the whole TomCat installation
 cd /usr/share
-sudo chown -R jenkins:jenkins ./tomcat
-sudo chown -R jenkins:jenkins ./apache-tomcat-7.0.23/
+sudo chown -R "$TOMCAT_USER":"$TOMCAT_USER" ./tomcat
+sudo chown -R "$TOMCAT_USER":"$TOMCAT_USER" ./apache-tomcat-7.0.23/
 echo ""
 echo ""
 echo "Start TomCat running ..."
@@ -299,19 +305,20 @@ cd ${PRG}
 if [ ! -f "waitForPsiProbe.sh" ]; then wget ${SRV_CONFIG}/tools/waitForPsiProbe.sh; fi
 chmod a+x waitForPsiProbe.sh
 ./waitForPsiProbe.sh
-cd $ADMIN_USERZ_WORK_DIR
+cd $ADMIN_USERZ_HOME
 #
 echo "Jenkins will need to know where Git resides. Apt puts it at : '/usr/bin/git'"
 echo "It will also expect Git to have been configured. Jenkins requires this to be done AS the jenkins user, so do the following ..."
 echo "Configure Git so Jenkins can use it :"
 #
-sudo -sHu jenkins
-cd /home/jenkins
-git config --global user.name "yourself"
-git config --global user.email "yourself@warehouseman.com"
-git config --global push.default "matching"
-exit
-#
+##### TODO ######
+### sudo -sHu "$TOMCAT_USER"
+### cd /home/"$TOMCAT_USER"
+### git config --global user.name "yourself"
+### git config --global user.email "yourself@warehouseman.com"
+### git config --global push.default "matching"
+### exit
+#################
 echo "Jenkins Continuous Integration"
 echo "Obtain Jenkins"
 #
