@@ -1,10 +1,12 @@
 export INS="/home/yourself/installers"
 export PRG="/home/yourself/programs"
 export FAILURE_NOTICE="______Looks_like_it_failed______"
-			export ADMIN_USERZ_UID=yourself
-			export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
-			export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
-			mkdir -p $ADMIN_USERZ_WORK_DIR
+#
+export ADMIN_USERZ_UID=yourself
+export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
+export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
+mkdir -p $ADMIN_USERZ_WORK_DIR
+#
 echo "============  Some preparations for later use  ============="
 echo "============================================================"
 #
@@ -111,7 +113,9 @@ sudo chown root:root server.xml
 sudo cp server.xml $CATALINA_HOME/conf
 sudo rm -f server.xml*
 #
-echo "Restart it."
+echo "Restart networking again, just in case it causes problems for TomCat."
+sudo ifdown eth0; sudo ifup eth0
+echo "Now try to start TomCat."
 # Start it up
 sudo $CATALINA_HOME/bin/startup.sh
 #
@@ -335,7 +339,7 @@ sudo mv jenkins.war $CATALINA_HOME/webapps/
 echo "... and confirm that it's working :"
 #
 # Checked it worked
-cd $ADMIN_USERZ_WORK_DIR
+cd ${PRG}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
 ./waitForJenkins.sh
@@ -348,8 +352,10 @@ echo " "
 echo "Here is the script for automating that :"
 echo " "
 # Extract the Jenkins Command Line Interface
-cd ${PRG}
-wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
+
+mkdir -p $ADMIN_USERZ_WORK_DIR
+cd $ADMIN_USERZ_WORK_DIR
+wget http://localhost/jnlpJars/jenkins-cli.jar
 #
 # Health check
 JNKNSVRSN=$(java -jar jenkins-cli.jar version)
