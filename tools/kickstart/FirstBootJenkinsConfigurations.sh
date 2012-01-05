@@ -113,21 +113,32 @@ sudo chown root:root server.xml
 sudo cp server.xml $CATALINA_HOME/conf
 sudo rm -f server.xml*
 #
+echo $(hostname)
+ifconfig eth0
+
 echo "Restart networking again, just in case it causes problems for TomCat."
 sudo ifdown eth0; sudo ifup eth0
 echo "Now try to start TomCat."
+date
 # Start it up
 sudo $CATALINA_HOME/bin/startup.sh
+date
 #
 echo "Check it's ok."
+#
+echo $(hostname)
+ifconfig eth0
+#
 #  Check it worked
 cd ${PRG}
 if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
 chmod a+x waitForTomcat.sh
 ./waitForTomcat.sh
+date
 echo "Stop it again."
 # Shut it down.
 sudo $CATALINA_HOME/bin/shutdown.sh
+date
 #
 echo "Configure TomCat"
 # Operate out of Port 80
@@ -139,9 +150,18 @@ sudo chown root:root server.xml
 sudo cp server.xml $CATALINA_HOME/conf
 sudo rm -f server.xml*
 #
+#
+echo $(hostname)
+ifconfig eth0
+#
 echo "Restart it."
+date
 # Start it up
 sudo $CATALINA_HOME/bin/startup.sh
+#
+#
+echo $(hostname)
+ifconfig eth0
 #
 echo "Check it's ok."
 #  Check it worked
@@ -149,6 +169,7 @@ cd ${PRG}
 if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
 chmod a+x waitForTomcat.sh
 ./waitForTomcat.sh
+date
 echo "Stop it again."
 # Shut it down.
 sudo $CATALINA_HOME/bin/shutdown.sh
@@ -247,12 +268,20 @@ cd /usr/share
 sudo chown -R "$TOMCAT_USER":"$TOMCAT_USER" ./tomcat
 sudo chown -R "$TOMCAT_USER":"$TOMCAT_USER" ./apache-tomcat-7.0.23/
 echo ""
+#
+echo $(hostname)
+ifconfig eth0
+#
 echo ""
 echo "Start TomCat running ..."
 echo ""
 #  Start TomCat
 sudo /etc/rc2.d/S99tomcat start
 echo ""
+#
+echo $(hostname)
+ifconfig eth0
+#
 echo ""
 echo "... check that it worked."
 echo ""
@@ -279,6 +308,7 @@ cd $ADMIN_USERZ_WORK_DIR
 rm -f probe.war
 rm -f Changelog.txt
 unzip ${INS}/probe-2.3.0.zip 
+sudo chown $TOMCAT_USER;$TOMCAT_USER probe.war
 sudo mv probe.war $CATALINA_HOME/webapps/
 #
 echo " * * * Psi Probe is way better than TomCat's 'Manager'"
@@ -334,6 +364,8 @@ ${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldJenkinsWar.log -p jenkins.war
 echo "Move the war into TomCat's webapps directory ..."
 #
 # Move war to TomCat
+
+sudo chown $TOMCAT_USER;$TOMCAT_USER jenkins.war
 sudo mv jenkins.war $CATALINA_HOME/webapps/
 #
 echo "... and confirm that it's working :"
