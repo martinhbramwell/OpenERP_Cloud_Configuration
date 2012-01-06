@@ -23,10 +23,11 @@ do
      fi
 
      echo -ne "Waiting for ${SERVICE} to start (${idx}).\033[100D"
-     let "idx += 1"
+     let "inner += 1"
      sleep 3
 
    done
+   let "outer += 1"
 done
 
 echo "Got no answer from ${SERVICE}.                                                     "
