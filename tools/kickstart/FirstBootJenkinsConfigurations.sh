@@ -369,9 +369,11 @@ cd ${PRG}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
 #
+echo "Restart TomCat"
 sudo /etc/rc2.d/S99tomcat stop
 sudo /etc/rc2.d/S99tomcat start
 #
+echo "Wait for Jenkins"
 ./waitForJenkins.sh
 #
 echo " * * * Prepare Jenkins * * * "
@@ -392,10 +394,11 @@ JNKNSVRSN=$(java -jar jenkins-cli.jar version)
 RSLT=$(echo "$JNKNSVRSN" | grep -c "$JENKINS_VERSION")
 test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAILURE_NOTICE
 #
-# Restart Tomcat
+echo "Restart TomCat"
 sudo /etc/rc2.d/S99tomcat stop
 sudo /etc/rc2.d/S99tomcat start
 #
+echo "Wait for Jenkins"
 ./waitForJenkins.sh
 ##
 # Install our various needed plugins
