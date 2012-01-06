@@ -413,6 +413,10 @@ su "$TOMCAT_USER" -c 'git config --global user.name "yourself"'
 su "$TOMCAT_USER" -c 'git config --global user.email "yourself@warehouseman.com"'
 su "$TOMCAT_USER" -c 'git config --global push.default "matching"'
 
+echo "Clear any problem packages"
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -f install
 echo "Restart as described above and turn to the Manage Jenkins >> Configure System page."
 
 
