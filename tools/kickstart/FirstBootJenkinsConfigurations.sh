@@ -362,6 +362,10 @@ echo "... and confirm that it's working :"
 cd ${PRG}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
+#
+sudo /etc/rc2.d/S99tomcat stop
+sudo /etc/rc2.d/S99tomcat start
+#
 ./waitForJenkins.sh
 #
 echo " * * * Prepare Jenkins * * * "
@@ -372,7 +376,7 @@ echo " "
 echo "Here is the script for automating that :"
 echo " "
 # Extract the Jenkins Command Line Interface
-
+#
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
 wget http://localhost/jenkins/jnlpJars/jenkins-cli.jar
@@ -386,6 +390,8 @@ test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAI
 sudo /etc/rc2.d/S99tomcat stop
 sudo /etc/rc2.d/S99tomcat start
 #
+./waitForJenkins.sh
+##
 # Install our various needed plugins
 java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
 java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
