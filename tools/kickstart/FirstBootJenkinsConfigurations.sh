@@ -42,7 +42,7 @@ wget -cNb --output-file=dldProbe.log ${LOCAL_MIRROR}/probe-2.3.0.zip
 # Obtain Jenkins
 SRV_JENKINS="http://mirrors.jenkins-ci.org"
 #wget -cNb --output-file=dldJenkinsWar.log ${SRV_JENKINS}/war/latest/jenkins.war
-wget -cNb --output-file=dldJenkinsWar.log ${LOCAL_MIRROR}/war/latest/jenkins.war
+wget -cNb --output-file=dldJenkinsWar.log ${LOCAL_MIRROR}/jenkins.war
 #
 #
 # Obtain and install 
