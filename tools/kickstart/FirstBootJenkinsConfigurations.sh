@@ -19,7 +19,7 @@ chmod +x ./waitForCompleteDownload.sh
 #
 # Initiate downloading the installers we're going to need.
 cd ${INS}
-LOCAL_MIRROR=http://localhost/downloads
+LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 # Obtain Java Development Kit 7 
 SRV_ORACLE="http://download.oracle.com/otn-pub"
 #wget -cNb --output-file=dldJdk.log ${SRV_ORACLE}/java/jdk/7u2-b13/jdk-7u2-linux-x64.tar.gz
