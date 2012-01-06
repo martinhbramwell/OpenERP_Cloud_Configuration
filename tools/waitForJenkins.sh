@@ -9,6 +9,7 @@ expect="Please <a href=\"newJob\">create new jobs</a> to get started."
 outer=0
 inner=0
 rslt=0
+idx=0
 while [ $outer -lt 2 ]
 do
    curl -s "http://localhost/${command}" | grep "${response}"
@@ -23,6 +24,7 @@ do
      fi
 
      echo -ne "Waiting for ${SERVICE} to start (${idx}).\033[100D"
+     let "idx += 1"
      let "inner += 1"
      sleep 3
 
