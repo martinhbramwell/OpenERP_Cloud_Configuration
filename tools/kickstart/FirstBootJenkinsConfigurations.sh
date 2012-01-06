@@ -341,18 +341,6 @@ chmod a+x waitForPsiProbe.sh
 ./waitForPsiProbe.sh
 cd $ADMIN_USERZ_HOME
 #
-echo "Jenkins will need to know where Git resides. Apt puts it at : '/usr/bin/git'"
-echo "It will also expect Git to have been configured. Jenkins requires this to be done AS the jenkins user, so do the following ..."
-echo "Configure Git so Jenkins can use it :"
-#
-##### TODO ######
-### sudo -sHu "$TOMCAT_USER"
-### cd /home/"$TOMCAT_USER"
-### git config --global user.name "yourself"
-### git config --global user.email "yourself@warehouseman.com"
-### git config --global push.default "matching"
-### exit
-#################
 echo "Jenkins Continuous Integration"
 echo "Obtain Jenkins"
 #
@@ -387,7 +375,7 @@ echo " "
 
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
-wget http://localhost/jnlpJars/jenkins-cli.jar
+wget http://localhost/jenkins/jnlpJars/jenkins-cli.jar
 #
 # Health check
 JNKNSVRSN=$(java -jar jenkins-cli.jar version)
@@ -404,6 +392,14 @@ java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
 #
 # Restart Jenkins
 java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
+
+echo "Jenkins will need to know where Git resides. Apt puts it at : '/usr/bin/git'"
+echo "It will also expect Git to have been configured. Jenkins requires this to be done AS the jenkins user, so do the following ..."
+echo "Configure Git so Jenkins can use it :"
+#
+su "$TOMCAT_USER" -c 'git config --global user.name "yourself"'
+su "$TOMCAT_USER" -c 'git config --global user.email "yourself@warehouseman.com"'
+su "$TOMCAT_USER" -c 'git config --global push.default "matching"'
 
 echo "Restart as described above and turn to the Manage Jenkins >> Configure System page."
 
