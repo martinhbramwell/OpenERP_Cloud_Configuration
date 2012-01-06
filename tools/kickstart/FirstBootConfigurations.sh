@@ -117,9 +117,11 @@ echo "Set up static addressing with these steps :"
 # Define new settings
 #vFixMe=continuous
 #vFixMe2=3
-vFixMe1=192.168.122
+#
 vFixMe=test
 vFixMe2=4
+#
+vFixMe1=192.168.122
 #
 # Make a place to work
 mkdir -p $ADMIN_USERZ_WORK_DIR/etc/network
@@ -142,7 +144,12 @@ sed s/FixMe2/$vFixMe2/ <tmp >./etc/network/interfaces
 echo "=======   Overwrite existing networking definitions  ======="
 echo "============================================================"
 sudo cp -R ./etc/* /etc
-echo "          Restarting networking..."
+echo "          Removing DHCP ..."
+sudo apt-get -y purge isc-dhcp-client
+echo "          Restarting networking ..."
 sudo ifdown eth0; sudo ifup eth0
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -f install
 #
 
