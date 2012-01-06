@@ -19,20 +19,25 @@ chmod +x ./waitForCompleteDownload.sh
 #
 # Initiate downloading the installers we're going to need.
 cd ${INS}
+LOCAL_MIRROR=http://localhost/downloads
 # Obtain Java Development Kit 7 
 SRV_ORACLE="http://download.oracle.com/otn-pub"
-wget -cNb --output-file=dldJdk.log ${SRV_ORACLE}/java/jdk/7u2-b13/jdk-7u2-linux-x64.tar.gz
+#wget -cNb --output-file=dldJdk.log ${SRV_ORACLE}/java/jdk/7u2-b13/jdk-7u2-linux-x64.tar.gz
+wget -cNb --output-file=dldJdk.log ${LOCAL_MIRROR}/jdk-7u2-linux-x64.tar.gz
 #
 # Obtain Apache Maven 3.0.3
 SRV_APACHE="http://mirror.cc.columbia.edu/pub/software/apache"
-wget -cNb --output-file=dldMaven.log ${SRV_APACHE}/maven/binaries/apache-maven-3.0.3-bin.tar.gz
+#wget -cNb --output-file=dldMaven.log ${SRV_APACHE}/maven/binaries/apache-maven-3.0.3-bin.tar.gz
+wget -cNb --output-file=dldMaven.log ${LOCAL_MIRROR}/apache-maven-3.0.3-bin.tar.gz
 #
 # Obtain TomCat 7
-wget -cNb --output-file=dldTomcat.log ${SRV_APACHE}/tomcat/tomcat-7/v7.0.23/bin/apache-tomcat-7.0.23.tar.gz
+#wget -cNb --output-file=dldTomcat.log ${SRV_APACHE}/tomcat/tomcat-7/v7.0.23/bin/apache-tomcat-7.0.23.tar.gz
+wget -cNb --output-file=dldTomcat.log ${LOCAL_MIRROR}/apache-tomcat-7.0.23.tar.gz
 #
 # Obtain Psi Probe
 SRV_PSIPROBE="http://psi-probe.googlecode.com"
-wget -cNb --output-file=dldProbe.log ${SRV_PSIPROBE}/files/probe-2.3.0.zip
+#wget -cNb --output-file=dldProbe.log ${SRV_PSIPROBE}/files/probe-2.3.0.zip
+wget -cNb --output-file=dldProbe.log ${LOCAL_MIRROR}/probe-2.3.0.zip
 #
 # Obtain Jenkins
 SRV_JENKINS="http://mirrors.jenkins-ci.org"
