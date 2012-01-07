@@ -371,13 +371,13 @@ echo "... and confirm that it's working :"
 cd ${PRG}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
+# 
+# echo "Restart TomCat"
+# sudo /etc/rc2.d/S99tomcat stop
+# sudo /etc/rc2.d/S99tomcat start
 #
-echo "Restart TomCat"
-sudo /etc/rc2.d/S99tomcat stop
-sudo /etc/rc2.d/S99tomcat start
-#
-echo "Wait for Jenkins"
-./waitForJenkins.sh
+# echo "Wait for Jenkins"
+# ./waitForJenkins.sh
 #
 echo " * * * Prepare Jenkins * * * "
 echo "Install plugins"
@@ -390,31 +390,52 @@ echo " "
 #
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
-wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
+sudo rm -f jenki*
+sudo wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
 #
 # Health check
 JNKNSVRSN=$(java -jar jenkins-cli.jar version)
 RSLT=$(echo "$JNKNSVRSN" | grep -c "$JENKINS_VERSION")
 test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAILURE_NOTICE
 #
-echo "Restart TomCat"
+echo "Stop TomCat"
 sudo /etc/rc2.d/S99tomcat stop
+#
+sudo rm -f *.hpi
+#
+echo "Obtain GitHub plugin..."
+sudo rm -fr /home/jenkins/.jenkins/plugins/github*
+sudo wget -cN ${LOCAL_MIRROR}/github.hpi
+#
+echo "Obtain SafeRestart plugin..."
+sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
+sudo wget -cN ${LOCAL_MIRROR}/saferestart.hpi
+#
+echo "Pass new plugins to Jenkins."
+sudo mv *.hpi /home/jenkins/.jenkins/plugins
+#
+echo "Start TomCat"
 sudo /etc/rc2.d/S99tomcat start
 #
 cd ${PRG}
 echo "Wait for Jenkins"
 ./waitForJenkins.sh
 ##
-wget $JENKINS_URL/pluginManager/available
-cat available | grep "Help us localize this page"
-#
-cd ${ADMIN_USERZ_WORK_DIR}
-# Install our various needed plugins
-java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
-java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
-#
-# Restart Jenkins
-java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
+if [ 0 == 1 ]; then
+	echo "Scare updateCenter into behaving properly..."
+	cd ${ADMIN_USERZ_WORK_DIR}
+	sudo curl -L http://updates.jenkins-ci.org/update-center.json | sed '1d;$d' | sudo curl -X POST -H 'Accept: application/json' -d @- $JENKINS_URL/updateCenter/byId/default/postBack#
+	# Install our various needed plugins
+	##
+	echo "Install GitHub plugin..."
+	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
+	echo "Install SafeRestart plugin..."
+	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
+	#
+	# Restart Jenkins
+	echo "Restart Jenkins using SafeRestart plugin..."
+	java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
+fi
 
 echo "Jenkins will need to know where Git resides. Apt puts it at : '/usr/bin/git'"
 echo "It will also expect Git to have been configured. Jenkins requires this to be done AS the jenkins user, so do the following ..."
