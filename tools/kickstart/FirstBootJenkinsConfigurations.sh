@@ -396,7 +396,7 @@ cd $ADMIN_USERZ_WORK_DIR
 sudo rm -f jenki*
 sudo wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
 sudo wget $JENKINS_URL/updateCenter/?auto_refresh=true
-#
+sudo wget $JENKINS_URL//pluginManager/checkUpdates#
 #
 # Health check
 JNKNSVRSN=$(java -jar jenkins-cli.jar version)
