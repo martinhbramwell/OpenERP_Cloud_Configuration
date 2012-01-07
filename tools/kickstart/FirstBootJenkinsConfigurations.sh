@@ -361,7 +361,7 @@ ${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldJenkinsWar.log -p jenkins.war
 echo "Move the war into TomCat's webapps directory ..."
 #
 # Move war to TomCat
-
+#
 sudo chown $TOMCAT_USER:$TOMCAT_USER jenkins.war
 sudo mv jenkins.war $CATALINA_HOME/webapps/
 #
@@ -371,13 +371,13 @@ echo "... and confirm that it's working :"
 cd ${PRG}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
-# 
-# echo "Restart TomCat"
-# sudo /etc/rc2.d/S99tomcat stop
-# sudo /etc/rc2.d/S99tomcat start
 #
-# echo "Wait for Jenkins"
-# ./waitForJenkins.sh
+echo "Restart TomCat"
+sudo /etc/rc2.d/S99tomcat stop
+sudo /etc/rc2.d/S99tomcat start
+#
+echo "Wait for Jenkins"
+./waitForJenkins.sh
 #
 echo " * * * Prepare Jenkins * * * "
 echo "Install plugins"
@@ -386,12 +386,16 @@ echo "For automated install of plugins, the download site for the plugins is her
 echo " "
 echo "Here is the script for automating that :"
 echo " "
+#
+sudo wget $JENKINS_URL/reload
+#
 # Extract the Jenkins Command Line Interface
 #
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
 sudo rm -f jenki*
 sudo wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
+#
 #
 # Health check
 JNKNSVRSN=$(java -jar jenkins-cli.jar version)
