@@ -416,6 +416,8 @@ sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
 sudo wget -cN ${LOCAL_MIRROR}/saferestart.hpi
 #
 echo "Pass new plugins to Jenkins."
+sudo chown $TOMCAT_USER:$TOMCAT_USER *.hpi
+sudo chmod 644 *.hpi
 sudo mv *.hpi /home/jenkins/.jenkins/plugins
 #
 echo "Start TomCat"
