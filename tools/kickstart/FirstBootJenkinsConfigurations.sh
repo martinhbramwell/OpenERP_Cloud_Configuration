@@ -407,9 +407,16 @@ sudo /etc/rc2.d/S99tomcat stop
 #
 sudo rm -f *.hpi
 #
+sudo rm -fr /home/jenkins/.jenkins/plugins/git*
+
+echo "Obtain Git plugin..."
+sudo wget -cN ${LOCAL_MIRROR}/git.hpi
+#
 echo "Obtain GitHub plugin..."
-sudo rm -fr /home/jenkins/.jenkins/plugins/github*
 sudo wget -cN ${LOCAL_MIRROR}/github.hpi
+#
+echo "Obtain GitHub Api plugin..."
+sudo wget -cN ${LOCAL_MIRROR}/github-api.hpi
 #
 echo "Obtain SafeRestart plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
