@@ -410,8 +410,8 @@ cat available | grep "Help us localize this page"
 #
 cd ${ADMIN_USERZ_WORK_DIR}
 # Install our various needed plugins
-java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
-java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
+java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin http://updates.jenkins-ci.org/latest/github.hpi
+java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin http://updates.jenkins-ci.org/latest/saferestart.hpi
 #
 # Restart Jenkins
 java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
