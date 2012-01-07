@@ -195,6 +195,9 @@ echo "This is TOMCAT_USER currently : [$TOMCAT_USER]"
 export TOMCAT_USER=jenkins
 export TOMCAT_USER_UC=Jenkins
 echo "Setting it to $TOMCAT_USER in case sudo can't see it."
+echo "This is Jenkins local url currently : [$JENKINS_URL]"
+export JENKINS_URL=http://localhost/jenkins
+echo "Setting it to $JENKINS_URL in case sudo can't see it."
 
 #
 export JAVA_HOME=/usr/lib/jvm/jdk
