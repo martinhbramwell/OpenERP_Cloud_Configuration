@@ -390,7 +390,7 @@ echo " "
 #
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
-wget http://localhost/jenkins/jnlpJars/jenkins-cli.jar
+wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
 #
 # Health check
 JNKNSVRSN=$(java -jar jenkins-cli.jar version)
@@ -401,9 +401,14 @@ echo "Restart TomCat"
 sudo /etc/rc2.d/S99tomcat stop
 sudo /etc/rc2.d/S99tomcat start
 #
+cd ${PRG}
 echo "Wait for Jenkins"
 ./waitForJenkins.sh
 ##
+wget $JENKINS_URL/pluginManager/available
+cat available | grep "Help us localize this page"
+#
+cd ${ADMIN_USERZ_WORK_DIR}
 # Install our various needed plugins
 java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
 java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
