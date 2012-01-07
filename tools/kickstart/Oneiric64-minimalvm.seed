@@ -75,8 +75,8 @@ d-i	netcfg/confirm_static					boolean true
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
 # from being shown, even if values come from dhcp.
-#d-i	netcfg/get_hostname					string continuous
-d-i	netcfg/get_hostname					string test
+d-i	netcfg/get_hostname					string continuous
+#d-i	netcfg/get_hostname					string test
 d-i	netcfg/get_domain					string warehouseman.com
 
 # Mirror servers
@@ -255,7 +255,7 @@ tasksel	tasksel/first						multiselect standard, OpenSSH server
 
 # Individual additional packages to install
 #d-i pkgsel/include string build-essential, git-core, unzip, pkg-config, sqlite3, libsqlite3-dev
-d-i 	pkgsel/include 						string build-essential, wget, unzip, pkg-config, curl, unzip, gcc, autoconf, make, git-core
+d-i 	pkgsel/include 						string build-essential, wget, unzip, pkg-config, curl, unzip, gcc, autoconf, make, git-core, aptitude
 
 ############### Boot loader installation ##################
 
