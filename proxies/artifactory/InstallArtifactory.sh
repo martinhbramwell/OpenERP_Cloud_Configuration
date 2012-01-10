@@ -7,7 +7,7 @@ rm -fr artifactory-2.4.2
 #
 wget -N http://downloads.sourceforge.net/project/artifactory/artifactory/2.4.2/artifactory-2.4.2.zip
 unzip artifactory-2.4.2 artifactory-2.4.2/webapps/artifactory.war
-sudo mv artifactory-2.4.2/* /usr/share/tomcat
+sudo mv artifactory-2.4.2/webapps/artifactory.war  /usr/share/tomcat/webapps
 rm -fr ./artifactory-2.4.2
 #
 #
