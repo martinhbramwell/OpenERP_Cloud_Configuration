@@ -27,6 +27,18 @@ sudo bin/mysqld_safe --user=mysql &
 # Next command is optional
 sudo cp support-files/mysql.server /etc/init.d/mysql.server
 
+cd /usr/local/mysql/bin
+./mysql -u root -D mysql -ss -n -q <<EOF
+#
+CREATE DATABASE redorademo;
+CREATE USER 'redora'@'openerpdbs.warehouseman.com' IDENTIFIED BY 'password';
+GRANT ALL ON redorademo.* TO 'redora'@'openerpdbs.warehouseman.com';
+FLUSH PRIVILEGES;
+#
+EOF
+exit
+
+
 # # Installing MySQL system tables...
 # OK
 # Filling help tables...
