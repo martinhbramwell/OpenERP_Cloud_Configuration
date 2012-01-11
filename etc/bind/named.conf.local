@@ -15,10 +15,10 @@ zone "warehouseman.com"
 
 #  Reverse lookup zone -- holds PTR records. Maps an IP address to a hostname.
 #  192.168.122.1
-zone "0.168.192.in-addr.arpa"
+zone "122.168.192.in-addr.arpa"
 {
 	type master;
-	file "/etc/bind/zones/rev.0.168.192.in-addr.arpa";
+	file "/etc/bind/zones/rev.122.168.192.in-addr.arpa";
 };
 
 
