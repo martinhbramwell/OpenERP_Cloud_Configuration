@@ -10,7 +10,7 @@ export VIRTUAL_RAM_SIZE=512
 
 export VIRTUAL_DISK_NAME=OO64ExpVDK
 export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
-export VIRTUAL_DISK_SIZE=4
+export VIRTUAL_DISK_SIZE=6
 # export VIRTUAL_DISK_NAME=OO64ExpVDK
 # export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
 #export VIRTUAL_DISK_SIZE=4
@@ -27,7 +27,7 @@ export ORIGINAL_IMAGE=$ORIGINAL_IMAGE_LOCATION/$ORIGINAL_IMAGE_NAME
 export TEMPORARY_MOUNT_POINT=/mnt/isoMount
 
 
-export SERVER_INSTALLER_VERSION=desktop
+export SERVER_INSTALLER_VERSION=server
 export DESKTOP_INSTALLER_VERSION=desktop
 #  * * * Uncommment only one * * * 
 #export INSTALLER_VERSION=$SERVER_INSTALLER_VERSION  
@@ -92,7 +92,7 @@ export VM_INSTALL_MEDIA=$TARGET_ISO
 export SOURCE_ISO=$INSTALL_MEDIA_REPO/$VM_INSTALL_MEDIA
 
 
-export REPLACEMENT_SEED_FILE=Oneiric64-minimalvm.seed
+export REPLACEMENT_SEED_FILE=Oneiric64-minimalvm_dktp.seed
 # export REPLACEMENT_SEED_FILE=Oneiric64-minimalvm.seed
 
 #export REPLACEMENT_SEED_FILE=Oneiric64-server.seed # Resulting disk usage :: 0000 Mb
