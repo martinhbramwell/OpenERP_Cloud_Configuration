@@ -465,4 +465,8 @@ sudo apt-get -y upgrade
 sudo apt-get -f install
 echo "Restart as described above and turn to the Manage Jenkins >> Configure System page."
 
+cd $ADMIN_USERZ_HOME
+sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
+
+
 
