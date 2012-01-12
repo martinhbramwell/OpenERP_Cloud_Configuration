@@ -74,6 +74,7 @@ sudo virt-install \
 --keymap=none \
 --accelerate \
 --vcpus=1 \
+--video=vmvga \
 --os-type linux \
 --os-variant=ubuntumaverick \
 --cdrom $SOURCE_ISO
