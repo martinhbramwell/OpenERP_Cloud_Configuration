@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Eclipse
+Name[en_US]=Eclipse
+Icon=/home/yourself/programs/org/eclipse/icon.xpm
+Exec=/home/yourself/programs/org/eclipse/eclipse
+Comment[en_US]=Eclipse IDE 64bit Helios SR2
+StartupNotify=true

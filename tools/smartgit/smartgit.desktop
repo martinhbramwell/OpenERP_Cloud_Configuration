@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Smart Git
+Name[en_US]=Smart Git
+Icon=/home/yourself/programs/com/syntevo/smartgit/bin/smartgit-128.png
+Exec=/home/yourself/programs/com/syntevo/smartgit/bin/smartgit.sh
+Comment[en_US]=Syntevo Smart Git
+StartupNotify=true
