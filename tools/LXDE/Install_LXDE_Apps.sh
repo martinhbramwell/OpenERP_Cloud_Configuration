@@ -4,6 +4,7 @@
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 #
+echo "Installing gedit ..."
 sudo aptitude -y install gedit
 #
 # Initiate downloading the installers we're going to need.
