@@ -27,9 +27,11 @@ sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
 echo "Symlinking Helios.."
 sudo ln -s eclipse-jee-helios-SR2-linux-gtk.tar.gz eclipse
 export HELIOS_HOME=${ECLIPSE_HOME}/eclipse
+sudo chown -R yourself:yourself ${HELIOS_HOME}
+#
+exit 0;
 echo "Creatng panel button.."
-
-exit 1;
+#
 TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
 # EOF_MARKER="        }\n    }\n}"
 EOF_MARKER="Button {"
