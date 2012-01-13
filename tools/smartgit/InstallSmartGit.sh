@@ -9,7 +9,7 @@ mkdir -p $ADMIN_USERZ_WORK_DIR
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
-# Obtain Syntevo SYNTEVO
+# Obtain Syntevo SmartGit
 SRV_SYNTEVO="http://www.syntevo.com"
 #wget -cNb --output-file=dldJdk.log ${SRV_SYNTEVO}/download/smartgit/smartgit-generic-2_1_6.tar.gz
 sudo rm -f dldSmartgit.log*
@@ -24,7 +24,21 @@ sudo tar zxvf ${INS}/smartgit-generic-2_1_6.tar.gz
 echo "Symlinking SmartGit.."
 sudo ln -s smartgit-2_1_6 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
-echo "Creatng panel button.."
+sudo chown -R yourself:yourself ${SYNTEVO_HOME}
+#
+exit 0;
 
+echo "Creating panel button.."
+#
+TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
+# EOF_MARKER="        }\n    }\n}"
+EOF_MARKER="Button {"
+# NEW_BUTTON_TO_ADD="        }\n        Button {\n            id=/usr/share/applications/lxterminal.desktop\n        }\n    }\n}\n"
+NEW_BUTTON_TO_ADD="Button   {"
 
-    
+cat ${TOP_PANEL_CONFIG} \
+  | sed -e "s|${EOF_MARKER}|${NEW_BUTTON_TO_ADD}|g" \
+   > ${TOP_PANEL_CONFIG}.new
+#
+cat ${TOP_PANEL_CONFIG}.new
+
