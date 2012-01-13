@@ -19,15 +19,14 @@ wget -cNb --output-file=dldEclipse.log ${LOCAL_MIRROR}/eclipse-jee-helios-SR2-li
 #
 ${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p eclipse-jee-helios
 #
-export ECLIPSE_HOME=${PRG}/org/eclipse
-sudo mkdir -p ${ECLIPSE_HOME}
-cd ${ECLIPSE_HOME}
+sudo mkdir -p ${PRG}/org
+cd ${PRG}/org
+pwd
 echo "Expanding Helios.."
 sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
 echo "Symlinking Helios.."
-sudo ln -s eclipse-jee-helios-SR2-linux-gtk.tar.gz eclipse
-export HELIOS_HOME=${ECLIPSE_HOME}/eclipse
-sudo chown -R yourself:yourself ${HELIOS_HOME}
+export ECLIPSE_HOME=${PRG}/org/eclipse
+sudo chown -R yourself:yourself ${ECLIPSE_HOME}
 #
 exit 0;
 echo "Creatng panel button.."
