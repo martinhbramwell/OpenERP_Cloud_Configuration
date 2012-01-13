@@ -23,14 +23,53 @@ sudo mkdir -p ${PRG}/org
 cd ${PRG}/org
 pwd
 echo "Expanding Helios.."
-sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
+# sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
 echo "Symlinking Helios.."
 export ECLIPSE_HOME=${PRG}/org/eclipse
 sudo chown -R yourself:yourself ${ECLIPSE_HOME}
+
+
 #
+
+echo "Creating panel button.."
+#
+cd ${PRG}
+#
+wget -cN ${SRV_CONFIG}/tools/InsertInFile.sh
+chmod +x ./InsertInFile.sh
+#
+
+PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels
+# TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
+cd ${ADMIN_USERZ_WORK_DIR}
+#
+LAUNCHER=eclipse.desktop
+APPLICATIONS=/usr/share/applications
+#
+wget -cN ${SRV_CONFIG}/tools/Eclipse/$LAUNCHER
+sudo chown root:root $LAUNCHER
+sudo chmod 644 $LAUNCHER
+sudo mv $LAUNCHER $APPLICATIONS
+#
+cp $PANEL_CONFIG/top .
+
+INSERTION="    Button \{\n            id=$APPLICATIONS/$LAUNCHER\n        }\n    "
+EOF_MARKER="\}"
+FILE=top
+${PRG}/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
+
+rm -f ./top
+mv ./top.new $PANEL_CONFIG/top
+
+tail -n 25  $PANEL_CONFIG/top.new
+ls -l
+ls -l $APPLICATIONS/ecl*
 exit 0;
-echo "Creatng panel button.."
-#
+
+
+
+
+
 TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
 # EOF_MARKER="        }\n    }\n}"
 EOF_MARKER="Button {"

@@ -48,16 +48,16 @@ echo ""
 #exit 1
 
 # Input validated
-echo "-----------------------------------------------------------"
-cat ${FILE_NAME}
-echo "-----------------------------------------------------------"
+# echo "-----------------------------------------------------------"
+# cat ${FILE_NAME}
+# echo "-----------------------------------------------------------"
 # SEARCH_PATTERN = "    \}"
 # INSERTION_PATTERN = "        Button {\n            Q_Q\n        \}\n"
 #sed "/\}/{
 sed "/$SEARCH_PATTERN$/{
 N
-s/$SEARCH_PATTERN$/$INSERTION_PATTERN$SEARCH_PATTERN/g
+s|$SEARCH_PATTERN$|$INSERTION_PATTERN$SEARCH_PATTERN|g
 }" <${FILE_NAME} >${FILE_NAME}.new
-cat ${FILE_NAME}.new
-echo "-----------------------------------------------------------"
+# cat ${FILE_NAME}.new
+# echo "-----------------------------------------------------------"
 
