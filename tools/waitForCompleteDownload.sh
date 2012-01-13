@@ -45,6 +45,13 @@ idx=0
 rslt=0
 while [ $idx -lt ${DELAY} ]
 do
+  rslt=$(  tail -n 2 ${LOG_FILE_NAME} | grep -c "nothing to do"   )
+  if [ ${rslt} -gt 0 ]
+  then
+    tail -n 4 ${LOG_FILE_NAME}
+    exit 0
+  fi
+
   rslt=$( tail -n 4 ${LOG_FILE_NAME} | grep -c "ERROR"   )
   if [ ${rslt} -gt 0 ]
   then
