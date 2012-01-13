@@ -1,10 +1,12 @@
+#!/bin/bash
+
 export KCKSTRT_DIR=/tools/kickstart
 export TOOLS_DIR=/home/hasan/projects/OpenERP_Cloud_Configuration$KCKSTRT_DIR
 export WORKING_DIR=~/Desktop/ISOwork
 
 # Characteristics of the final target VM
 export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
-export VIRTUAL_RAM_SIZE=512
+export VIRTUAL_RAM_SIZE=1024
 # export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
 # export VIRTUAL_RAM_SIZE=512
 
