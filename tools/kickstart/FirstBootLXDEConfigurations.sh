@@ -23,3 +23,4 @@ cd ${PRG}/installTools
 wget ${SRV_CONFIG}/tools/LXDE/Install_LXDE_Apps.sh
 chmod +x ./Install_LXDE_Apps.sh
 #
+./Install_LXDE_Apps.sh
