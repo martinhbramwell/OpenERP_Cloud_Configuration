@@ -1,6 +1,5 @@
 #!/bin/sh
-# Starts simple test
-#
+# 
 
 
 case "$1" in
@@ -19,12 +18,24 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootJenkinsConfigurations.sh
    chmod +x ./FirstBootJenkinsConfigurations.sh
 #
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootLXDEConfigurations.sh
+   chmod +x ./FirstBootLXDEConfigurations.sh
+#
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootEclipseConfigurations.sh
+   chmod +x ./FirstBootEclipseConfigurations.sh
+#
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootSmartGitConfigurations.sh
+   chmod +x ./FirstBootSmartGitConfigurations.sh
+#
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCleanUp.sh
    chmod +x ./FirstBootCleanUp.sh
 #
    ./FirstBootConfigurations.sh
    ./FirstBootJenkinsConfigurations.sh
-   ./FirstBootCleanUp.sh
+   ./FirstBootLXDEConfigurations.sh
+   ./FirstBootEclipseConfigurations.sh
+   ./FirstBootSmartGitConfigurations.sh
+   ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
 
 ;;
