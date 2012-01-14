@@ -22,7 +22,7 @@ SRV_SOURCEFORGE="http://http://sourceforge.net/projects"
 wget -cNb --output-file=dldLXDE_Tools.log ${LOCAL_MIRROR}/gpicview_0.2.2-1_amd64.deb
 #
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p gpicview_0.1.8
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p gpicview_0.2.2
 #
 echo "Installing LXShortcut ..."
 #
