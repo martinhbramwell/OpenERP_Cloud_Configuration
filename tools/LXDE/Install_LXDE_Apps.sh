@@ -6,6 +6,8 @@ export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 #
 echo "Installing gedit ..."
 sudo aptitude -y install gedit
+echo " "
+echo " gedit Installed  "
 #
 # Initiate downloading the installers we're going to need.
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
@@ -22,6 +24,9 @@ wget -cNb --output-file=dldLXDE_Tools.log ${LOCAL_MIRROR}/gpicview_0.1.8ubuntu1_
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p gpicview_0.1.8
 
 echo "Installing LXShortcut ..."
+
+
+echo "LXShortcut Installed..."
 
 
 
