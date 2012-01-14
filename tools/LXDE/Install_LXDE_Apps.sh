@@ -25,7 +25,7 @@ ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p
 #
 echo "Installing LXShortcut ..."
 #
-pwd 
+dpkg -i gpicview_0.1.8ubuntu1_i386.deb
 #
 echo "LXShortcut Installed..."
 
