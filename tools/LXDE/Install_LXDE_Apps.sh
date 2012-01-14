@@ -5,7 +5,7 @@ export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 #
 echo "Installing gedit ..."
-sudo aptitude -y install gedit
+############################################ sudo aptitude -y install gedit
 echo " "
 echo " gedit Installed  "
 #
@@ -25,7 +25,7 @@ ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p
 #
 echo "Installing LXShortcut ..."
 #
-dpkg -i gpicview_0.1.8ubuntu1_i386.deb
+sudo dpkg -i gpicview_0.1.8ubuntu1_i386.deb
 #
 echo "LXShortcut Installed..."
 
