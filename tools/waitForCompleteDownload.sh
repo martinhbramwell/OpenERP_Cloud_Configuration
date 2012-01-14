@@ -59,7 +59,7 @@ do
     exit 0
   fi
 
-  rslt=$( cat ${LOG_FILE_NAME} | grep -c "${SEARCH_PATTERN}[0-9A-Za-z'\.\-]* saved"   )
+  rslt=$( cat ${LOG_FILE_NAME} | grep -c "${SEARCH_PATTERN}[_0-9A-Za-z'\.\-]* saved"   )
 
   if [ ${rslt} -eq 1 ]
   then
