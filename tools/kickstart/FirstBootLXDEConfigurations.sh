@@ -20,6 +20,7 @@ echo "Get LXDE configurator"
 #
 # Obtain LXDE Configurator script
 cd ${PRG}/installTools
+rm -f ./Install_LXDE_Apps.sh
 wget ${SRV_CONFIG}/tools/LXDE/Install_LXDE_Apps.sh
 chmod +x ./Install_LXDE_Apps.sh
 #

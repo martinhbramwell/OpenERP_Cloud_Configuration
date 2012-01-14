@@ -5,7 +5,9 @@ export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 #
 echo "Installing gedit ..."
-sudo aptitude -y install gedit
+############################################ sudo aptitude -y install gedit
+echo " "
+echo " gedit Installed  "
 #
 # Initiate downloading the installers we're going to need.
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
@@ -17,11 +19,16 @@ echo "Obtaining LXDE Tools.."
 # Obtain LXDE Tools
 SRV_SOURCEFORGE="http://http://sourceforge.net/projects"
 #wget -cNb --output-file=dldLXDE_Tools.log ${SRV_SOURCEFORGE}/lxde/files/latest/download?source=files
-wget -cNb --output-file=dldLXDE_Tools.log ${LOCAL_MIRROR}/gpicview_0.1.8ubuntu1_i386.deb
+wget -cNb --output-file=dldLXDE_Tools.log ${LOCAL_MIRROR}/gpicview_0.2.2-1_amd64.deb
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p gpicview_0.1.8
-
+#
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldLXDE_Tools.log -p gpicview_0.2.2
+#
 echo "Installing LXShortcut ..."
+#
+sudo dpkg -i gpicview_0.2.2-1_amd64.deb
+#
+echo "LXShortcut Installed..."
 
 
 
