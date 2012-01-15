@@ -28,8 +28,6 @@ sudo ln -s smartgit-2_1_6 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
 sudo chown -R yourself:yourself ${SYNTEVO_HOME}
 #
-exit 0;
-
 
 echo "Creating panel button.."
 #
