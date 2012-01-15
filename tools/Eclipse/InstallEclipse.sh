@@ -17,7 +17,7 @@ sudo rm -f dldEclipse.log*
 echo "Obtaining Helios.."
 wget -cNb --output-file=dldEclipse.log ${LOCAL_MIRROR}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
 #
-${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p eclipse-jee-helios
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p eclipse-jee-helios
 #
 sudo mkdir -p ${PRG}/org
 cd ${PRG}/org
