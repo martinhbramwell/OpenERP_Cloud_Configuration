@@ -61,6 +61,6 @@ mv ./top.new $PANEL_CONFIG/top
 
 tail -n 25  $PANEL_CONFIG/top.new
 ls -l
-ls -l $APPLICATIONS/ecl*
+ls -l $APPLICATIONS/sma*
 exit 0;
 
