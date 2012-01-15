@@ -52,7 +52,7 @@ else
 fi
 cd $ADMIN_USERZ_WORK_DIR
 #
-if [ ! -f .$X11_TOP_PANEL ]; then
+if [ -f .$X11_TOP_PANEL ]; then
    echo "Won't over write existing top panel."
 else
    echo "Get the top panel."
