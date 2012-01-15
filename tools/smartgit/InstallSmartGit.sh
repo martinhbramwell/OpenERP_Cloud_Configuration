@@ -26,7 +26,7 @@ sudo tar zxvf ${INS}/smartgit-generic-2_1_6.tar.gz
 echo "Symlinking SmartGit.."
 sudo ln -s smartgit-2_1_6 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
-sudo chown -R yourself:yourself ${SYNTEVO_HOME}
+sudo chown -R yourself:yourself ${PRG}
 #
 
 echo "Creating panel button.."
