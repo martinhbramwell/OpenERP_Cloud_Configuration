@@ -56,7 +56,7 @@ cp $PANEL_CONFIG/top .
 INSERTION="    Button \{\n            id=$APPLICATIONS/$LAUNCHER\n        }\n    "
 EOF_MARKER="\}"
 FILE=top
-${PRG}/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
+${PRG}/installTools/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
 
 rm -f ./top
 mv ./top.new $PANEL_CONFIG/top
