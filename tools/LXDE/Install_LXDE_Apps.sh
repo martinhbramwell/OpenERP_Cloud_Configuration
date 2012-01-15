@@ -62,6 +62,9 @@ else
 fi
 #
 #
+cd $ADMIN_USERZ_WORK_DIR
+mv $X11_DIR PANELS_CONFIG_DIR/
+
 
 
 
