@@ -1,9 +1,9 @@
 #!/bin/sh
 # 
-# sudo apt-get -y update
-# sudo apt-get -y upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 #
-# sudo apt-get -y install gedit
+sudo apt-get -y install gedit
 #
 export INS="/home/yourself/installers"
 export PRG="/home/yourself/programs"
