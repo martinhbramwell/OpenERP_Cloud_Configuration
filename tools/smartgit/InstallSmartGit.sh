@@ -31,7 +31,7 @@ sudo chown -R yourself:yourself ${PRG}
 
 echo "Creating panel button.."
 #
-cd ${PRG}
+cd ${PRG}/installTools
 #
 wget -cN ${SRV_CONFIG}/tools/InsertInFile.sh
 chmod +x ./InsertInFile.sh
