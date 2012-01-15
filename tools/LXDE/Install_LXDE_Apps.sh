@@ -64,7 +64,7 @@ fi
 #
 echo "LXDE panels config obtained. Installing to default home ..."
 cd $ADMIN_USERZ_WORK_DIR
-mv $X11_DIR $PANELS_CONFIG_DIR/
+mv .$X11_DIR $PANELS_CONFIG_DIR/
 #
 echo "LXDE panels installed. Can now be configured for newly installed application."
 
