@@ -66,20 +66,3 @@ ls -l
 ls -l $APPLICATIONS/ecl*
 exit 0;
 
-
-
-
-
-TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
-# EOF_MARKER="        }\n    }\n}"
-EOF_MARKER="Button {"
-# NEW_BUTTON_TO_ADD="        }\n        Button {\n            id=/usr/share/applications/lxterminal.desktop\n        }\n    }\n}\n"
-NEW_BUTTON_TO_ADD="Button   {"
-
-cat ${TOP_PANEL_CONFIG} \
-  | sed -e "s|${EOF_MARKER}|${NEW_BUTTON_TO_ADD}|g" \
-   > ${TOP_PANEL_CONFIG}.new
-#
-cat ${TOP_PANEL_CONFIG}.new
-
-    
