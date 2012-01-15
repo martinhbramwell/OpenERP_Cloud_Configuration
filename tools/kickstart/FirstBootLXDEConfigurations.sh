@@ -8,7 +8,7 @@
 export INS="/home/yourself/installers"
 export PRG="/home/yourself/programs"
 export FAILURE_NOTICE="______Looks_like_it_failed______"
-3
+#
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 #
 export ADMIN_USERZ_UID=yourself
