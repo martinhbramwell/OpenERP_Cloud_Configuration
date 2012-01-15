@@ -23,7 +23,7 @@ sudo mkdir -p ${PRG}/org
 cd ${PRG}/org
 pwd
 echo "Expanding Helios.."
-# sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
+sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
 echo "Symlinking Helios.."
 export ECLIPSE_HOME=${PRG}/org/eclipse
 sudo chown -R yourself:yourself ${ECLIPSE_HOME}
