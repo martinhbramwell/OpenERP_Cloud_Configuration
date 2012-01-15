@@ -61,7 +61,7 @@ ${PRG}/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
 rm -f ./top
 mv ./top.new $PANEL_CONFIG/top
 
-tail -n 25  $PANEL_CONFIG/top.new
+tail -n 25  $PANEL_CONFIG/top
 ls -l
 ls -l $APPLICATIONS/ecl*
 exit 0;
