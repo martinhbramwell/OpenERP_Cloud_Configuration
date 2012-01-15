@@ -28,17 +28,39 @@ sudo chown -R yourself:yourself ${SYNTEVO_HOME}
 #
 exit 0;
 
+
 echo "Creating panel button.."
 #
-TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
-# EOF_MARKER="        }\n    }\n}"
-EOF_MARKER="Button {"
-# NEW_BUTTON_TO_ADD="        }\n        Button {\n            id=/usr/share/applications/lxterminal.desktop\n        }\n    }\n}\n"
-NEW_BUTTON_TO_ADD="Button   {"
-
-cat ${TOP_PANEL_CONFIG} \
-  | sed -e "s|${EOF_MARKER}|${NEW_BUTTON_TO_ADD}|g" \
-   > ${TOP_PANEL_CONFIG}.new
+cd ${PRG}
 #
-cat ${TOP_PANEL_CONFIG}.new
+wget -cN ${SRV_CONFIG}/tools/InsertInFile.sh
+chmod +x ./InsertInFile.sh
+#
+
+PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels
+# TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
+cd ${ADMIN_USERZ_WORK_DIR}
+#
+LAUNCHER=smartgit.desktop
+APPLICATIONS=/usr/share/applications
+#
+wget -cN ${SRV_CONFIG}/tools/smartgit/$LAUNCHER
+sudo chown root:root $LAUNCHER
+sudo chmod 644 $LAUNCHER
+sudo mv $LAUNCHER $APPLICATIONS
+#
+cp $PANEL_CONFIG/top .
+
+INSERTION="    Button \{\n            id=$APPLICATIONS/$LAUNCHER\n        }\n    "
+EOF_MARKER="\}"
+FILE=top
+${PRG}/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
+
+rm -f ./top
+mv ./top.new $PANEL_CONFIG/top
+
+tail -n 25  $PANEL_CONFIG/top.new
+ls -l
+ls -l $APPLICATIONS/ecl*
+exit 0;
 
