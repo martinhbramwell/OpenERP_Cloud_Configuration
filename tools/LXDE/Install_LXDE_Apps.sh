@@ -13,7 +13,7 @@ export X11_PANELS_DIR=$X11_DIR/panels
 export X11_TOP_PANEL=$X11_PANELS_DIR/top
 #
 echo "Installing gedit ..."
-############################################ sudo aptitude -y install gedit
+sudo aptitude -y install gedit
 echo " "
 echo " gedit Installed  "
 #
