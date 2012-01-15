@@ -11,6 +11,7 @@ export X11_DIR=/LXDE
 export X11_PANELS_CONFIG=$X11_DIR/config
 export X11_PANELS_DIR=$X11_DIR/panels
 export X11_TOP_PANEL=$X11_PANELS_DIR/top
+export X11_MAIN_PANEL=$X11_PANELS_DIR/panel
 #
 echo "Installing gedit ..."
 sudo aptitude -y install gedit
@@ -42,23 +43,28 @@ cd $ADMIN_USERZ_WORK_DIR
 mkdir -p $ADMIN_USERZ_WORK_DIR$X11_PANELS_DIR
 cd $ADMIN_USERZ_WORK_DIR
 #
-if [ -f .$X11_PANELS_CONFIG ]; then
-   echo "Won't over write the config file."
+if [ -f .$X11_MAIN_PANEL ]; then
+   echo "Won't risk over-writing anything."
 else
-   echo "Get the config file."
-   cd .$X11_DIR
-   wget ${SRV_CONFIG}/tools$X11_PANELS_CONFIG
-   echo "Got the config file."
-fi
-cd $ADMIN_USERZ_WORK_DIR
+   if [ -f .$X11_PANELS_CONFIG ]; then
+      echo "Won't over-write the config file."
+   else
+      echo "Get the config file."
+      cd .$X11_DIR
+      wget ${SRV_CONFIG}/tools$X11_PANELS_CONFIG
+      echo "Got the config file."
+   fi
+   cd $ADMIN_USERZ_WORK_DIR
 #
-if [ -f .$X11_TOP_PANEL ]; then
-   echo "Won't over write existing top panel."
-else
-   echo "Get the top panel."
-   cd .$X11_PANELS_DIR
-   wget ${SRV_CONFIG}/tools$X11_TOP_PANEL
-   echo "Got the top panel."
+   if [ -f .$X11_TOP_PANEL ]; then
+      echo "Won't over-write existing top panel."
+   else
+      echo "Get the panels."
+      cd .$X11_PANELS_DIR
+      wget ${SRV_CONFIG}/tools$X11_TOP_PANEL
+      wget ${SRV_CONFIG}/tools$X11_MAIN_PANEL
+      echo "Got the panels."
+   fi
 fi
 #
 #
