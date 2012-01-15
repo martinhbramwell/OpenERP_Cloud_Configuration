@@ -16,6 +16,8 @@ sudo rm -f dldSmartgit.log*
 echo "Obtaining SmartGit.."
 wget -cNb --output-file=dldSmartgit.log ${LOCAL_MIRROR}/smartgit-generic-2_1_6.tar.gz
 #
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldSmartgit.log -p smartgit-generic
+#
 export SYNTEVO_HOME=${PRG}/com/syntevo
 sudo mkdir -p ${SYNTEVO_HOME}
 cd ${SYNTEVO_HOME}
