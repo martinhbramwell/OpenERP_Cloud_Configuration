@@ -21,7 +21,7 @@ echo "Get LXDE configurator"
 # Obtain LXDE Configurator script
 cd ${PRG}/installTools
 rm -f ./Install_NX_Apps.sh
-wget ${SRV_CONFIG}/tools/LXDE/Install_NX_Apps.sh
+wget ${SRV_CONFIG}/tools/NX/Install_NX_Apps.sh
 chmod +x ./Install_NX_Apps.sh
 #
 #
