@@ -22,9 +22,9 @@ ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p ec
 sudo mkdir -p ${PRG}/org
 cd ${PRG}/org
 pwd
-echo "Expanding Indigo ..."
+echo "Expanding Helios ..."
 sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk-x86_64.tar.gz
-echo "Symlinking Indigo ..."
+echo "Symlinking Helios ..."
 export ECLIPSE_HOME=${PRG}/org/eclipse
 sudo chown -R yourself:yourself ${ECLIPSE_HOME}
 
