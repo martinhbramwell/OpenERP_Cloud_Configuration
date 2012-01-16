@@ -4,7 +4,7 @@
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
-export USER_LOG=/home/$ADMIN_USERZ_UID/install.log
+export USER_LOG=/home/$ADMIN_USERZ_UID/install2.log
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
 export PANELS_CONFIG_DIR=$ADMIN_USERZ_HOME/.config/lxpanel
