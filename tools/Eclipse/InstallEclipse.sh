@@ -15,16 +15,16 @@ SRV_ECLIPSE="http://www.eclipse.org/downloads/download.php?file="
 #wget -cNb --output-file=dldEclipse.log ${SRV_ECLIPSE}/technology/epp/downloads/release/helios/SR2/eclipse-jee-helios-SR2-linux-gtk.tar.gz
 sudo rm -f dldEclipse.log*
 echo "Obtaining Helios.."
-wget -cNb --output-file=dldEclipse.log ${LOCAL_MIRROR}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
+wget -cNb --output-file=dldEclipse.log ${LOCAL_MIRROR}/eclipse-jee-indigo-SR2-linux-gtk-x86_64.tar.gz
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p eclipse-jee-helios
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p eclipse-jee-indigo
 #
 sudo mkdir -p ${PRG}/org
 cd ${PRG}/org
 pwd
-echo "Expanding Helios.."
-sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk.tar.gz
-echo "Symlinking Helios.."
+echo "Expanding Indigo ..."
+sudo tar zxvf ${INS}/eclipse-jee-indigo-SR2-linux-gtk-x86_64.tar.gz
+echo "Symlinking Indigo ..."
 export ECLIPSE_HOME=${PRG}/org/eclipse
 sudo chown -R yourself:yourself ${ECLIPSE_HOME}
 
