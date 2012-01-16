@@ -17,8 +17,8 @@ mkdir -p $ADMIN_USERZ_WORK_DIR
 echo "Get SmartGit configurator"
 #
 # Obtain SmartGit Configurator script
-mkdir -p ${PRG}/installTools/Syntevo
-cd ${PRG}/installTools/Syntevo
+mkdir -p ${PRG}/installTools
+cd ${PRG}/installTools
 rm -f ./InstallSmartGit.sh
 wget ${SRV_CONFIG}/tools/smartgit/InstallSmartGit.sh
 chmod +x ./InstallSmartGit.sh
