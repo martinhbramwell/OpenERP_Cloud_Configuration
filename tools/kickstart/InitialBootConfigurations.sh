@@ -30,11 +30,12 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCleanUp.sh
    chmod +x ./FirstBootCleanUp.sh
 #
-   ./FirstBootConfigurations.sh
-   ./FirstBootJenkinsConfigurations.sh
-   ./FirstBootLXDEConfigurations.sh
-   ./FirstBootEclipseConfigurations.sh
-   ./FirstBootSmartGitConfigurations.sh
+
+   ./FirstBootConfigurations.sh 2>&1 | tee install_initial.log
+   ./FirstBootJenkinsConfigurations.sh 2>&1 | tee install_jenkins.log
+   ./FirstBootLXDEConfigurations.sh 2>&1 | tee install_lxde.log
+   ./FirstBootEclipseConfigurations.sh 2>&1 | tee install_eclipse.log
+   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee install_smartgit.log
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
 
