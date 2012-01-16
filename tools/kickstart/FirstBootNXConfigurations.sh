@@ -16,15 +16,15 @@ export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
-echo "Get LXDE configurator"
+echo "Get NX installers"
 #
-# Obtain LXDE Configurator script
+# Obtain NX installer script
 cd ${PRG}/installTools
 rm -f ./Install_NX_Apps.sh
 wget ${SRV_CONFIG}/tools/NX/Install_NX_Apps.sh
 chmod +x ./Install_NX_Apps.sh
 #
 #
-echo "Running NX configurator now ..."
+echo "Running NX installer now ..."
 #
 ./Install_NX_Apps.sh
