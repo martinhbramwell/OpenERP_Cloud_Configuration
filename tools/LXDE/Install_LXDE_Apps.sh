@@ -4,6 +4,7 @@
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
+export USER_LOG=/home/$ADMIN_USERZ_UID/install.log
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
 export PANELS_CONFIG_DIR=$ADMIN_USERZ_HOME/.config/lxpanel
@@ -37,41 +38,41 @@ echo "LXDE tools Obtained. Installing LXShortcut ..."
 #
 sudo dpkg -i gpicview_0.2.2-1_amd64.deb
 #
-echo "LXShortcut Installed. Create a top panel if none exists ..."
+echo "LXShortcut Installed. Create a top panel if none exists ..." >> ${USER_LOG}
 #
 cd $PANELS_CONFIG_DIR
 mkdir -p .$X11_PANELS_DIR
 #
 if [ -f .$X11_MAIN_PANEL ]; then
-   echo "Won't risk over-writing anything."
+   echo "Won't risk over-writing anything." >> ${USER_LOG}
 else
    if [ -f .$X11_PANELS_CONFIG ]; then
-      echo "Won't over-write the config file."
+      echo "Won't over-write the config file." >> ${USER_LOG}
    else
-      echo "Get the config file."
+      echo "Get the config file." >> ${USER_LOG}
       cd .$X11_DIR
       wget ${SRV_CONFIG}/tools$X11_PANELS_CONFIG
-      echo "Got the config file."
+      echo "Got the config file." >> ${USER_LOG}
    fi
    cd $PANELS_CONFIG_DIR
 #
    if [ -f .$X11_TOP_PANEL ]; then
-      echo "Won't over-write existing top panel."
+      echo "Won't over-write existing top panel." >> ${USER_LOG}
    else
-      echo "Get the panels."
+      echo "Get the panels." >> ${USER_LOG}
       cd .$X11_PANELS_DIR
       wget ${SRV_CONFIG}/tools$X11_TOP_PANEL
       wget ${SRV_CONFIG}/tools$X11_MAIN_PANEL
-      echo "Got the panels."
+      echo "Got the panels." >> ${USER_LOG}
    fi
 fi
 #
 #
-echo "LXDE panels config obtained. Installing to default home ..."
+echo "LXDE panels config obtained. Installing to default home ..." >> ${USER_LOG}
 cd $ADMIN_USERZ_WORK_DIR
 #  mv .$X11_DIR $PANELS_CONFIG_DIR/
 #
-echo "LXDE panels installed. Can now be configured for newly installed application."
+echo "LXDE panels installed. Can now be configured for newly installed application." >> ${USER_LOG}
 
 
 
