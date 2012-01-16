@@ -17,7 +17,7 @@ mkdir -p $ADMIN_USERZ_WORK_DIR
 echo "Get Eclipse configurator"
 #
 # Obtain Eclipse Configurator script
-cd ${PRG}/installTools/Eclipse
+cd ${PRG}/installTools
 rm -f ./InstallEclipse.sh
 wget ${SRV_CONFIG}/tools/Eclipse/InstallEclipse.sh
 chmod +x ./InstallEclipse.sh
