@@ -49,21 +49,21 @@ else
    if [ -f .$X11_PANELS_CONFIG ]; then
       echo "Won't over-write the config file."
    else
-      echo "Get the config file." >> ${USER_LOG}
+      echo "Get the config file."
       cd .$X11_DIR
       wget ${SRV_CONFIG}/tools$X11_PANELS_CONFIG
-      echo "Got the config file." >> ${USER_LOG}
+      echo "Got the config file."
    fi
    cd $PANELS_CONFIG_DIR
 #
    if [ -f .$X11_TOP_PANEL ]; then
       echo "Won't over-write existing top panel."
    else
-      echo "Get the panels." >> ${USER_LOG}
+      echo "Get the panels."
       cd .$X11_PANELS_DIR
       wget ${SRV_CONFIG}/tools$X11_TOP_PANEL
       wget ${SRV_CONFIG}/tools$X11_MAIN_PANEL
-      echo "Got the panels." >> ${USER_LOG}
+      echo "Got the panels."
    fi
 fi
 #
