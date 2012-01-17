@@ -38,16 +38,16 @@ echo "LXDE tools Obtained. Installing LXShortcut ..."
 #
 sudo dpkg -i gpicview_0.2.2-1_amd64.deb
 #
-echo "LXShortcut Installed. Create a top panel if none exists ..." >> ${USER_LOG}
+echo "LXShortcut Installed. Create a top panel if none exists ..."
 #
 cd $PANELS_CONFIG_DIR
 mkdir -p .$X11_PANELS_DIR
 #
 if [ -f .$X11_MAIN_PANEL ]; then
-   echo "Won't risk over-writing anything." >> ${USER_LOG}
+   echo "Won't risk over-writing anything."
 else
    if [ -f .$X11_PANELS_CONFIG ]; then
-      echo "Won't over-write the config file." >> ${USER_LOG}
+      echo "Won't over-write the config file."
    else
       echo "Get the config file." >> ${USER_LOG}
       cd .$X11_DIR
@@ -57,7 +57,7 @@ else
    cd $PANELS_CONFIG_DIR
 #
    if [ -f .$X11_TOP_PANEL ]; then
-      echo "Won't over-write existing top panel." >> ${USER_LOG}
+      echo "Won't over-write existing top panel."
    else
       echo "Get the panels." >> ${USER_LOG}
       cd .$X11_PANELS_DIR
@@ -68,11 +68,11 @@ else
 fi
 #
 #
-echo "LXDE panels config obtained. Installing to default home ..." >> ${USER_LOG}
+echo "LXDE panels config obtained. Installing to default home ..."
 cd $ADMIN_USERZ_WORK_DIR
 #  mv .$X11_DIR $PANELS_CONFIG_DIR/
 #
-echo "LXDE panels installed. Can now be configured for newly installed application." >> ${USER_LOG}
+echo "LXDE panels installed. Can now be configured for newly installed application."	
 
 
 
