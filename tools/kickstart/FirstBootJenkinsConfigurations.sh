@@ -424,6 +424,7 @@ sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
 sudo wget -cN ${LOCAL_MIRROR}/saferestart.hpi
 #
 echo "Obtain Fitnesse plugin..."
+sudo rm -fr /home/jenkins/.jenkins/plugins/fitnesse*
 sudo wget -cN ${LOCAL_MIRROR}/fitnesse.hpi
 #
 echo "Pass new plugins to Jenkins."
@@ -448,12 +449,10 @@ if [ 0 == 1 ]; then
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
 	echo "Install SafeRestart plugin..."
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
-
-#
-echo "Install Fitnesse plugin..."
-java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin fitnesse
-#
-#
+	#
+	echo "Install Fitnesse plugin..."
+	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin fitnesse
+	#
 	# Restart Jenkins
 	echo "Restart Jenkins using SafeRestart plugin..."
 	java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
