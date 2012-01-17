@@ -40,8 +40,8 @@ sudo dpkg -i gpicview_0.2.2-1_amd64.deb
 #
 echo "LXShortcut Installed. Create a top panel if none exists ..."
 #
+mkdir -p PANELS_CONFIG_DIR$X11_PANELS_DIR
 cd $PANELS_CONFIG_DIR
-mkdir -p .$X11_PANELS_DIR
 #
 if [ -f .$X11_MAIN_PANEL ]; then
    echo "Won't risk over-writing anything."
