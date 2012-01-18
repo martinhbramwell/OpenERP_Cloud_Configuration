@@ -24,8 +24,13 @@ LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 #
 cd ${INS}
 #
+echo "Turning off screensaver"
+sed 's|random|off|' <.xscreensaver >.xscreensaver.new
+mv -f .xscreensaver.new .xscreensaver
+#
+#
+echo "Disabled screensaver. Obtaining LXDE Tools.."
 sudo rm -f dldLXDE_Tools.log*
-echo "Obtaining LXDE Tools.."
 # Obtain LXDE Tools
 SRV_SOURCEFORGE="http://http://sourceforge.net/projects"
 #wget -cNb --output-file=dldLXDE_Tools.log ${SRV_SOURCEFORGE}/lxde/files/latest/download?source=files
