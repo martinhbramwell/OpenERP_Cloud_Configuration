@@ -40,6 +40,8 @@ sudo aptitude -y update
 sudo aptitude -y upgrade
 #
 echo "Make RSA key.."
+sudo mkdir -p $JENKINS_USERZ_HOME/.ssh
+sudo echo "####" | cat >> $JENKINS_USERZ_HOME/.ssh/id_rsa 
 sudo rm -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 echo -e "\n\n\n" | sudo ssh-keygen -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 #
