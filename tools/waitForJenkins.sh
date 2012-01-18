@@ -20,7 +20,7 @@ do
      rslt1=$(curl -s "http://localhost/${service}" | grep -c "${expect1}" )
      rslt2=$(curl -s "http://localhost/${service}" | grep -c "${expect2}" )
 
-     if [ (${rslt1} == 1) || (${rslt2} == 1) ]
+     if [[ ${rslt1} == 1 || ${rslt2} == 1 ]]
      then
        echo "${SERVICE} is up and running,                                                   "
        exit 0
