@@ -36,19 +36,31 @@ sudo aptitude -y install ssh-askpass
 sudo aptitude -y update
 sudo aptitude -y upgrade
 #
-echo "Ensure both jenkins user and default user will be able to access RSA key.."
+export ADMIN_USERZ_UID=yourself
+export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
+export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
+#
+export JENKINS_USERZ_UID=jenkins
+export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
+#
+echo "Ensure both jenkins user and default user can access RSA key.."
 sudo usermod -a -G $JENKINS_USERZ_UID $ADMIN_USERZ_UID
 #
-echo "Make place for RSA key.."
-cd $JENKINS_USERZ_HOME
-sudo -u jenkins mkdir -p .ssh
-sudo chmod 750 $JENKINS_USERZ_HOME/.ssh
-cd .ssh
-sudo -u jenkins rm -f ./id_rsa*
+#
+echo "Make a place for the RSA key.."
+#
+sudo rm -fr $JENKINS_USERZ_HOME/.ssh
+#
+sudo -u $JENKINS_USERZ_UID mkdir -p $JENKINS_USERZ_HOME/.ssh
+sudo chmod 770 $JENKINS_USERZ_HOME/.ssh
+#
 #
 echo "Make RSA key.."
-sudo -u jenkins ssh-keygen -N "" -t rsa -f id_rsa
-sudo chmod 640 $JENKINS_USERZ_HOME/.ssh/id_rsa
+#
+sudo -u jenkins ssh-keygen -N "" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
+sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
+sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
+#
 #
       exit 0;
 
