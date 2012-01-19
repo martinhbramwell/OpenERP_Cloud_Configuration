@@ -10,6 +10,7 @@ export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
 #
 # Initiate downloading the installers we're going to need.
 cd ${INS}
+#
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 # Obtain Syntevo SmartGit
 SRV_SYNTEVO="http://www.syntevo.com"
@@ -30,18 +31,14 @@ sudo ln -s smartgit-2_1_6 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
 #
 #
+      exit 0;
+
+#
 #
 echo "Get RSA key generator dependencies ..."
 sudo aptitude -y install ssh-askpass
 sudo aptitude -y update
 sudo aptitude -y upgrade
-#
-export ADMIN_USERZ_UID=yourself
-export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
-export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
-#
-export JENKINS_USERZ_UID=jenkins
-export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
 #
 echo "Ensure both jenkins user and default user can access RSA key.."
 sudo usermod -a -G $JENKINS_USERZ_UID $ADMIN_USERZ_UID
