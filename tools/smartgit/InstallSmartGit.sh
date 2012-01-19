@@ -61,10 +61,6 @@ sudo -u jenkins ssh-keygen -N "" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
 sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
 #
-#
-      exit 0;
-
-#
 echo "Creating panel button.."
 #
 cd ${PRG}/installTools
@@ -72,7 +68,7 @@ cd ${PRG}/installTools
 wget -cN ${SRV_CONFIG}/tools/InsertInFile.sh
 chmod +x ./InsertInFile.sh
 #
-
+#
 PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels
 # TOP_PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels/top
 cd ${ADMIN_USERZ_WORK_DIR}
@@ -86,7 +82,10 @@ sudo chmod 644 $LAUNCHER
 sudo mv $LAUNCHER $APPLICATIONS
 #
 cp $PANEL_CONFIG/top .
+#
+      exit 0;
 
+#
 INSERTION="    Button \{\n            id=$APPLICATIONS/$LAUNCHER\n        }\n    "
 EOF_MARKER="\}"
 FILE=top
