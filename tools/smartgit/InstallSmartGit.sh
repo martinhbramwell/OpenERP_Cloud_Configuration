@@ -28,39 +28,30 @@ sudo tar zxvf ${INS}/smartgit-generic-2_1_6.tar.gz
 echo "Symlinking SmartGit.."
 sudo ln -s smartgit-2_1_6 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
-
-
-      exit 0;
-
-sudo chown -R yourself:yourself ${PRG}
 #
-echo "Get ready to make RSA key.."
-sudo aptitude -y update
-sudo aptitude -y upgrade
 #
+#
+echo "Get RSA key generator dependencies ..."
 sudo aptitude -y install ssh-askpass
-#
 sudo aptitude -y update
 sudo aptitude -y upgrade
+#
+echo "Ensure both jenkins user and default user will be able to access RSA key.."
+sudo usermod -a -G $JENKINS_USERZ_UID $ADMIN_USERZ_UID
+#
+echo "Make place for RSA key.."
+cd $JENKINS_USERZ_HOME
+sudo -u jenkins mkdir -p .ssh
+sudo chmod 750 $JENKINS_USERZ_HOME/.ssh
+cd .ssh
+sudo -u jenkins rm -f ./id_rsa*
 #
 echo "Make RSA key.."
-cd $JENKINS_USERZ_HOME
-#
-mkdir -p .ssh
-#
-echo "####" | cat >> tmp
-sudo cp tmp $JENKINS_USERZ_HOME/.ssh/id_rsa 
-rm -f $JENKINS_USERZ_HOME/.ssh/id_rsa
-#
-ls -l
-whoami
-pwd
-echo -e "\n\n\n" | ssh-keygen -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
-#
-echo "Ensure both jenkins user and default user can access RSA key.."
-sudo usermod -a -G $ADMIN_USERZ_UID $JENKINS_USERZ_UID
-sudo chmod 750 $JENKINS_USERZ_HOME/.ssh
+sudo -u jenkins ssh-keygen -N "" -t rsa -f id_rsa
 sudo chmod 640 $JENKINS_USERZ_HOME/.ssh/id_rsa
+#
+      exit 0;
+
 #
 echo "Creating panel button.."
 #
