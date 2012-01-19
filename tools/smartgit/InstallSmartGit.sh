@@ -28,6 +28,10 @@ sudo tar zxvf ${INS}/smartgit-generic-2_1_6.tar.gz
 echo "Symlinking SmartGit.."
 sudo ln -s smartgit-2_1_6 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
+
+
+      exit 0;
+
 sudo chown -R yourself:yourself ${PRG}
 #
 echo "Get ready to make RSA key.."
@@ -40,10 +44,18 @@ sudo aptitude -y update
 sudo aptitude -y upgrade
 #
 echo "Make RSA key.."
-sudo mkdir -p $JENKINS_USERZ_HOME/.ssh
-sudo echo "####" | cat >> $JENKINS_USERZ_HOME/.ssh/id_rsa 
-sudo rm -f $JENKINS_USERZ_HOME/.ssh/id_rsa
-echo -e "\n\n\n" | sudo ssh-keygen -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
+cd $JENKINS_USERZ_HOME
+#
+mkdir -p .ssh
+#
+echo "####" | cat >> tmp
+sudo cp tmp $JENKINS_USERZ_HOME/.ssh/id_rsa 
+rm -f $JENKINS_USERZ_HOME/.ssh/id_rsa
+#
+ls -l
+whoami
+pwd
+echo -e "\n\n\n" | ssh-keygen -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 #
 echo "Ensure both jenkins user and default user can access RSA key.."
 sudo usermod -a -G $ADMIN_USERZ_UID $JENKINS_USERZ_UID
