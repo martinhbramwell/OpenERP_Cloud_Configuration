@@ -432,10 +432,10 @@ sudo wget -cN ${LOCAL_MIRROR}/github-api.hpi
 echo "Obtain PostBuild plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/postbuild-task*
 sudo wget -cN ${LOCAL_MIRROR}/postbuild-task.hpi
-#
-echo "Obtain SafeRestart plugin..."
-sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
-sudo wget -cN ${LOCAL_MIRROR}/saferestart.hpi
+# 
+# echo "Obtain SafeRestart plugin..."
+# sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
+# sudo wget -cN ${LOCAL_MIRROR}/saferestart.hpi
 #
 echo "Obtain Fitnesse plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/fitnesse*
@@ -461,8 +461,9 @@ if [ 0 == 1 ]; then
 	##
 	echo "Install GitHub plugin..."
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
-	echo "Install SafeRestart plugin..."
-	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
+	#
+	# echo "Install SafeRestart plugin..."
+	# java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
 	#
 	echo "Install Postbuild plugin..."
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin postbuild-task
