@@ -7,6 +7,9 @@ export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
+export ADMIN_USERZ_LINKS_DIR=/home/$ADMIN_USERZ_UID/q
+mkdir -p $ADMIN_USERZ_LINKS_DIR
+#
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 #
 echo "Complete the installation with all updates & upgrades"

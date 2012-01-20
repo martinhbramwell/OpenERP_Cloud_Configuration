@@ -7,6 +7,9 @@ export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
+export ADMIN_USERZ_LINKS_DIR=/home/$ADMIN_USERZ_UID/q
+mkdir -p $ADMIN_USERZ_LINKS_DIR
+#
 echo "============  Some preparations for later use  ============="
 echo "============================================================"
 #
@@ -198,7 +201,14 @@ echo "Setting it to $TOMCAT_USER in case sudo can't see it."
 echo "This is Jenkins local url currently : [$JENKINS_URL]"
 export JENKINS_URL=http://localhost/jenkins
 echo "Setting it to $JENKINS_URL in case sudo can't see it."
-
+#
+echo "Make a quick access symbolic link for forcibly restarting TomCat."
+cd $CATALINA_HOME
+rm -f ./forceTomCatRestart.sh*
+wget ${SRV_CONFIG}/tools/tomcat/forceTomCatRestart.sh
+mkdir -p $$ADMIN_USERZ_LINKS_DIR/tc
+ln -s ./forceTomCatRestart.sh $ADMIN_USERZ_LINKS_DIR/tc/ftcr
+#
 #
 export JAVA_HOME=/usr/lib/jvm/jdk
 #
@@ -419,6 +429,10 @@ sudo wget -cN ${LOCAL_MIRROR}/github.hpi
 echo "Obtain GitHub Api plugin..."
 sudo wget -cN ${LOCAL_MIRROR}/github-api.hpi
 #
+echo "Obtain PostBuild plugin..."
+sudo rm -fr /home/jenkins/.jenkins/plugins/postbuild-task*
+sudo wget -cN ${LOCAL_MIRROR}/postbuild-task.hpi
+#
 echo "Obtain SafeRestart plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/saferestart*
 sudo wget -cN ${LOCAL_MIRROR}/saferestart.hpi
@@ -449,6 +463,9 @@ if [ 0 == 1 ]; then
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
 	echo "Install SafeRestart plugin..."
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
+	#
+	echo "Install Postbuild plugin..."
+	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin postbuild-task
 	#
 	echo "Install Fitnesse plugin..."
 	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin fitnesse
