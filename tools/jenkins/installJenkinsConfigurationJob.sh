@@ -16,7 +16,10 @@ cd $JENKINS_USERZ_JOBS_DIR
 sudo -u jenkins mkdir -p $FIRST_JOB_DIR
 cd $FIRST_JOB_DIR
 pwd
-echo wget ${SRV_CONFIG}/$JENKINS_DIR/$FIRST_JOB_DIR/$FIRST_JOB_CONFIG
+sudo -u jenkins rm -f $FIRST_JOB_CONFIG*
+sudo -u jenkins wget ${SRV_CONFIG}/$JENKINS_DIR/$FIRST_JOB_DIR/$FIRST_JOB_CONFIG
 echo "Got the config file."
+cd $JENKINS_USERZ_HOME
+ls -l $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR
 #
 
