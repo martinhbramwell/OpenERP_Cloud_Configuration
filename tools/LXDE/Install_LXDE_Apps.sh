@@ -22,14 +22,16 @@ echo " gedit Installed  "
 # Initiate downloading the installers we're going to need.
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 #
+echo "Turning off screensaver"
+cd $ADMIN_USERZ_WORK_DIR
+cp /etc/X11/app-defaults/XScreenSaver-nogl xss
+sudo sed 's|random|off|' <xss >XScreenSaver-nogl
+sudo mv XScreenSaver-nogl /etc/X11/app-defaults/
+echo "Disabled screensaver. Obtaining LXDE Tools.."
+#
+#
 cd ${INS}
 #
-echo "Turning off screensaver"
-sed 's|random|off|' <.xscreensaver >.xscreensaver.new
-mv -f .xscreensaver.new .xscreensaver
-#
-#
-echo "Disabled screensaver. Obtaining LXDE Tools.."
 sudo rm -f dldLXDE_Tools.log*
 # Obtain LXDE Tools
 SRV_SOURCEFORGE="http://http://sourceforge.net/projects"
