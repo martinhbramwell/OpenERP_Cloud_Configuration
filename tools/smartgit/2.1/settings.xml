@@ -4,13 +4,16 @@
 		<obj key="cleanup" type="@CleanupSettings" id="_ID_3">
 			<prop key="gcIntervalDays" value="7" type="int"/>
 		</obj>
-		<obj key="commit" type="_NULL_" id=""/>
-		<obj key="compare" type="@CompareSettings" id="_ID_4">
+		<obj key="commit" type="@CommitSettings" id="_ID_4">
+			<prop key="missing" value="true" type="boolean"/>
+			<prop key="untracked" value="false" type="boolean"/>
+		</obj>
+		<obj key="compare" type="@CompareSettings" id="_ID_5">
 			<collection key="fileComparators" type="Object">
-				<obj key="" type="@FileComparator" id="_ID_5">
+				<obj key="" type="@FileComparator" id="_ID_6">
 					<prop key="filePattern" value="*" type="String"/>
 					<prop key="compareType" value="0" type="int"/>
-					<obj key="externalFileCompare" type="@FileStarter" id="_ID_6">
+					<obj key="externalFileCompare" type="@FileStarter" id="_ID_7">
 						<prop key="command" value="" type="_NULL_"/>
 						<prop key="parameters" value="" type="_NULL_"/>
 					</obj>
@@ -18,24 +21,24 @@
 			</collection>
 			<prop key="compareWithWorkingTree" value="false" type="boolean"/>
 		</obj>
-		<obj key="conflictSolver" type="@ConflictSolverSettings" id="_ID_7">
+		<obj key="conflictSolver" type="@ConflictSolverSettings" id="_ID_8">
 			<prop key="useExternalConflictSolver" value="false" type="boolean"/>
-			<obj key="fileStarter" type="@FileStarter" id="_ID_8">
+			<obj key="fileStarter" type="@FileStarter" id="_ID_9">
 				<prop key="command" value="" type="_NULL_"/>
 				<prop key="parameters" value="" type="_NULL_"/>
 			</obj>
 		</obj>
 		<obj key="stash" type="_NULL_" id=""/>
-		<obj key="open" type="@OpenSettings" id="_ID_9">
+		<obj key="open" type="@OpenSettings" id="_ID_10">
 			<collection key="editorList" type="Object">
-				<obj key="" type="@Editor" id="_ID_10">
+				<obj key="" type="@Editor" id="_ID_11">
 					<prop key="filePattern" value="*" type="String"/>
 					<prop key="systemOpenOrEdit" value="true" type="boolean"/>
 					<prop key="systemEdit" value="false" type="boolean"/>
 				</obj>
 			</collection>
-			<obj key="directoryCommand" type="@DirectoryCommand" id="_ID_11">
-				<obj key="fileStarter" type="@FileStarter" id="_ID_12">
+			<obj key="directoryCommand" type="@DirectoryCommand" id="_ID_12">
+				<obj key="fileStarter" type="@FileStarter" id="_ID_13">
 					<prop key="command" value="" type="_NULL_"/>
 					<prop key="parameters" value="" type="_NULL_"/>
 				</obj>
@@ -43,16 +46,16 @@
 			<prop key="maximumNumberOfFilesToOpenAtOnce" value="10" type="int"/>
 		</obj>
 	</obj>
-	<obj key="comparePreviewSettings" type="@ComparePreviewSettings" id="_ID_13">
+	<obj key="comparePreviewSettings" type="@ComparePreviewSettings" id="_ID_14">
 		<prop key="compareType" value="" type="_NULL_"/>
 	</obj>
-	<obj key="dateFormat" type="@DateFormatSettings" id="_ID_14">
+	<obj key="dateFormat" type="@DateFormatSettings" id="_ID_15">
 		<prop key="datePattern" value="MM/dd/yyyy" type="String"/>
 		<prop key="timePattern" value="hh:mm a" type="String"/>
 	</obj>
-	<obj key="defaultViewSettings" type="@MergeSettings" id="_ID_15">
-		<obj key="compareSettings" type="@CompareEditorSettings" id="_ID_16">
-			<obj key="textSettings" type="@TextComponentViewSettings" id="_ID_17">
+	<obj key="defaultViewSettings" type="@MergeSettings" id="_ID_16">
+		<obj key="compareSettings" type="@CompareEditorSettings" id="_ID_17">
+			<obj key="textSettings" type="@TextComponentViewSettings" id="_ID_18">
 				<prop key="tabSize" value="4" type="int"/>
 				<prop key="showWhitespaces" value="false" type="boolean"/>
 				<prop key="showLineNumbers" value="false" type="boolean"/>
@@ -64,28 +67,28 @@
 		</obj>
 		<prop key="compareWithBase" value="true" type="boolean"/>
 	</obj>
-	<obj key="git" type="@GitSettings" id="_ID_18">
+	<obj key="git" type="@GitSettings" id="_ID_19">
 		<prop key="gitExe" value="/usr/bin/git" type="String"/>
-		<prop key="useOwnSshClient" value="true" type="boolean"/>
+		<prop key="useOwnSshClient" value="false" type="boolean"/>
 	</obj>
-	<obj key="globalTextComponentSettings" type="@GlobalTextSettings" id="_ID_19">
-		<obj key="font" type="@FontSettings" id="_ID_20">
+	<obj key="globalTextComponentSettings" type="@GlobalTextSettings" id="_ID_20">
+		<obj key="font" type="@FontSettings" id="_ID_21">
 			<prop key="fontFamily" value="Monospaced" type="String"/>
 			<prop key="fontSize" value="11" type="int"/>
 			<prop key="antialiasing" value="true" type="boolean"/>
 		</obj>
-		<obj key="colors" type="@ColorSettings" id="_ID_21">
+		<obj key="colors" type="@ColorSettings" id="_ID_22">
 			<prop key="foregroundText" value="-16777216" type="int"/>
-			<prop key="foregroundWhitespace" value="" type="_NULL_"/>
+			<prop key="foregroundWhitespace" value="-4144960" type="int"/>
 			<prop key="backgroundEditable" value="-1" type="int"/>
 			<prop key="backgroundReadOnly" value="-592138" type="int"/>
 			<prop key="backgroundGutter" value="-26" type="int"/>
-			<prop key="backgroundModified" value="" type="_NULL_"/>
-			<prop key="backgroundAdded" value="" type="_NULL_"/>
-			<prop key="backgroundRemoved" value="" type="_NULL_"/>
-			<prop key="backgroundConflict" value="" type="_NULL_"/>
+			<prop key="backgroundModified" value="-14136" type="int"/>
+			<prop key="backgroundAdded" value="-4263746" type="int"/>
+			<prop key="backgroundRemoved" value="-3618561" type="int"/>
+			<prop key="backgroundConflict" value="-21846" type="int"/>
 		</obj>
-		<obj key="actions" type="@TextActionSettings" id="_ID_22">
+		<obj key="actions" type="@TextActionSettings" id="_ID_23">
 			<prop key="smartHome" value="true" type="boolean"/>
 			<prop key="cursorLeftRightLimitToLine" value="true" type="boolean"/>
 			<prop key="smartEnterAutoIndent" value="true" type="boolean"/>
@@ -94,23 +97,23 @@
 			<prop key="focusNextChangeAfterTakingChange" value="true" type="boolean"/>
 		</obj>
 	</obj>
-	<obj key="listx" type="@L" id="_ID_23">
+	<obj key="listx" type="@L" id="_ID_24">
 		<prop key="eUT" value="-9223372036854775808" type="long"/>
 		<prop key="nRT" value="-9223372036854775808" type="long"/>
 		<prop key="eV" value="" type="_NULL_"/>
 	</obj>
-	<obj key="pathSettings" type="@PathSettings" id="_ID_24">
+	<obj key="pathSettings" type="@PathSettings" id="_ID_25">
 		<prop key="lastProjectPath" value="/home/yourself/dev/OpenERP_Cloud_Configuration" type="String"/>
 		<collection key="lastClonedUrls" type="String">
 			<prop key="" value="git@github.com:martinhbramwell/OpenERP_Cloud_Configuration.git" type="String"/>
 		</collection>
 		<prop key="lastSvnUseStandardLayout" value="true" type="boolean"/>
 	</obj>
-	<obj key="project" type="@GlobalProjectSettings" id="_ID_25">
+	<obj key="project" type="@GlobalProjectSettings" id="_ID_26">
 		<prop key="openProjectInNewWindow" value="" type="_NULL_"/>
 		<prop key="reopenLastUsedProjectOnStartUp" value="true" type="boolean"/>
 		<prop key="showWarningUpushedChanges" value="true" type="boolean"/>
-		<obj key="configDefaults" type="@ConfigDefaults" id="_ID_26">
+		<obj key="configDefaults" type="@ConfigDefaults" id="_ID_27">
 			<prop key="mergeType" value="merge-commit" type="String"/>
 			<prop key="textEncoding" value="" type="_NULL_"/>
 			<prop key="pruneObsoleteRemoteTrackingBranches" value="true" type="boolean"/>
@@ -118,42 +121,54 @@
 		</obj>
 	</obj>
 	<obj key="quickStashSettings" type="_NULL_" id=""/>
-	<obj key="uiSettings" type="@UiSettings" id="_ID_27">
-		<obj key="compareFrame" type="_NULL_" id=""/>
+	<obj key="uiSettings" type="@UiSettings" id="_ID_28">
+		<obj key="compareFrame" type="@Bounds" id="_ID_29">
+			<prop key="x" value="31" type="int"/>
+			<prop key="y" value="77" type="int"/>
+			<prop key="width" value="1580" type="int"/>
+			<prop key="height" value="689" type="int"/>
+			<prop key="maximized" value="0" type="int"/>
+		</obj>
 		<obj key="conflictSolverFrame" type="_NULL_" id=""/>
 		<obj key="editFrame" type="_NULL_" id=""/>
 		<obj key="indexEditorFrame" type="_NULL_" id=""/>
 		<obj key="logFrame" type="_NULL_" id=""/>
-		<obj key="projectFrame" type="@Bounds" id="_ID_28">
+		<obj key="projectFrame" type="@Bounds" id="_ID_30">
 			<prop key="x" value="180" type="int"/>
 			<prop key="y" value="96" type="int"/>
-			<prop key="width" value="1339" type="int"/>
-			<prop key="height" value="649" type="int"/>
+			<prop key="width" value="1375" type="int"/>
+			<prop key="height" value="785" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="basicFileSelectorDialog" type="@Bounds" id="_ID_29">
+		<obj key="basicFileSelectorDialog" type="@Bounds" id="_ID_31">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="branchManagerDialog" type="@Bounds" id="_ID_30">
+		<obj key="branchManagerDialog" type="@Bounds" id="_ID_32">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="checkoutDialog" type="@Bounds" id="_ID_31">
+		<obj key="checkoutDialog" type="@Bounds" id="_ID_33">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="commitDialog" type="_NULL_" id=""/>
-		<obj key="ignoreFileDialog" type="@Bounds" id="_ID_32">
+		<obj key="commitDialog" type="@Bounds" id="_ID_34">
+			<prop key="x" value="-3" type="int"/>
+			<prop key="y" value="-27" type="int"/>
+			<prop key="width" value="473" type="int"/>
+			<prop key="height" value="494" type="int"/>
+			<prop key="maximized" value="0" type="int"/>
+		</obj>
+		<obj key="ignoreFileDialog" type="@Bounds" id="_ID_35">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
@@ -163,21 +178,21 @@
 		<obj key="logSelectShowBranchesDialog" type="_NULL_" id=""/>
 		<obj key="mergeDialog" type="_NULL_" id=""/>
 		<obj key="pushAdvancedDialog" type="_NULL_" id=""/>
-		<obj key="projectManagerDialog" type="@Bounds" id="_ID_33">
+		<obj key="projectManagerDialog" type="@Bounds" id="_ID_36">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="remotesDialog" type="@Bounds" id="_ID_34">
+		<obj key="remotesDialog" type="@Bounds" id="_ID_37">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="welcomeDialog" type="@Bounds" id="_ID_35">
+		<obj key="welcomeDialog" type="@Bounds" id="_ID_38">
 			<prop key="x" value="-1" type="int"/>
 			<prop key="y" value="-38" type="int"/>
 			<prop key="width" value="469" type="int"/>
@@ -185,17 +200,17 @@
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
 		<obj key="logFrameLayouts" type="_NULL_" id=""/>
-		<obj key="projectFrameLayouts" type="@DockingLayouts" id="_ID_36">
+		<obj key="projectFrameLayouts" type="@DockingLayouts" id="_ID_39">
 			<collection key="layoutKeys" type="String">
 				<prop key="" value="main" type="String"/>
 			</collection>
-			<obj key="layout-main" type="@DockingLayout" id="_ID_37">
-				<prop key="layoutString" value="1454; !0   &quot;T    8   !3L   *)          4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;P  LYL    (     0    $    /    !     0    (    R    ,@   #(    R                                0    0  +.;     @             %,0   A0    (        ,$H    !  &quot;SFP    (  %#O   P2@    $    &quot;   P2@  &quot;C$  !A-  !0[P         &quot;  !0[P  K2(                    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S  &quot;*=P    (          0    \\    $    !     (   #Z    &gt;    ,@   #(                               !    !   BG&lt;    &quot;              4Q   &quot;%     (       &quot;2Z@    $  (IW     @  K2(  )+J     0    (  )+J  !SZ@  &amp;$T  *TB          (  %#O  &quot;M(@                    8 ;P!U &apos;0 &lt; !U &apos;0  -*L     @    $    !    #P    0    $     @   2P   !X    R    ,@                               $    $  #2K     (             !3$   (4     @       &apos;/J     0  TJP    &quot;  &quot;M(@  &lt;^H    !     @  DNH  &apos;/J   830  K2(          @  4.\\  *TB                    #0!C &amp;\\ ;0!M &amp;D = !- &amp;4 &lt;P!S &amp;$ 9P!E   X;@    @    !     0    \\               @              ,@   #(                               !        .&amp;X    &quot;                          @       !IF     $  #AN     P  /@,  &amp;F8          $  &amp;F8   ?&gt;P  /@,    !     @  /@,  ,QY  &quot;S$0  &apos;WL          @  &apos;WL  ,N,                    !P!C &amp;@ 80!N &amp;&lt; 90!S  #QO@    (    !     0    \\               (              ,@   #(                               !        \\;X    &quot;                          (       &quot;]:@    $  /&amp;^     @  RXP  +UJ     0    $  +UJ  &quot;S$0  RXP          @  &apos;WL  ,N,                   $8P       !A-      (   1C     0  4.\\      @  !&amp;0  #!*     8  !&amp;4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;___________        !&amp;,        *,0     !   $9@   3    &quot;U     /____________________\\   1C     0  K2(      @  !&amp;0  )+J     0  !&amp;4    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S__________\\        $9   &lt;^H    !   $90    8 ;P!U &apos;0 &lt; !U &apos;3__________P    #_____________________     P         &apos;          $         !0               @    T 8P!O &amp;T ;0!I &apos;0 30!E &apos;, &lt;P!A &amp;&lt; 90    &lt; 8P!H &amp;$ ;@!G &amp;4 &lt;P      " type="String"/>
+			<obj key="layout-main" type="@DockingLayout" id="_ID_40">
+				<prop key="layoutString" value="1454; !0   &quot;T    8   !5\\   ,1          4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;P  LYL    (     0    $    /    !     0    (    R    ,@   #(    R                                0    0  +.;     @             %50   HH    (        ,$H    !  &quot;SFP    (  %#O   P2@    $    &quot;   P2@  &quot;C$  !A-  !0[P         &quot;  !0[P  K2(                    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S  &quot;*=P    (          0    \\    $    !     (   #Z    &gt;    ,@   #(                               !    !   BG&lt;    &quot;              55   &quot;B@    (       &quot;2Z@    $  (IW     @  K2(  )+J     0    (  )+J  !SZ@  &amp;$T  *TB          (  %#O  &quot;M(@                    8 ;P!U &apos;0 &lt; !U &apos;0  -*L     @    $    !    #P    0    $     @   2P   !X    R    ,@                               $    $  #2K     (             !54   **     @       &apos;/J     0  TJP    &quot;  &quot;M(@  &lt;^H    !     @  DNH  &apos;/J   830  K2(          @  4.\\  *TB                    #0!C &amp;\\ ;0!M &amp;D = !- &amp;4 &lt;P!S &amp;$ 9P!E   X;@    @    !     0    \\               @              ,@   #(                               !        .&amp;X    &quot;                          @       !NL0    $  #AN     P  0G$  &amp;ZQ          $  &amp;ZQ  !3V   0G$    !     @  0G$  .X&lt;  #&lt;*P  4]@          @  4]@  //L                    !P!C &amp;@ 80!N &amp;&lt; 90!S  #QO@    (    !     0    \\               (              ,@   #(                               !        \\;X    &quot;                          (       !4&lt;0    $  /&amp;^     @  \\^P  %1Q     0    $  %1Q  #&lt;*P  \\^P          @  4]@  //L                   $8P       !A-      (   1C     0  4.\\      @  !&amp;0  #!*     8  !&amp;4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;___________        !&amp;,        *,0     !   $9@   3    &quot;U     /____________________\\   1C     0  K2(      @  !&amp;0  )+J     0  !&amp;4    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S__________\\        $9   &lt;^H    !   $90    8 ;P!U &apos;0 &lt; !U &apos;3__________P    #_____________________     P         &apos;          $         !0               @    T 8P!O &amp;T ;0!I &apos;0 30!E &apos;, &lt;P!A &amp;&lt; 90    &lt; 8P!H &amp;$ ;@!G &amp;4 &lt;P      " type="String"/>
 			</obj>
 			<prop key="currentLayout" value="main" type="String"/>
 		</obj>
 		<obj key="branchBrowserTable" type="_NULL_" id=""/>
-		<obj key="branchChooserTable" type="@TableUiSettings" id="_ID_38">
+		<obj key="branchChooserTable" type="@TableUiSettings" id="_ID_41">
 			<prop key="visibleColumnNames" value="" type="String"/>
 			<prop key="hiddenColumnNames" value="" type="String"/>
 			<collection key="sortOrder" type="Object"/>
@@ -207,18 +222,18 @@
 		<obj key="logTableDefaultSettings" type="_NULL_" id=""/>
 		<prop key="nestInTrayForRegularStartup" value="true" type="boolean"/>
 	</obj>
-	<obj key="vcsRecords" type="@VcsRecords" id="_ID_39">
-		<prop key="lastGitUsage" value="0" type="long"/>
+	<obj key="vcsRecords" type="@VcsRecords" id="_ID_42">
+		<prop key="lastGitUsage" value="1327155299800" type="long"/>
 		<prop key="lastSvnUsage" value="0" type="long"/>
 	</obj>
-	<obj key="updateCheck" type="@UpdateAutoCheckSettings" id="_ID_40">
+	<obj key="updateCheck" type="@UpdateAutoCheckSettings" id="_ID_43">
 		<prop key="enabled" value="true" type="boolean"/>
 		<prop key="knownLatestVersion" value="" type="_NULL_"/>
 		<prop key="knownLatestVersionNextRemindTime" value="" type="_NULL_"/>
 		<prop key="knownLatestInfo" value="1325653200000" type="long"/>
 		<prop key="lastCheckTime" value="1327148926487" type="long"/>
 		<prop key="checkInterval" value="weekly" type="String"/>
-		<obj key="proxy" type="@HttpProxySettings" id="_ID_41">
+		<obj key="proxy" type="@HttpProxySettings" id="_ID_44">
 			<prop key="proxyHost" value="" type="_NULL_"/>
 			<prop key="proxyPort" value="3128" type="int"/>
 			<prop key="proxyUser" value="" type="_NULL_"/>
