@@ -8,6 +8,10 @@ export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 export JENKINS_USERZ_UID=jenkins
 export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
 #
+export SMARTGIT_CONFIG_DIR=$ADMIN_USERZ_HOME/.smartgit
+export SMARTGIT_CONFIG_URI=/tools/smartgit
+export SMARTGIT_VERSION=2.1
+#
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 #
@@ -50,6 +54,18 @@ echo "Make RSA key.."
 sudo -u jenkins ssh-keygen -N "okokok" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
 sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
+#
+echo "Provide initial settings files."
+sudo mkdir -p $SMARTGIT_CONFIG_DIR/${SMARTGIT_VERSION}
+sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID $SMARTGIT_CONFIG_DIR
+cd $SMARTGIT_CONFIG_DIR/${SMARTGIT_VERSION}
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/settings.xml
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/accelerators.xml
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/credentials.xml
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/hostingProviders.xml
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/projects.xml
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/settings.xml
+wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/uiSettings.xml
 #
 #
 echo "Creating panel button.."
