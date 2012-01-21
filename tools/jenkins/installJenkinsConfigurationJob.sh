@@ -11,6 +11,11 @@ export JENKINS_DIR=tools/jenkins
 export FIRST_JOB_DIR=ConfigFilesSCM
 export FIRST_JOB_CONFIG=config.xml
 #
+export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
+#
+export JENKINS_URL=http://localhost/jenkins/
+# export JENKINS_URL=http://test.warehouseman.com/jenkins/
+#
 echo "Get the config file."
 cd $JENKINS_USERZ_JOBS_DIR
 sudo -u jenkins mkdir -p $FIRST_JOB_DIR
@@ -21,5 +26,12 @@ sudo -u jenkins wget ${SRV_CONFIG}/$JENKINS_DIR/$FIRST_JOB_DIR/$FIRST_JOB_CONFIG
 echo "Got the config file."
 cd $JENKINS_USERZ_HOME
 ls -l $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR
+#
+#
+sudo wget $JENKINS_URL/reload
+echo "Wait for Jenkins"
+${JENKINS_COMMAND_DIR}/waitForJenkins.sh
+#
+java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} build ${FIRST_JOB_DIR}
 #
 
