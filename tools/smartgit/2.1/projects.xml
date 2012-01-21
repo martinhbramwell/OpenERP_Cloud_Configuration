@@ -10,26 +10,30 @@
 			</obj>
 			<obj key="log" type="_NULL_" id=""/>
 			<obj key="merge" type="_NULL_" id=""/>
-			<obj key="pull" type="_NULL_" id=""/>
+			<obj key="pull" type="@FetchSettings" id="_ID_5">
+				<prop key="merge" value="true" type="boolean"/>
+				<prop key="updateSubmodules" value="true" type="boolean"/>
+				<prop key="initializeSubmodules" value="true" type="boolean"/>
+			</obj>
 			<obj key="push" type="_NULL_" id=""/>
 			<obj key="rebase" type="_NULL_" id=""/>
 			<obj key="reset" type="_NULL_" id=""/>
 		</obj>
 	</obj>
-	<obj key="tree" type="@ProjectTreeGroup" id="_ID_5">
+	<obj key="tree" type="@ProjectTreeGroup" id="_ID_6">
 		<collection key="nodes" type="Object">
-			<obj key="" type="@ProjectTreeProjectDefaultInsertion" id="_ID_6">
+			<obj key="" type="@ProjectTreeProjectDefaultInsertion" id="_ID_7">
 				<collection key="nodes" type="Object">
-					<obj key="" type="@ProjectTreeEntry" id="_ID_7">
-						<obj key="project" type="@Project" id="_ID_8">
+					<obj key="" type="@ProjectTreeEntry" id="_ID_8">
+						<obj key="project" type="@Project" id="_ID_9">
 							<prop key="name" value="OpenERP_Cloud_Configuration" type="String"/>
-							<obj key="fileFilter" type="@ViewFilter" id="_ID_9">
+							<obj key="fileFilter" type="@ViewFilter" id="_ID_10">
 								<prop key="viewRecursive" value="true" type="boolean"/>
 								<prop key="viewIgnoredFiles" value="false" type="boolean"/>
 								<prop key="viewUnversionedFiles" value="true" type="boolean"/>
 								<prop key="viewUnchangedFiles" value="true" type="boolean"/>
 							</obj>
-							<obj key="settings" type="@ProjectSettings" id="_ID_10">
+							<obj key="settings" type="@ProjectSettings" id="_ID_11">
 								<collection key="rootPaths" type="String">
 									<prop key="" value="~/dev/OpenERP_Cloud_Configuration" type="String"/>
 								</collection>
@@ -37,52 +41,52 @@
 								<obj key="pull" type="_NULL_" id=""/>
 								<prop key="removeDeleteLocalFiles" value="true" type="boolean"/>
 							</obj>
-							<obj key="ui" type="@ProjectUiSettings" id="_ID_11">
-								<obj key="mainFrameFileTable" type="@TableUiSettings" id="_ID_12">
+							<obj key="ui" type="@ProjectUiSettings" id="_ID_12">
+								<obj key="mainFrameFileTable" type="@TableUiSettings" id="_ID_13">
 									<prop key="visibleColumnNames" value="Name\tIndex State\tWorking Tree State\tRelative Directory" type="String"/>
 									<prop key="hiddenColumnNames" value="Last Changed On\tSize\tExt." type="String"/>
 									<collection key="sortOrder" type="Object">
-										<obj key="" type="@TableColumnSortOrder" id="_ID_13">
+										<obj key="" type="@TableColumnSortOrder" id="_ID_14">
 											<prop key="id" value="Working Tree State" type="String"/>
 											<prop key="reverse" value="false" type="boolean"/>
 										</obj>
-										<obj key="" type="@TableColumnSortOrder" id="_ID_14">
+										<obj key="" type="@TableColumnSortOrder" id="_ID_15">
 											<prop key="id" value="Index State" type="String"/>
 											<prop key="reverse" value="false" type="boolean"/>
 										</obj>
 									</collection>
 									<collection key="columnWidths" type="Object">
-										<obj key="" type="@TableColumnWidth" id="_ID_15">
+										<obj key="" type="@TableColumnWidth" id="_ID_16">
 											<prop key="id" value="Name" type="String"/>
 											<prop key="width" value="204" type="int"/>
 										</obj>
-										<obj key="" type="@TableColumnWidth" id="_ID_16">
+										<obj key="" type="@TableColumnWidth" id="_ID_17">
 											<prop key="id" value="Index State" type="String"/>
 											<prop key="width" value="88" type="int"/>
 										</obj>
-										<obj key="" type="@TableColumnWidth" id="_ID_17">
+										<obj key="" type="@TableColumnWidth" id="_ID_18">
 											<prop key="id" value="Working Tree State" type="String"/>
 											<prop key="width" value="137" type="int"/>
 										</obj>
-										<obj key="" type="@TableColumnWidth" id="_ID_18">
+										<obj key="" type="@TableColumnWidth" id="_ID_19">
 											<prop key="id" value="Relative Directory" type="String"/>
 											<prop key="width" value="117" type="int"/>
 										</obj>
-										<obj key="" type="@TableColumnWidth" id="_ID_19">
+										<obj key="" type="@TableColumnWidth" id="_ID_20">
 											<prop key="id" value="Last Changed On" type="String"/>
 											<prop key="width" value="114" type="int"/>
 										</obj>
-										<obj key="" type="@TableColumnWidth" id="_ID_20">
+										<obj key="" type="@TableColumnWidth" id="_ID_21">
 											<prop key="id" value="Size" type="String"/>
 											<prop key="width" value="31" type="int"/>
 										</obj>
-										<obj key="" type="@TableColumnWidth" id="_ID_21">
+										<obj key="" type="@TableColumnWidth" id="_ID_22">
 											<prop key="id" value="Ext." type="String"/>
 											<prop key="width" value="30" type="int"/>
 										</obj>
 									</collection>
 								</obj>
-								<obj key="filterConfiguration" type="@FindObjectConfiguration" id="_ID_22">
+								<obj key="filterConfiguration" type="@FindObjectConfiguration" id="_ID_23">
 									<collection key="patterns" type="String"/>
 									<prop key="regularExpressions" value="false" type="boolean"/>
 								</obj>
@@ -96,5 +100,5 @@
 		</collection>
 		<prop key="name" value="" type="_NULL_"/>
 	</obj>
-	<ref key="lastRecentlyUsedProject" type="@Project" id="_REF_8"/>
+	<ref key="lastRecentlyUsedProject" type="@Project" id="_REF_9"/>
 </obj>
