@@ -10,6 +10,8 @@ mkdir -p $ADMIN_USERZ_WORK_DIR
 export ADMIN_USERZ_LINKS_DIR=/home/$ADMIN_USERZ_UID/q
 mkdir -p $ADMIN_USERZ_LINKS_DIR
 #
+export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
+#
 echo "============  Some preparations for later use  ============="
 echo "============================================================"
 #
@@ -379,7 +381,9 @@ sudo mv jenkins.war $CATALINA_HOME/webapps/
 echo "... and confirm that it's working :"
 #
 # Checked it worked
-cd ${PRG}
+mkdir -p ${JENKINS_COMMAND_DIR}
+chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${JENKINS_COMMAND_DIR}
+cd ${JENKINS_COMMAND_DIR}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
 #
@@ -388,7 +392,7 @@ sudo /etc/rc2.d/S99tomcat stop
 sudo /etc/rc2.d/S99tomcat start
 #
 echo "Wait for Jenkins"
-./waitForJenkins.sh
+${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 #
 echo " * * * Prepare Jenkins * * * "
 echo "Install plugins"
@@ -399,6 +403,9 @@ echo "Here is the script for automating that :"
 echo " "
 #
 sudo wget $JENKINS_URL/reload
+echo "Wait for Jenkins"
+${JENKINS_COMMAND_DIR}/waitForJenkins.sh
+#
 #
 # Extract the Jenkins Command Line Interface
 #
@@ -407,10 +414,17 @@ cd $ADMIN_USERZ_WORK_DIR
 sudo rm -f jenki*
 sudo wget $JENKINS_URL/jnlpJars/jenkins-cli.jar
 sudo wget $JENKINS_URL/updateCenter/?auto_refresh=true
-sudo wget $JENKINS_URL//pluginManager/checkUpdates#
+sudo wget $JENKINS_URL/pluginManager/checkUpdates#
+sudo wget $JENKINS_URL/reload
+#
+mv jenkins-cli.jar ${JENKINS_COMMAND_DIR}
+
+echo "Wait for Jenkins"
+${JENKINS_COMMAND_DIR}/waitForJenkins.sh
+#
 #
 # Health check
-JNKNSVRSN=$(java -jar jenkins-cli.jar version)
+JNKNSVRSN=$(java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar version)
 RSLT=$(echo "$JNKNSVRSN" | grep -c "$JENKINS_VERSION")
 test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAILURE_NOTICE
 #
@@ -452,7 +466,7 @@ sudo /etc/rc2.d/S99tomcat start
 #
 cd ${PRG}
 echo "Wait for Jenkins"
-./waitForJenkins.sh
+${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 ##
 if [ 0 == 1 ]; then
 	echo "Scare updateCenter into behaving properly..."
@@ -461,20 +475,20 @@ if [ 0 == 1 ]; then
 	# Install our various needed plugins
 	##
 	echo "Install GitHub plugin..."
-	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin github
+	java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s $JENKINS_URL install-plugin github
 	#
 	# echo "Install SafeRestart plugin..."
-	# java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
+	# java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s $JENKINS_URL install-plugin saferestart
 	#
 	echo "Install Postbuild plugin..."
-	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin postbuild-task
+	java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s $JENKINS_URL install-plugin postbuild-task
 	#
 	echo "Install Fitnesse plugin..."
-	java -jar jenkins-cli.jar -s $JENKINS_URL install-plugin fitnesse
+	java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s $JENKINS_URL install-plugin fitnesse
 	#
 	# Restart Jenkins
 	echo "Restart Jenkins using SafeRestart plugin..."
-	java -jar jenkins-cli.jar -s $JENKINS_URL safe-restart
+	java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s $JENKINS_URL safe-restart
 fi
 
 echo "Jenkins will need to know where Git resides. Apt puts it at : '/usr/bin/git'"
