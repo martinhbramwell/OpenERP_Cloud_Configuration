@@ -26,10 +26,13 @@ echo "Turning off screensaver"
 cd $ADMIN_USERZ_WORK_DIR
 cp /etc/X11/app-defaults/XScreenSaver-nogl xss
 sudo sed 's|random|off|' <xss >XScreenSaver-nogl
+sudo rm -f xss
 sudo mv XScreenSaver-nogl /etc/X11/app-defaults/
 echo "Disabled screensaver. Obtaining LXDE Tools.."
 #
 echo "Tweaking settings of CLI terminal"
+sudo mkdir -p $ADMIN_USERZ_HOME/.config/lxterminal
+sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID $ADMIN_USERZ_HOME/.config 
 cd $ADMIN_USERZ_HOME/.config/lxterminal
 rm -f lxterminal.conf*
 wget ${SRV_CONFIG}/tools//LXDE/terminal/lxterminal.conf
