@@ -33,7 +33,6 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCleanUp.sh
    chmod +x ./FirstBootCleanUp.sh
 #
-
    ./FirstBootConfigurations.sh 2>&1 | tee ini_initial.log
    ./FirstBootJenkinsConfigurations.sh 2>&1 | tee ini_jenkins.log
    ./FirstBootLXDEConfigurations.sh 2>&1 | tee ini_lxde.log
