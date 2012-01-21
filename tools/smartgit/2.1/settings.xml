@@ -69,7 +69,7 @@
 	</obj>
 	<obj key="git" type="@GitSettings" id="_ID_19">
 		<prop key="gitExe" value="/usr/bin/git" type="String"/>
-		<prop key="useOwnSshClient" value="false" type="boolean"/>
+		<prop key="useOwnSshClient" value="true" type="boolean"/>
 	</obj>
 	<obj key="globalTextComponentSettings" type="@GlobalTextSettings" id="_ID_20">
 		<obj key="font" type="@FontSettings" id="_ID_21">
@@ -175,24 +175,30 @@
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="logSelectShowBranchesDialog" type="_NULL_" id=""/>
+		<obj key="logSelectShowBranchesDialog" type="@Bounds" id="_ID_36">
+			<prop key="x" value="-2147483648" type="int"/>
+			<prop key="y" value="-2147483648" type="int"/>
+			<prop key="width" value="-2147483648" type="int"/>
+			<prop key="height" value="-2147483648" type="int"/>
+			<prop key="maximized" value="0" type="int"/>
+		</obj>
 		<obj key="mergeDialog" type="_NULL_" id=""/>
 		<obj key="pushAdvancedDialog" type="_NULL_" id=""/>
-		<obj key="projectManagerDialog" type="@Bounds" id="_ID_36">
+		<obj key="projectManagerDialog" type="@Bounds" id="_ID_37">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="remotesDialog" type="@Bounds" id="_ID_37">
+		<obj key="remotesDialog" type="@Bounds" id="_ID_38">
 			<prop key="x" value="-2147483648" type="int"/>
 			<prop key="y" value="-2147483648" type="int"/>
 			<prop key="width" value="-2147483648" type="int"/>
 			<prop key="height" value="-2147483648" type="int"/>
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
-		<obj key="welcomeDialog" type="@Bounds" id="_ID_38">
+		<obj key="welcomeDialog" type="@Bounds" id="_ID_39">
 			<prop key="x" value="-1" type="int"/>
 			<prop key="y" value="-38" type="int"/>
 			<prop key="width" value="469" type="int"/>
@@ -200,17 +206,17 @@
 			<prop key="maximized" value="0" type="int"/>
 		</obj>
 		<obj key="logFrameLayouts" type="_NULL_" id=""/>
-		<obj key="projectFrameLayouts" type="@DockingLayouts" id="_ID_39">
+		<obj key="projectFrameLayouts" type="@DockingLayouts" id="_ID_40">
 			<collection key="layoutKeys" type="String">
 				<prop key="" value="main" type="String"/>
 			</collection>
-			<obj key="layout-main" type="@DockingLayout" id="_ID_40">
-				<prop key="layoutString" value="1454; !0   &quot;T    8   !5\\   ,1          4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;P  LYL    (     0    $    /    !     0    (    R    ,@   #(    R                                0    0  +.;     @             %50   HH    (        ,$H    !  &quot;SFP    (  %#O   P2@    $    &quot;   P2@  &quot;C$  !A-  !0[P         &quot;  !0[P  K2(                    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S  &quot;*=P    (          0    \\    $    !     (   #Z    &gt;    ,@   #(                               !    !   BG&lt;    &quot;              55   &quot;B@    (       &quot;2Z@    $  (IW     @  K2(  )+J     0    (  )+J  !SZ@  &amp;$T  *TB          (  %#O  &quot;M(@                    8 ;P!U &apos;0 &lt; !U &apos;0  -*L     @    $    !    #P    0    $     @   2P   !X    R    ,@                               $    $  #2K     (             !54   **     @       &apos;/J     0  TJP    &quot;  &quot;M(@  &lt;^H    !     @  DNH  &apos;/J   830  K2(          @  4.\\  *TB                    #0!C &amp;\\ ;0!M &amp;D = !- &amp;4 &lt;P!S &amp;$ 9P!E   X;@    @    !     0    \\               @              ,@   #(                               !        .&amp;X    &quot;                          @       !NL0    $  #AN     P  0G$  &amp;ZQ          $  &amp;ZQ  !3V   0G$    !     @  0G$  .X&lt;  #&lt;*P  4]@          @  4]@  //L                    !P!C &amp;@ 80!N &amp;&lt; 90!S  #QO@    (    !     0    \\               (              ,@   #(                               !        \\;X    &quot;                          (       !4&lt;0    $  /&amp;^     @  \\^P  %1Q     0    $  %1Q  #&lt;*P  \\^P          @  4]@  //L                   $8P       !A-      (   1C     0  4.\\      @  !&amp;0  #!*     8  !&amp;4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;___________        !&amp;,        *,0     !   $9@   3    &quot;U     /____________________\\   1C     0  K2(      @  !&amp;0  )+J     0  !&amp;4    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S__________\\        $9   &lt;^H    !   $90    8 ;P!U &apos;0 &lt; !U &apos;3__________P    #_____________________     P         &apos;          $         !0               @    T 8P!O &amp;T ;0!I &apos;0 30!E &apos;, &lt;P!A &amp;&lt; 90    &lt; 8P!H &amp;$ ;@!G &amp;4 &lt;P      " type="String"/>
+			<obj key="layout-main" type="@DockingLayout" id="_ID_41">
+				<prop key="layoutString" value="1454; !0   &quot;T    8   !5\\   ,1          4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;P  LYL    (     0    $    /    !     0    (    R    ,@   #(    R                                0    0  +.;     @             %50   HH    (        ,$H    !  &quot;SFP    (  %#O   P2@    $    &quot;   P2@  &quot;C$  !A-  !0[P         &quot;  !0[P  K2(                    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S  &quot;*=P    (          0    \\    $    !     (   #Z    &gt;    ,@   #(                               !    !   BG&lt;    &quot;              55   &quot;B@    (       &quot;2Z@    $  (IW     @  K2(  )+J     0    (  )+J  !SZ@  &amp;$T  *TB          (  %#O  &quot;M(@                    8 ;P!U &apos;0 &lt; !U &apos;0  -*L     @    $    !    #P    0    $     @   2P   !X    R    ,@                               $    $  #2K     (             !54   **     @       &apos;/J     0  TJP    &quot;  &quot;M(@  &lt;^H    !     @  DNH  &apos;/J   830  K2(          @  4.\\  *TB                    #0!C &amp;\\ ;0!M &amp;D = !- &amp;4 &lt;P!S &amp;$ 9P!E   X;@    @    !     0    \\               @              ,@   #(                               !        .&amp;X    &quot;                          @        &amp;[P    $  #AN     P  GD    ;O          $   ;O  #@I@  GD     !     @  GD   !AK  &quot;GJ   X*8          @  X*8  &amp;A                     !P!C &amp;@ 80!N &amp;&lt; 90!S  #QO@    (    !     0    \\               (              ,@   #(                               !        \\;X    &quot;                          (       !0_@    $  /&amp;^     @  :$   %#^     0    $  %#^  &quot;GJ   :$           @  X*8  &amp;A                    $8P       !A-      (   1C     0  4.\\      @  !&amp;0  #!*     0  !&amp;4    + &amp;0 :0!R &amp;4 8P!T &amp;\\ &lt;@!I &amp;4 &lt;___________        !&amp;,        *,0     !   $9@   3    &quot;U     /____________________\\   1C     0  K2(      @  !&amp;0  )+J     0  !&amp;4    / &apos;  =0!S &amp;@ 80!B &amp;P 90!# &amp;\\ ;0!M &amp;D = !S__________\\        $9   &lt;^H    !   $90    8 ;P!U &apos;0 &lt; !U &apos;3__________P    #_____________________     P         &apos;          $         !0               @    T 8P!O &amp;T ;0!I &apos;0 30!E &apos;, &lt;P!A &amp;&lt; 90    &lt; 8P!H &amp;$ ;@!G &amp;4 &lt;P      " type="String"/>
 			</obj>
 			<prop key="currentLayout" value="main" type="String"/>
 		</obj>
 		<obj key="branchBrowserTable" type="_NULL_" id=""/>
-		<obj key="branchChooserTable" type="@TableUiSettings" id="_ID_41">
+		<obj key="branchChooserTable" type="@TableUiSettings" id="_ID_42">
 			<prop key="visibleColumnNames" value="" type="String"/>
 			<prop key="hiddenColumnNames" value="" type="String"/>
 			<collection key="sortOrder" type="Object"/>
@@ -219,21 +225,26 @@
 		<obj key="branchManagerTable" type="_NULL_" id=""/>
 		<obj key="tagBranchBrowserTable" type="_NULL_" id=""/>
 		<obj key="tagChooserTable" type="_NULL_" id=""/>
-		<obj key="logTableDefaultSettings" type="_NULL_" id=""/>
+		<obj key="logTableDefaultSettings" type="@TableUiSettings" id="_ID_43">
+			<prop key="visibleColumnNames" value="" type="String"/>
+			<prop key="hiddenColumnNames" value="" type="String"/>
+			<collection key="sortOrder" type="Object"/>
+			<collection key="columnWidths" type="Object"/>
+		</obj>
 		<prop key="nestInTrayForRegularStartup" value="true" type="boolean"/>
 	</obj>
-	<obj key="vcsRecords" type="@VcsRecords" id="_ID_42">
-		<prop key="lastGitUsage" value="1327155299800" type="long"/>
+	<obj key="vcsRecords" type="@VcsRecords" id="_ID_44">
+		<prop key="lastGitUsage" value="1327156275667" type="long"/>
 		<prop key="lastSvnUsage" value="0" type="long"/>
 	</obj>
-	<obj key="updateCheck" type="@UpdateAutoCheckSettings" id="_ID_43">
+	<obj key="updateCheck" type="@UpdateAutoCheckSettings" id="_ID_45">
 		<prop key="enabled" value="true" type="boolean"/>
 		<prop key="knownLatestVersion" value="" type="_NULL_"/>
 		<prop key="knownLatestVersionNextRemindTime" value="" type="_NULL_"/>
 		<prop key="knownLatestInfo" value="1325653200000" type="long"/>
 		<prop key="lastCheckTime" value="1327148926487" type="long"/>
 		<prop key="checkInterval" value="weekly" type="String"/>
-		<obj key="proxy" type="@HttpProxySettings" id="_ID_44">
+		<obj key="proxy" type="@HttpProxySettings" id="_ID_46">
 			<prop key="proxyHost" value="" type="_NULL_"/>
 			<prop key="proxyPort" value="3128" type="int"/>
 			<prop key="proxyUser" value="" type="_NULL_"/>
