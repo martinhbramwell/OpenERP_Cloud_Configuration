@@ -503,12 +503,20 @@ echo "Clear any problem packages"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -f install
-echo "Restart as described above and turn to the Manage Jenkins >> Configure System page."
-
-cd $ADMIN_USERZ_HOME
-sudo mkdir -p ./programs/installTools
-cd ./programs
-mv *.* ./installTools 
+#
+echo "Make a place for installation phase tools"
+cd ${PRG}
+sudo mkdir -p installTools
+mv *.* ./installTools
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
+#
+echo "Now install and run the first Jenkins job"
+cd ${PRG}/installTools
+wget ${SRV_CONFIG}/tools/jenkins/installJenkinsConfigurationJob.sh
+chmod +x installJenkinsConfigurationJob.sh
+./installJenkinsConfigurationJob.sh
+#
+
+
 
 
