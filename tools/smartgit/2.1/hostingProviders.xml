@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obj key="HostingProviders" type="@HostingProviderSettings" id="_ID_1">
+	<collection key="ids" type="String">
+		<prop key="" value="beanstalk" type="String"/>
+		<prop key="" value="codebase" type="String"/>
+		<prop key="" value="github" type="String"/>
+		<prop key="" value="unfuddle" type="String"/>
+	</collection>
+	<obj key="provider-beanstalk" type="@DefaultProviderSettings" id="_ID_2">
+		<prop key="domain" value="" type="_NULL_"/>
+		<prop key="userName" value="" type="_NULL_"/>
+		<prop key="password" value="" type="_NULL_"/>
+	</obj>
+	<obj key="provider-codebase" type="@DefaultProviderSettings" id="_ID_3">
+		<prop key="domain" value="" type="_NULL_"/>
+		<prop key="userName" value="" type="_NULL_"/>
+		<prop key="password" value="" type="_NULL_"/>
+	</obj>
+	<obj key="provider-github" type="@GithubSettings" id="_ID_4">
+		<prop key="userName" value="martinhbramwell" type="String"/>
+		<prop key="token" value="0" type="int"/>
+	</obj>
+	<obj key="provider-unfuddle" type="@DefaultProviderSettings" id="_ID_5">
+		<prop key="domain" value="" type="_NULL_"/>
+		<prop key="userName" value="" type="_NULL_"/>
+		<prop key="password" value="" type="_NULL_"/>
+	</obj>
+</obj>

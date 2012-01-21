@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obj key="Accelerators" type="@AllAccelerators" id="_ID_1">
+	<obj key="compareAccelerators" type="@Accelerators" id="_ID_2">
+		<collection key="id-keystroke-mapping" type="Object"/>
+	</obj>
+	<obj key="conflictSolverAccelerators" type="@Accelerators" id="_ID_3">
+		<collection key="id-keystroke-mapping" type="Object"/>
+	</obj>
+	<obj key="editorAccelerators" type="@Accelerators" id="_ID_4">
+		<collection key="id-keystroke-mapping" type="Object"/>
+	</obj>
+	<obj key="indexEditorAccelerators" type="@Accelerators" id="_ID_5">
+		<collection key="id-keystroke-mapping" type="Object"/>
+	</obj>
+	<obj key="logAccelerators" type="@Accelerators" id="_ID_6">
+		<collection key="id-keystroke-mapping" type="Object"/>
+	</obj>
+	<obj key="projectAccelerators" type="@Accelerators" id="_ID_7">
+		<collection key="id-keystroke-mapping" type="Object"/>
+	</obj>
+</obj>

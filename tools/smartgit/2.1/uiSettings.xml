@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obj key="UiSettings" type="@UiPreferences" id="_ID_1">
+	<obj key="directoryPopupMenu" type="@MenuStructure" id="_ID_2">
+		<prop key="name" value="Directory" type="String"/>
+		<collection key="items" type="Object">
+			<obj key="" type="@Action" id="_ID_3">
+				<prop key="action" value="open" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_4">
+				<prop key="action" value="log" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_5"/>
+			<obj key="" type="@Action" id="_ID_6">
+				<prop key="action" value="commit" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_7"/>
+			<obj key="" type="@Action" id="_ID_8">
+				<prop key="action" value="stage" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_9">
+				<prop key="action" value="unstage" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_10">
+				<prop key="action" value="submoduleInit" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_11">
+				<prop key="action" value="submoduleReset" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_12">
+				<prop key="action" value="ignore" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_13">
+				<prop key="action" value="delete" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_14"/>
+			<obj key="" type="@Action" id="_ID_15">
+				<prop key="action" value="fetch" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_16">
+				<prop key="action" value="push" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_17">
+				<prop key="action" value="push-advanced" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_18">
+				<prop key="action" value="sync" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_19"/>
+			<obj key="" type="@Action" id="_ID_20">
+				<prop key="action" value="refresh" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_21"/>
+			<obj key="" type="@Action" id="_ID_22">
+				<prop key="action" value="projectRemoveWorkingTree" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_23">
+				<prop key="action" value="projectEdit" type="String"/>
+			</obj>
+		</collection>
+	</obj>
+	<obj key="filePopupMenu" type="@MenuStructure" id="_ID_24">
+		<prop key="name" value="File" type="String"/>
+		<collection key="items" type="Object">
+			<obj key="" type="@Action" id="_ID_25">
+				<prop key="action" value="open" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_26">
+				<prop key="action" value="showChanges" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_27">
+				<prop key="action" value="compare2Files" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_28">
+				<prop key="action" value="log" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_29"/>
+			<obj key="" type="@Action" id="_ID_30">
+				<prop key="action" value="commit" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_31"/>
+			<obj key="" type="@Action" id="_ID_32">
+				<prop key="action" value="stage" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_33">
+				<prop key="action" value="unstage" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_34">
+				<prop key="action" value="indexEditor" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_35">
+				<prop key="action" value="ignore" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_36">
+				<prop key="action" value="resolve" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_37"/>
+			<obj key="" type="@Action" id="_ID_38">
+				<prop key="action" value="discard" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_39">
+				<prop key="action" value="remove" type="String"/>
+			</obj>
+			<obj key="" type="@Action" id="_ID_40">
+				<prop key="action" value="delete" type="String"/>
+			</obj>
+			<obj key="" type="@Separator" id="_ID_41"/>
+			<obj key="" type="@Action" id="_ID_42">
+				<prop key="action" value="selectDirectory" type="String"/>
+			</obj>
+		</collection>
+	</obj>
+	<obj key="pushableCommitsPopupMenu" type="@MenuStructure" id="_ID_43">
+		<prop key="name" value="Pushable Commits" type="String"/>
+		<collection key="items" type="Object">
+			<obj key="" type="@Action" id="_ID_44">
+				<prop key="action" value="pushCommits" type="String"/>
+			</obj>
+		</collection>
+	</obj>
+</obj>
