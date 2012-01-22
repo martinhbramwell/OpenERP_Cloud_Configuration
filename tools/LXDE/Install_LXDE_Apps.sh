@@ -35,7 +35,20 @@ sudo mkdir -p $ADMIN_USERZ_HOME/.config/lxterminal
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID $ADMIN_USERZ_HOME/.config 
 cd $ADMIN_USERZ_HOME/.config/lxterminal
 rm -f lxterminal.conf*
-wget ${SRV_CONFIG}/tools//LXDE/terminal/lxterminal.conf
+wget ${SRV_CONFIG}/tools/LXDE/terminal/lxterminal.conf
+#
+echo "Getting a more suitable wallpaper..."
+cd /usr/share/lxde/wallpapers
+wget -cN ${LOCAL_MIRROR}/tanday.jpg
+#
+echo "Get desktop definitions..."
+cd $ADMIN_USERZ_HOME/.config/pcmanfm/LXDE
+wget ${SRV_CONFIG}/tools/LXDE/pcmanfm/pcmanfm.conf
+#
+echo "Provide some browser bookmarks ..."
+cd $ADMIN_USERZ_HOME/.config/chromium/Default/
+wget ${SRV_CONFIG}/tools/LXDE/chromium/Bookmarks
+#
 #
 cd ${INS}
 #
