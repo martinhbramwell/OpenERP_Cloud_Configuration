@@ -27,13 +27,19 @@ sudo rm -f dldNXs.log*
 echo "Obtaining FreeNX server.."
 wget -cNb --output-file=dldNXs.log ${LOCAL_MIRROR}/nxserver_3.5.0-9_amd64.deb
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldNXc.log -p nxclient_3.5
+export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
+wget ${SRV_CONFIG}/tools/waitForLogFileEvent.sh
+chmod +x ./waitForLogFileEvent.sh
+#
+FAIL_PATTERN="nothing to do|ERROR"
+
+${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldNXc.log -s nxclient_3.5 -f ${FAIL_PATTERN}
 sudo dpkg -i nxclient_3.5.0-7_amd64.deb
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldNXn.log -p nxnode_3.5
+${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldNXn.log -s nxnode_3.5 -f ${FAIL_PATTERN}
 sudo dpkg -i nxnode_3.5.0-7_amd64.deb
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldNXs.log -p nxserver_3.5
+${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldNXs.log -s nxserver_3.5 -f ${FAIL_PATTERN} 
 sudo dpkg -i nxserver_3.5.0-9_amd64.deb
 #
 exit 0;
