@@ -47,4 +47,9 @@ BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${LATEST_BUILD_NUMBE
 echo "Wait for first job to complete ..."
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${BUILD_LOG} -s "Finished: SUCCESS" -f "FAILED"
 #
+JOB_RESOURCES=workspace/src/main/resources/jenkins
+cd $JENKINS_USERZ_DATA_DIR
+cp -fr $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR/$JOB_RESOURCES/*.xml .
+cp -fr $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR/$JOB_RESOURCES/jobs/* ./jobs
+
 
