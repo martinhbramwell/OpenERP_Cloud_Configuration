@@ -1,0 +1,54 @@
+{
+   "checksum": "ccdfcd9cc22a1082dda183505a154a98",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "12971718729833515",
+            "id": "5",
+            "name": "Delicious",
+            "type": "url",
+            "url": "http://www.delicious.com/martinhbramwell"
+         }, {
+            "date_added": "12971719393112460",
+            "id": "6",
+            "name": "Your Acct",
+            "type": "url",
+            "url": "https://github.com/account"
+         }, {
+            "date_added": "12971719406000592",
+            "id": "7",
+            "name": "Dlds!",
+            "type": "url",
+            "url": "http://openerpns.warehouseman.com/downloads/"
+         }, {
+            "date_added": "12971729179896020",
+            "id": "8",
+            "name": "Cloud Configuration",
+            "type": "url",
+            "url": "https://github.com/martinhbramwell/OpenERP_Cloud_Configuration"
+         } ],
+         "date_added": "12971718401157670",
+         "date_modified": "12971729179896020",
+         "id": "1",
+         "name": "Bookmarks Bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "12971718401157692",
+         "date_modified": "0",
+         "id": "2",
+         "name": "Other Bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "12971718401157694",
+         "date_modified": "0",
+         "id": "3",
+         "name": "Synced Bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
