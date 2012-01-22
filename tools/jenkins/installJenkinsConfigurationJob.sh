@@ -15,7 +15,8 @@ export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
 #
 export JENKINS_URL=http://localhost/jenkins
 # export JENKINS_URL=http://test.warehouseman.com/jenkins/
-cd ${PRG}/tools
+mkdir -p ${PRG}/installTools
+cd ${PRG}/programs/installTools/
 wget ${SRV_CONFIG}/tools/waitForLogFileEvent.sh
 chmod +x ./waitForLogFileEvent.sh
 #
@@ -38,14 +39,19 @@ java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} reload-config
 echo "Wait for Jenkins"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 #
-echo "Build first job..."
+JOB_DIR=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}
+BUILD_NUMBER=$( cat ${JOB_DIR}/nextBuildNumber )
+NEXT_BUILD_NUMBER=$(( BUILD_NUMBER + 1 ))
+#
+echo "Build first job... ${BUILD_NUMBER}"
 java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} build ${FIRST_JOB_DIR}
 #
-LATEST_BUILD_NUMBER=$(( $( cat ${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/nextBuildNumber ) -1 ))
-BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${LATEST_BUILD_NUMBER}/log
-#
 echo "Wait for first job to complete ..."
+${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${JOB_DIR}/nextBuildNumber -s ${NEXT_BUILD_NUMBER} -f "0"
+BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${LATEST_BUILD_NUMBER}/log
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${BUILD_LOG} -s "Finished: SUCCESS" -f "FAILED"
+#
+echo "Pass new jobs to their new homes ..."
 #
 JOB_RESOURCES=workspace/src/main/resources/jenkins
 cd $JENKINS_USERZ_DATA_DIR
