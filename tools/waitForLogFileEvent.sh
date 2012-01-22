@@ -43,7 +43,7 @@ fi
 #
 [ ! -f ${LOG_FILE_NAME} ] && echo "${LOG_FILE_NAME} : File not found!" && exit 1
 
-echo Will wait ${DELAY} seconds for either ${SUCCESS_PATTERN} or ${FAIL_PATTERN} to appear in ${LOG_FILE_NAME}.
+echo Will wait ${DELAY} seconds for either \"${SUCCESS_PATTERN}\" or \"${FAIL_PATTERN}\" to appear in ${LOG_FILE_NAME}.
 echo ""
 #exit 1
 

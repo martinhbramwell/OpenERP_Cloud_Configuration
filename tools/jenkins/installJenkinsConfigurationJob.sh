@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Script to collect prepare an empty Jenkins server with an empty Fitnesse wiki.
 #
 export JENKINS_USERZ_UID=jenkins
@@ -15,6 +15,10 @@ export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
 #
 export JENKINS_URL=http://localhost/jenkins
 # export JENKINS_URL=http://test.warehouseman.com/jenkins/
+cd ${PRG}/tools
+wget ${SRV_CONFIG}/tools/waitForLogFileEvent.sh
+chmod +x ./waitForLogFileEvent.sh
+#
 #
 echo "Get the config file."
 cd $JENKINS_USERZ_JOBS_DIR
@@ -37,6 +41,10 @@ ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 echo "Build first job..."
 java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} build ${FIRST_JOB_DIR}
 #
+LATEST_BUILD_NUMBER=$(( $( cat ${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/nextBuildNumber ) -1 ))
+BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${LATEST_BUILD_NUMBER}/log
+#
 echo "Wait for first job to complete ..."
+${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${BUILD_LOG} -s "Finished: SUCCESS" -f "FAILED"
 #
 
