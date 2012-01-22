@@ -13,7 +13,7 @@ export FIRST_JOB_CONFIG=config.xml
 #
 export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
 #
-export JENKINS_URL=http://localhost/jenkins/
+export JENKINS_URL=http://localhost/jenkins
 # export JENKINS_URL=http://test.warehouseman.com/jenkins/
 #
 echo "Get the config file."
@@ -28,10 +28,15 @@ cd $JENKINS_USERZ_HOME
 ls -l $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR
 #
 #
-sudo wget $JENKINS_URL/reload
+echo "Trying to reload."
+java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} reload-configuration
+# sudo wget $JENKINS_URL/reload
 echo "Wait for Jenkins"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 #
+echo "Build first job..."
 java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} build ${FIRST_JOB_DIR}
+#
+echo "Wait for first job to complete ..."
 #
 
