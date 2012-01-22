@@ -1,0 +1,138 @@
+{
+   "bookmark_bar": {
+      "show_on_all_tabs": true
+   },
+   "browser": {
+      "clear_lso_data_enabled": false,
+      "custom_chrome_frame": true,
+      "window_placement": {
+         "bottom": 791,
+         "left": 194,
+         "maximized": false,
+         "right": 1205,
+         "top": 40,
+         "work_area_bottom": 874,
+         "work_area_left": 0,
+         "work_area_right": 1440,
+         "work_area_top": 26
+      }
+   },
+   "cloud_print": {
+      "email": ""
+   },
+   "countryid_at_install": 21843,
+   "default_search_provider": {
+      "enabled": true,
+      "encodings": "UTF-8",
+      "icon_url": "http://www.google.com/favicon.ico",
+      "id": "2",
+      "instant_url": "{google:baseURL}webhp?{google:RLZ}sourceid=chrome-instant&{google:instantFieldTrialGroupParameter}ie={inputEncoding}&ion=1{searchTerms}&nord=1",
+      "keyword": "google.com.ec",
+      "name": "Google",
+      "prepopulate_id": "1",
+      "search_url": "{google:baseURL}search?{google:RLZ}{google:acceptedSuggestion}{google:originalQueryForSuggestion}{google:searchFieldtrialParameter}{google:instantFieldTrialGroupParameter}sourceid=chrome&client=ubuntu&channel=cs&ie={inputEncoding}&q={searchTerms}",
+      "suggest_url": "{google:baseSuggestURL}search?{google:searchFieldtrialParameter}{google:instantFieldTrialGroupParameter}client=chrome&hl={language}&q={searchTerms}"
+   },
+   "download": {
+      "directory_upgrade": true,
+      "extensions_to_open": ""
+   },
+   "extensions": {
+      "autoupdate": {
+         "last_check": "12971718890384918",
+         "next_check": "12971737001233402"
+      },
+      "blacklistupdate": {
+         "lastpingday": "12971692801086870",
+         "version": "0.0.0.9"
+      },
+      "chrome_url_overrides": {
+         "bookmarks": [ "chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/main.html" ]
+      },
+      "settings": {
+         "ahfgeienlihckogmohjhadlkjgocpleb": {
+            "active_permissions": {
+               "api": [ "management", "webstorePrivate" ]
+            },
+            "app_launcher_index": -2,
+            "page_index": 0
+         },
+         "cbbjhegipokkofhhicbckicchjpcpeni": {
+            "blacklist": true
+         },
+         "hpibmhghjndideebpackbdlpncgkcppp": {
+            "blacklist": true
+         },
+         "kcanfkmhccbaheheaackijegkclkaeic": {
+            "blacklist": true
+         },
+         "lncjcfkpannmofmpgdfoonkniofdnaba": {
+            "blacklist": true
+         },
+         "mfhfkclojmdocagbmecgcnlofppebebd": {
+            "blacklist": true
+         },
+         "pbglijbamgmlcpnnpbfjkbdeheejjloj": {
+            "blacklist": true
+         },
+         "pkbbbncikcipejaiiiioboongndhmjgl": {
+            "blacklist": true
+         }
+      },
+      "theme": {
+         "id": "",
+         "use_system": true
+      }
+   },
+   "homepage": "http://www.google.com/",
+   "homepage_is_newtabpage": true,
+   "http_throttling": {
+      "enabled": true
+   },
+   "ntp": {
+      "intro_display_count": 11,
+      "pref_version": 3,
+      "promo_build": 0,
+      "promo_closed": false,
+      "promo_end": 1323071940.0,
+      "promo_group": 59,
+      "promo_group_max": 0,
+      "promo_group_timeslice": 0,
+      "promo_line": "\u003Ca href=\"http://www.google.com/chromebook/index.html#utm_campaign=en&utm_source=en-ntp-holidays-na-us-bkws&utm_medium=ntp-holidays\"\u003EGet a Chromebook for the holidays\u003C/a\u003E: the computer powered by Chrome.",
+      "promo_resource_cache_update": "1327244807.009411",
+      "promo_start": 1321862280.0,
+      "shown_page": 2048
+   },
+   "plugins": {
+      "enabled_internal_pdf3": true,
+      "enabled_nacl": true,
+      "last_internal_directory": "/usr/lib/chromium-browser",
+      "plugins_list": [ {
+         "enabled": true,
+         "name": "Remoting Viewer",
+         "path": "internal-remoting-viewer",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "Default Plug-in",
+         "path": "default_plugin",
+         "version": "1"
+      }, {
+         "enabled": true,
+         "name": "Remoting Viewer"
+      }, {
+         "enabled": true,
+         "name": "Default Plug-in"
+      } ]
+   },
+   "profile": {
+      "content_settings": {
+         "pref_version": 1
+      },
+      "exited_cleanly": false
+   },
+   "tabs": {
+      "use_compact_navigation_bar": false,
+      "use_vertical_tabs": false
+   }
+}
