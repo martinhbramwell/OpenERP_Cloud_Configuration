@@ -48,7 +48,7 @@ java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} build ${FIRST
 #
 echo "Wait for first job to complete ..."
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${JOB_DIR}/nextBuildNumber -s ${NEXT_BUILD_NUMBER} -f "0"
-BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${LATEST_BUILD_NUMBER}/log
+BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${BUILD_NUMBER}/log
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${BUILD_LOG} -s "Finished: SUCCESS" -f "FAILED"
 #
 echo "Pass new jobs to their new homes ..."
@@ -57,5 +57,13 @@ JOB_RESOURCES=workspace/src/main/resources/jenkins
 cd $JENKINS_USERZ_DATA_DIR
 cp -fr $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR/$JOB_RESOURCES/*.xml .
 cp -fr $JENKINS_USERZ_JOBS_DIR/$FIRST_JOB_DIR/$JOB_RESOURCES/jobs/* ./jobs
+sudo chown -R $JENKINS_USERZ_UID:$JENKINS_USERZ_UID .
+#
+echo "Trying to reload."
+java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} reload-configuration
+# sudo wget $JENKINS_URL/reload
+echo "Wait for Jenkins"
+${JENKINS_COMMAND_DIR}/waitForJenkins.sh
+#
 
 
