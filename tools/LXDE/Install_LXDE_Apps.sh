@@ -42,8 +42,11 @@ cd /usr/share/lxde/wallpapers
 wget -cN ${LOCAL_MIRROR}/tanday.jpg
 #
 echo "Get desktop definitions..."
+mkdir -p $ADMIN_USERZ_HOME/.config/pcmanfm/LXDE
 cd $ADMIN_USERZ_HOME/.config/pcmanfm/LXDE
 wget ${SRV_CONFIG}/tools/LXDE/pcmanfm/pcmanfm.conf
+#
+mkdir -p $ADMIN_USERZ_HOME/.config/lxsession/LXDE
 cd $ADMIN_USERZ_HOME/.config/lxsession/LXDE
 wget ${SRV_CONFIG}/tools/LXDE/desktop.conf
 #
