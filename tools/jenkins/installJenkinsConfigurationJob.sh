@@ -46,9 +46,19 @@ NEXT_BUILD_NUMBER=$(( BUILD_NUMBER + 1 ))
 echo "Build first job... ${BUILD_NUMBER}"
 java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} build ${FIRST_JOB_DIR}
 #
-echo "Wait for first job to complete ..."
+echo "Wait for first job to start ..."
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${JOB_DIR}/nextBuildNumber -s ${NEXT_BUILD_NUMBER} -f "0"
 BUILD_LOG=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}/builds/${BUILD_NUMBER}/log
+#
+DELAY=12
+while [ ! -f ${BUILD_LOG} ] && [  ${DELAY} -gt 0 ]
+do
+    sleep 15
+    DELAY=$(( DELAY - 1 ))
+    echo "${DELAY} FOR ${BUILD_LOG}"
+done
+#
+echo "Wait for first job to complete ..."
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ${BUILD_LOG} -s "Finished: SUCCESS" -f "FAILED"
 #
 echo "Pass new jobs to their new homes ..."
