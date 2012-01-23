@@ -1,0 +1,8 @@
+
+[Desktop Entry]
+Type=Application
+Name=LXRandR autostart
+Comment=Start xrandr with settings done in LXRandR
+Exec=xrandr --output default --mode 1280x800 --rate 0.0
+OnlyShowIn=LXDE
+

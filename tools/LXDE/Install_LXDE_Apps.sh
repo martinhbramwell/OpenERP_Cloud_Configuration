@@ -50,10 +50,15 @@ mkdir -p $ADMIN_USERZ_HOME/.config/lxsession/LXDE
 cd $ADMIN_USERZ_HOME/.config/lxsession/LXDE
 wget ${SRV_CONFIG}/tools/LXDE/desktop.conf
 #
+mkdir -p $ADMIN_USERZ_HOME/.config/autostart
+cd $ADMIN_USERZ_HOME/.config/autostart
+wget ${SRV_CONFIG}/tools/LXDE/autostart/lxrandr-autostart.desktop
+#
 echo "Provide some browser bookmarks ..."
 mkdir -p $ADMIN_USERZ_HOME/.config/chromium/Default
 cd $ADMIN_USERZ_HOME/.config/chromium/Default/
 wget ${SRV_CONFIG}/tools/LXDE/chromium/Bookmarks
+wget ${SRV_CONFIG}/tools/LXDE/chromium/Preferences
 #
 #
 cd ${INS}
