@@ -1,24 +1,27 @@
 #!/bin/bash
-# Script to collect prepare an empty Jenkins server with an empty Fitnesse wiki.
+# Script to prepare an empty Jenkins server with an empty Fitnesse wiki.
 #
 export INS="/home/yourself/installers"
 export PRG="/home/yourself/programs"
 export FAILURE_NOTICE="______Looks_like_it_failed______"
 #
 export ADMIN_USERZ_UID=yourself
-export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
-export ADMIN_USERZ_DEV_DIR=/home/$ADMIN_USERZ_UID/dev2
-export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
-mkdir -p $ADMIN_USERZ_WORK_DIR
+export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
+export ADMIN_USERZ_DEV_DIR=/home/${ADMIN_USERZ_UID}/dev2
+export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
+mkdir -p ${ADMIN_USERZ_WORK_DIR}
 #
 export JENKINS_USERZ_UID=jenkins
-export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
-export JENKINS_USERZ_DATA_DIR=$JENKINS_USERZ_HOME/.$JENKINS_USERZ_UID
-export JENKINS_USERZ_JOBS_DIR=$JENKINS_USERZ_DATA_DIR/jobs
+export JENKINS_USERZ_UID_UC=Jenkins
+export JENKINS_USERZ_HOME=/home/${JENKINS_USERZ_UID}
+export JENKINS_USERZ_DATA_DIR=${JENKINS_USERZ_HOME}/.${JENKINS_USERZ_UID}
+export JENKINS_USERZ_JOBS_DIR=${JENKINS_USERZ_DATA_DIR}/jobs
+export JENKINS_USERZ_SSH_DIR=${JENKINS_USERZ_HOME}/.ssh
+export JENKINS_COMMAND_DIR=${PRG}/org/${JENKINS_USERZ_UID}
 #
-sudo rm -fr $ADMIN_USERZ_DEV_DIR
-mkdir $ADMIN_USERZ_DEV_DIR
-sudo chown -R $JENKINS_USERZ_UID:$JENKINS_USERZ_UID $ADMIN_USERZ_DEV_DIR
+sudo rm -fr ${ADMIN_USERZ_DEV_DIR}
+mkdir ${ADMIN_USERZ_DEV_DIR}
+sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${ADMIN_USERZ_DEV_DIR}
 #
 export GIT_MANAGED_PROJECT=OpenERP_Cloud_Configuration
 export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
@@ -26,12 +29,19 @@ export JENKINS_VCS_PATH=servers/jenkins
 export JENKINS_VCS_DIR=${GIT_MANAGED_DIR}/${JENKINS_VCS_PATH}
 #
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
+export LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 #
+export CATALINA_HOME=/usr/share/tomcat
+#
+export   JENKINS_URL=http://localhost/jenkins
+# export JENKINS_URL=http://test.warehouseman.com/jenkins/
+#
+export FIRST_JOB_DIR=ConfigFilesSCM
 ##
 # Prerequisite : waitForLogFileEvent.sh
 #
 mkdir -p ${PRG}/installTools
-cd ${PRG}/programs/installTools/
+cd ${PRG}/installTools/
 rm -f ./waitForLogFileEvent.sh
 wget ${SRV_CONFIG}/tools/waitForLogFileEvent.sh
 chmod +x ./waitForLogFileEvent.sh
@@ -59,35 +69,12 @@ cd ${ADMIN_USERZ_DEV_DIR}
 rm -fr ${GIT_MANAGED_PROJECT} 
 #
 echo "Clone the Jenkins Project into the Git Repo :"
+sudo -Hu ${JENKINS_USERZ_UID} chmod 600 ${JENKINS_USERZ_SSH_DIR}/*
 echo sudo -Hu ${JENKINS_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu $JENKINS_USERZ_UID git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
+sudo -Hu ${JENKINS_USERZ_UID} chmod 660 ${JENKINS_USERZ_SSH_DIR}/*
 #
-#
-if [  1 == 0  ]
-then
-	export JENKINS_DIR=tools/jenkins
-	#
-	export FIRST_JOB_DIR=ConfigFilesSCM
-	export FIRST_JOB_CONFIG=config.xml
-	#
-	export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
-	#
-	export JENKINS_URL=http://localhost/jenkins
-	# export JENKINS_URL=http://test.warehouseman.com/jenkins/
-	export LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
-	#
-	echo "This is JENKINS_USERZ_UID currently : [$JENKINS_USERZ_UID]"
-	export JENKINS_USERZ_UID=jenkins
-	export JENKINS_USERZ_UID_UC=Jenkins
-	# And a local environment variable
-	export CATALINA_HOME=/usr/share/tomcat
-	#
-	echo "Setting it to $JENKINS_USERZ_UID in case sudo can't see it."
-	echo "This is Jenkins local url currently : [$JENKINS_URL]"
-	export JENKINS_URL=http://localhost/jenkins
-	echo "Setting it to $JENKINS_URL in case sudo can't see it."
-	#
-fi
+exit;
 #
 echo "Jenkins Continuous Integration"
 echo "Obtain Jenkins"
@@ -256,6 +243,11 @@ sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
 #
 ##
 if [ 0 == 1 ]; then
+	#
+	export JENKINS_DIR=tools/jenkins
+	#
+	export FIRST_JOB_CONFIG=config.xml
+	#
 	echo "Get the config file."
 	cd $JENKINS_USERZ_JOBS_DIR
 	sudo -u jenkins mkdir -p $FIRST_JOB_DIR
