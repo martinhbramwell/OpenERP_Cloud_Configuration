@@ -7,7 +7,7 @@ export FAILURE_NOTICE="______Looks_like_it_failed______"
 #
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
-export ADMIN_USERZ_DEV_DIR=/home/${ADMIN_USERZ_UID}/dev2
+export ADMIN_USERZ_DEV_DIR=/home/${ADMIN_USERZ_UID}/dev
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
 mkdir -p ${ADMIN_USERZ_WORK_DIR}
 #
@@ -18,10 +18,6 @@ export JENKINS_USERZ_DATA_DIR=${JENKINS_USERZ_HOME}/.${JENKINS_USERZ_UID}
 export JENKINS_USERZ_JOBS_DIR=${JENKINS_USERZ_DATA_DIR}/jobs
 export JENKINS_USERZ_SSH_DIR=${JENKINS_USERZ_HOME}/.ssh
 export JENKINS_COMMAND_DIR=${PRG}/org/${JENKINS_USERZ_UID}
-#
-sudo rm -fr ${ADMIN_USERZ_DEV_DIR}
-mkdir ${ADMIN_USERZ_DEV_DIR}
-sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${ADMIN_USERZ_DEV_DIR}
 #
 export GIT_MANAGED_PROJECT=OpenERP_Cloud_Configuration
 export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
@@ -38,6 +34,19 @@ export   JENKINS_URL=http://localhost/jenkins
 #
 export FIRST_JOB_DIR=ConfigFilesSCM
 ##
+sudo rm -fr ${ADMIN_USERZ_DEV_DIR}
+mkdir ${ADMIN_USERZ_DEV_DIR}
+sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${ADMIN_USERZ_DEV_DIR}
+#
+echo "Jenkins Continuous Integration"
+echo "Obtain Jenkins"
+cd ${INS}
+rm -f ./dldJenkinsWar.log*
+rm -f ./jenkins.war
+wget -cNb --output-file=dldJenkinsWar.log ${LOCAL_MIRROR}/jenkins.war
+# export SRV_JENKINS="http://mirrors.jenkins-ci.org"
+# wget -cNb --output-file=dldJenkinsWar.log ${SRV_JENKINS}/war/latest/jenkins.war
+#
 # Prerequisite : waitForLogFileEvent.sh
 #
 mkdir -p ${PRG}/installTools
@@ -69,26 +78,17 @@ cd ${ADMIN_USERZ_DEV_DIR}
 rm -fr ${GIT_MANAGED_PROJECT} 
 #
 echo "Clone the Jenkins Project into the Git Repo :"
-sudo -Hu ${JENKINS_USERZ_UID} chmod 600 ${JENKINS_USERZ_SSH_DIR}/*
+sudo -Hu ${JENKINS_USERZ_UID} chmod 600 ${JENKINS_USERZ_SSH_DIR}/*  # The next step requies tight security
 echo sudo -Hu ${JENKINS_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu $JENKINS_USERZ_UID git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
-sudo -Hu ${JENKINS_USERZ_UID} chmod 660 ${JENKINS_USERZ_SSH_DIR}/*
+# Undo tight security so Jenkins & SmartGit can share the key
+sudo -Hu ${JENKINS_USERZ_UID} chmod 660 ${JENKINS_USERZ_SSH_DIR}/* 
 #
-exit;
 #
-echo "Jenkins Continuous Integration"
-echo "Obtain Jenkins"
-cd ${INS}
-rm -f ./dldJenkinsWar.log*
-rm -f ./jenkins.war
-wget -cNb --output-file=dldJenkinsWar.log ${LOCAL_MIRROR}/jenkins.war
-SRV_JENKINS="http://mirrors.jenkins-ci.org"
-#wget -cNb --output-file=dldJenkinsWar.log ${SRV_JENKINS}/war/latest/jenkins.war
-#
-# Use Jenkins Web Archive file obtained earlier
-# wget -cNb --output-file=dldJenkinsWar.log http://mirrors.jenkins-ci.org/war/latest/jenkins.war
+echo "Wait for jenkins.war to arrive ..."
 SEARCH_PATTERN="jenkins.war' saved"
 FAILURE_PATTERN="nothing to do|ERROR"
+cd ${INS}
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldJenkinsWar.log -s "${SEARCH_PATTERN}" -f "${FAILURE_PATTERN}"
 #
 echo "Remove residue of prior installations ..."
@@ -107,9 +107,8 @@ echo "... and confirm that it's working :"
 #
 # Checked it worked
 #
-echo "Restart TomCat"
+echo "Halt TomCat"
 sudo /etc/rc2.d/S99tomcat stop
-sudo /etc/rc2.d/S99tomcat start
 #
 mkdir -p ${JENKINS_COMMAND_DIR}
 chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${JENKINS_COMMAND_DIR}
@@ -117,25 +116,22 @@ cd ${JENKINS_COMMAND_DIR}
 if [ ! -f "waitForJenkins.sh" ]; then wget ${SRV_CONFIG}/tools/waitForJenkins.sh; fi
 chmod a+x waitForJenkins.sh
 #
-echo "Wait for Jenkins"
-${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 #
-ls -l
-exit;
 echo "Define a symbolic link from the Jenkins Home directory to the Git Managed Jenkins VCS directory"
 cd $JENKINS_USERZ_HOME
+sudo -u $JENKINS_USERZ_UID mkdir -p $JENKINS_USERZ_DATA_DIR
 sudo -u $JENKINS_USERZ_UID mv $JENKINS_USERZ_DATA_DIR $JENKINS_USERZ_DATA_DIR.bk
+sudo -u $JENKINS_USERZ_UID ln -s $JENKINS_VCS_DIR $JENKINS_USERZ_DATA_DIR
+#
+echo "Jenkins will really go to $JENKINS_VCS_DIR when expecting to go to $JENKINS_USERZ_DATA_DIR."
+#
+echo "Start TomCat again"
+sudo /etc/rc2.d/S99tomcat start
 #
 echo " * * * Prepare Jenkins * * * "
-echo "Install plugins"
-echo " "
-echo "For automated install of plugins, the download site for the plugins is here : http://updates.jenkins-ci.org/download/plugins/"
-echo " "
-echo "Here is the script for automating that :"
-echo " "
 #
 sudo wget $JENKINS_URL/reload
-echo "Wait for Jenkins"
+echo "Wait for Jenkins to finish restarting"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 #
 #
@@ -160,13 +156,24 @@ JNKNSVRSN=$(java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar version)
 RSLT=$(echo "$JNKNSVRSN" | grep -c "$JENKINS_VERSION")
 test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAILURE_NOTICE
 #
+#
+#
+#
+exit
+#
+#
+#
+#
 echo "Stop TomCat"
 sudo /etc/rc2.d/S99tomcat stop
 #
+echo "Install plugins"
+echo " "
+echo "For automated install of plugins, the download site for the plugins is here : http://updates.jenkins-ci.org/download/plugins/"
+echo " "
 sudo rm -f *.hpi
-#
 sudo rm -fr /home/jenkins/.jenkins/plugins/git*
-
+#
 echo "Obtain Git plugin..."
 sudo wget -cN ${LOCAL_MIRROR}/git.hpi
 #
