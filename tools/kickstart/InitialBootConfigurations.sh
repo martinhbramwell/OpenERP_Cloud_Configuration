@@ -15,6 +15,9 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootConfigurations.sh
    chmod +x ./FirstBootConfigurations.sh
 #
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootSSHConfigurations.sh
+   chmod +x ./FirstBootSSHConfigurations.sh
+#
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootJenkinsConfigurations.sh
    chmod +x ./FirstBootJenkinsConfigurations.sh
 #
