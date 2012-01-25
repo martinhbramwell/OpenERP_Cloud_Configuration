@@ -42,23 +42,23 @@ sudo aptitude -y upgrade
 echo "Ensure both $JENKINS_USERZ_UID user and $ADMIN_USERZ_UID can access RSA key.."
 sudo usermod -a -G $JENKINS_USERZ_UID $ADMIN_USERZ_UID
 #
-echo "Make a place for the RSA key at $JENKINS_USERZ_HOME/.ssh ..."
-#
-sudo rm -fr $JENKINS_USERZ_HOME/.ssh
-#
-sudo -u $JENKINS_USERZ_UID mkdir -p $JENKINS_USERZ_HOME/.ssh
-sudo chmod 770 $JENKINS_USERZ_HOME/.ssh
-#
-#     echo "Make RSA key.."  ##   Better to get it locally.  See below.
-#
-#     sudo -u jenkins ssh-keygen -N "okokok" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
-#     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
-#     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
-echo "Get RSA key from local file server."
-$JENKINS_USERZ_HOME/.ssh
-sudo wget -cN ${LOCAL_MIRROR}/id_rsa
-sudo wget -cN ${LOCAL_MIRROR}/id_rsa.pub
-#
+	echo "Make a place for the RSA key at $JENKINS_USERZ_HOME/.ssh ..."
+	#
+	sudo rm -fr $JENKINS_USERZ_HOME/.ssh
+	#
+	sudo -u $JENKINS_USERZ_UID mkdir -p $JENKINS_USERZ_HOME/.ssh
+	sudo chmod 770 $JENKINS_USERZ_HOME/.ssh
+	#
+	#     echo "Make RSA key.."  ##   Better to get it locally.  See below.
+	#
+	#     sudo -u jenkins ssh-keygen -N "okokok" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
+	#     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
+	#     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
+	echo "Get RSA key from local file server."
+	$JENKINS_USERZ_HOME/.ssh
+	sudo wget -cN ${LOCAL_MIRROR}/id_rsa
+	sudo wget -cN ${LOCAL_MIRROR}/id_rsa.pub
+	#
 echo "Provide initial settings files."
 sudo mkdir -p $SMARTGIT_CONFIG_DIR/${SMARTGIT_VERSION}
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID $SMARTGIT_CONFIG_DIR
