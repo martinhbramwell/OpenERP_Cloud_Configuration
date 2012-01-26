@@ -150,7 +150,8 @@ sudo wget $JENKINS_URL/updateCenter/?auto_refresh=true
 sudo wget $JENKINS_URL/pluginManager/checkUpdates#
 sudo wget $JENKINS_URL/reload
 #
-mv jenkins-cli.jar ${JENKINS_COMMAND_DIR}
+sudo mv jenkins-cli.jar ${JENKINS_COMMAND_DIR}
+sudo chown ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${JENKINS_COMMAND_DIR}/jenkins-cli.jar
 #
 echo "Wait for Jenkins"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
