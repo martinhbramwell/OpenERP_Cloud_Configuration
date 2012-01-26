@@ -67,7 +67,7 @@ source ~/.bashrc
 #
 echo "Obtain remotely customized environment variables."
 # Prepare
-${PRG}/installTools
+cd ${PRG}/installTools
 # Get the master files of environment variables
 rm -f ${PRG}/installTools/ConfigRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/ConfigRequiredVars.sh
