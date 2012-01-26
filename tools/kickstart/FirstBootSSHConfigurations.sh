@@ -8,10 +8,12 @@ export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configur
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
-mkdir -p $ADMIN_USERZ_WORK_DIR
+sudo mkdir -p $ADMIN_USERZ_WORK_DIR
+sudo mkdir -p ${PRG}/installTools
 #
 echo "Get SSH tools installer"
 #
+cd ${PRG}/installTools
 # Obtain SSH tools installer script
 rm -f ${PRG}/installTools/installSecureShellTools.sh
 wget ${SRV_CONFIG}/tools/SSH/installSecureShellTools.sh

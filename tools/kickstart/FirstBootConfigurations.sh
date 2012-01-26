@@ -63,10 +63,11 @@ sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
 #
 #
 # Make them available permanently
-source .bashrc
+source ~/.bashrc
 #
 echo "Obtain remotely customized environment variables."
 # Prepare
+${PRG}/installTools
 # Get the master files of environment variables
 rm -f ${PRG}/installTools/ConfigRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/ConfigRequiredVars.sh

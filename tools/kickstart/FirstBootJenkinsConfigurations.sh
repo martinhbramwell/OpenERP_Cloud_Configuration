@@ -533,9 +533,9 @@ fi
 #
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
 #
-echo "-----------------------------------------"
-echo "Now install and run the first Jenkins job"
-echo "-----------------------------------------"
+echo "--------------------------------------------"
+echo "Now obtain and run the Jenkins configurator"
+echo "--------------------------------------------"
 cd ${PRG}/installTools
 wget ${SRV_CONFIG}/tools/jenkins/installJenkinsConfigurationJob.sh
 chmod +x installJenkinsConfigurationJob.sh
