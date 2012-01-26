@@ -164,12 +164,6 @@ test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAI
 #
 #
 #
-#
-exit
-#
-#
-#
-#
 echo "Stop TomCat"
 sudo /etc/rc2.d/S99tomcat stop
 #
@@ -280,6 +274,12 @@ java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} reload-config
 # sudo wget $JENKINS_URL/reload
 echo "Wait for Jenkins"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
+#
+#
+#
+exit
+#
+#
 #
 JOB_DIR=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}
 BUILD_NUMBER=$( cat ${JOB_DIR}/nextBuildNumber )
