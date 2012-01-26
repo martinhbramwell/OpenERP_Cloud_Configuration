@@ -78,11 +78,16 @@ cd ${ADMIN_USERZ_DEV_DIR}
 rm -fr ${GIT_MANAGED_PROJECT} 
 #
 echo "Clone the Jenkins Project into the Git Repo :"
-sudo -Hu ${JENKINS_USERZ_UID} chmod 600 ${JENKINS_USERZ_SSH_DIR}/*  # The next step requies tight security
+# The next step requires tight security so use 600
+sudo -Hu ${JENKINS_USERZ_UID} chmod 600 ${JENKINS_USERZ_SSH_DIR}/*
 echo sudo -Hu ${JENKINS_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu $JENKINS_USERZ_UID git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 # Undo tight security so Jenkins & SmartGit can share the key
-sudo -Hu ${JENKINS_USERZ_UID} chmod 660 ${JENKINS_USERZ_SSH_DIR}/* 
+sudo -Hu ${JENKINS_USERZ_UID} chmod 660 ${JENKINS_USERZ_SSH_DIR}/*
+# SmartGit needs to own it all ...
+sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${GIT_MANAGED_PROJECT}
+#  ... Jenkins needs to own the subdirectory it uses.
+sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${JENKINS_VCS_DIR}
 #
 #
 echo "Wait for jenkins.war to arrive ..."
@@ -145,7 +150,8 @@ sudo wget $JENKINS_URL/updateCenter/?auto_refresh=true
 sudo wget $JENKINS_URL/pluginManager/checkUpdates#
 sudo wget $JENKINS_URL/reload
 #
-mv jenkins-cli.jar ${JENKINS_COMMAND_DIR}
+sudo mv jenkins-cli.jar ${JENKINS_COMMAND_DIR}
+sudo chown ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${JENKINS_COMMAND_DIR}/jenkins-cli.jar
 #
 echo "Wait for Jenkins"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
@@ -155,12 +161,6 @@ ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
 JNKNSVRSN=$(java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar version)
 RSLT=$(echo "$JNKNSVRSN" | grep -c "$JENKINS_VERSION")
 test $RSLT -gt 0 && echo "Jenkins command line interface responds," || echo $FAILURE_NOTICE
-#
-#
-#
-#
-exit
-#
 #
 #
 #
@@ -274,6 +274,12 @@ java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s ${JENKINS_URL} reload-config
 # sudo wget $JENKINS_URL/reload
 echo "Wait for Jenkins"
 ${JENKINS_COMMAND_DIR}/waitForJenkins.sh
+#
+#
+#
+exit
+#
+#
 #
 JOB_DIR=${JENKINS_USERZ_JOBS_DIR}/${FIRST_JOB_DIR}
 BUILD_NUMBER=$( cat ${JOB_DIR}/nextBuildNumber )
