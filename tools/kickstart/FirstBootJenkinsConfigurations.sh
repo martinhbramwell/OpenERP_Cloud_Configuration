@@ -12,14 +12,16 @@ mkdir -p $ADMIN_USERZ_LINKS_DIR
 #
 export JENKINS_COMMAND_DIR=${PRG}/org/jenkins
 #
+echo "Make a place for installation phase tools"
+sudo mkdir -p ${PRG}/installTools
+#
 echo "============  Some preparations for later use  ============="
 echo "============================================================"
 #
 # Obtain Download Confirmation script
-cd ${PRG}
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 wget ${SRV_CONFIG}/tools/waitForCompleteDownload.sh
-chmod +x ./waitForCompleteDownload.sh
+chmod +x ${PRG}/installTools/waitForCompleteDownload.sh
 #
 #
 # Initiate downloading the installers we're going to need.
@@ -68,7 +70,7 @@ echo "Install Oracle's Java JDK 7"
 # Use JDK 7 obtained earlier 
 # wget -cNb --output-file=dldJdk.log http://download.oracle.com/otn-pub/java/jdk/7u2-b13/jdk-7u2-linux-x64.tar.gz
 cd ${INS}
-${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldJdk.log -p jdk-7u2
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldJdk.log -p jdk-7u2
 sudo mkdir -p /usr/lib/jvm
 cd /usr/lib/jvm
 sudo tar zxvf ${INS}/jdk-7u2-linux-x64.tar.gz
@@ -90,7 +92,7 @@ echo "Prepare Maven 3.0.3"
 # Use Maven 3.0.3 obtained earlier
 # wget -cNb --output-file=dldMaven.log ${SRV_APACHE}/maven/binaries/apache-maven-3.0.3-bin.tar.gz
 cd ${INS}
-${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldMaven.log -p maven-3.0.3
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldMaven.log -p maven-3.0.3
 tar -xzvf apache-maven-3.0.3-bin.tar.gz
 sudo rm -fr /usr/share/apache-maven-3.0.3
 sudo mv apache-maven-3.0.3 /usr/share/
@@ -102,7 +104,7 @@ echo "Obtain and install TomCat"
 # Use TomCat 7 obtained earlier
 # wget -cNb --output-file=dldTomcat.log ${SRV_APACHE}/tomcat/tomcat-7/v7.0.23/bin/apache-tomcat-7.0.23.tar.gz
 cd ${INS}
-${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldTomcat.log -p tomcat-7.0.23
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldTomcat.log -p tomcat-7.0.23
 #
 # Decompress it into /usr/share
 cd /usr/share/
@@ -141,10 +143,10 @@ echo $(hostname)
 ifconfig eth0
 #
 #  Check it worked
-cd ${PRG}
+cd ${PRG}/installTools
 if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
-chmod a+x waitForTomcat.sh
-./waitForTomcat.sh
+chmod a+x ${PRG}/installTools/waitForTomcat.sh
+${PRG}/installTools/waitForTomcat.sh
 date
 echo "Stop it again."
 # Shut it down.
@@ -176,10 +178,10 @@ ifconfig eth0
 #
 echo "Check it's ok."
 #  Check it worked
-cd ${PRG}
+cd ${PRG}/installTools
 if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
-chmod a+x waitForTomcat.sh
-./waitForTomcat.sh
+chmod a+x ${PRG}/installTools/waitForTomcat.sh
+${PRG}/installTools/waitForTomcat.sh
 date
 echo "Stop it again."
 # Shut it down.
@@ -308,10 +310,10 @@ echo ""
 echo "... check that it worked."
 echo ""
 #  Check it worked
-cd ${PRG}
+cd ${PRG}/installTools
 if [ ! -f "waitForTomcat.sh" ]; then wget ${SRV_CONFIG}/tools/waitForTomcat.sh; fi
-chmod a+x waitForTomcat.sh
-./waitForTomcat.sh
+chmod a+x ${PRG}/installTools/waitForTomcat.sh
+${PRG}/installTools/waitForTomcat.sh
 #
 echo ""
 echo ""
@@ -323,7 +325,7 @@ echo "Get Psi Probe"
 # Use Psi Probe obtained earlier
 # wget -cNb --output-file=dldProbe.log http://psi-probe.googlecode.com/files/probe-2.3.0.zip
 cd ${INS}
-${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldProbe.log -p probe-2.3.0
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldProbe.log -p probe-2.3.0
 #
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
@@ -357,7 +359,7 @@ sudo /etc/rc2.d/S99tomcat stop
 sudo /etc/rc2.d/S99tomcat start
 #
 # Checked it worked
-cd ${PRG}
+cd ${PRG}/installTools
 if [ ! -f "waitForPsiProbe.sh" ]; then wget ${SRV_CONFIG}/tools/waitForPsiProbe.sh; fi
 chmod a+x waitForPsiProbe.sh
 ./waitForPsiProbe.sh
@@ -376,7 +378,7 @@ if [ 0 == 1 ]; then
 	# Use Jenkins Web Archive file obtained earlier
 	# wget -cNb --output-file=dldJenkinsWar.log http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 	cd ${INS}
-	${PRG}/waitForCompleteDownload.sh -d 3600 -l ./dldJenkinsWar.log -p jenkins.war
+	${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldJenkinsWar.log -p jenkins.war
 	#
 	echo "Move the war into TomCat's webapps directory ..."
 	#
@@ -529,6 +531,7 @@ if [ 0 == 1 ]; then
 	#
 fi
 #
+sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
 #
 echo "-----------------------------------------"
 echo "Now install and run the first Jenkins job"
