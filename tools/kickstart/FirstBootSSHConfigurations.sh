@@ -16,7 +16,7 @@ echo "Get SSH tools installer"
 cd ${PRG}/installTools
 # Obtain SSH tools installer script
 rm -f ${PRG}/installTools/installSecureShellTools.sh
-wget ${SRV_CONFIG}/tools/SSH/installSecureShellTools.sh
+wget ${SRV_CONFIG}/tools/ssh/installSecureShellTools.sh
 chmod +x ${PRG}/installTools/installSecureShellTools.sh
 #
 #
