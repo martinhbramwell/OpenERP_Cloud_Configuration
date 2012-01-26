@@ -36,8 +36,6 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCleanUp.sh
    chmod +x ./FirstBootCleanUp.sh
 #
-if [  1 == 1 ]
-then
    ./FirstBootConfigurations.sh 2>&1 | tee ini_1_initial.log
    ./FirstBootSSHConfigurations.sh 2>&1 | tee ini_2_ssh.log
    ./FirstBootJenkinsConfigurations.sh 2>&1 | tee ini_3_jenkins.log
@@ -47,7 +45,7 @@ then
    ./FirstBootNXConfigurations.sh 2>&1 | tee ini_7_NX.log
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
-fi
+
 ;;
 
 *)
