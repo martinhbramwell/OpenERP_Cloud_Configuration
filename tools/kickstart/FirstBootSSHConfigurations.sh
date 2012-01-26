@@ -13,12 +13,11 @@ mkdir -p $ADMIN_USERZ_WORK_DIR
 echo "Get SSH tools installer"
 #
 # Obtain SSH tools installer script
-cd ${PRG}/installTools
-rm -f ./installSecureShellTools.sh
+rm -f ${PRG}/installTools/installSecureShellTools.sh
 wget ${SRV_CONFIG}/tools/SSH/installSecureShellTools.sh
-chmod +x ./installSecureShellTools.sh
+chmod +x ${PRG}/installTools/installSecureShellTools.sh
 #
 #
 echo "Running SSH tools installer now ..."
 #
-./installSecureShellTools.sh
+${PRG}/installTools/installSecureShellTools.sh

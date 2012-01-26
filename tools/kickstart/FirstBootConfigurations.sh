@@ -43,64 +43,66 @@ sudo mv neededByTomCat /etc/sudoers.d/
 #
 echo "Prepare some variables for later use. [$SRV_CONFIG]"
 #
-export INS="/home/yourself/installers"
-export PRG="/home/yourself/programs"
 export FAILURE_NOTICE="______Looks_like_it_failed______"
-#
-cd $ADMIN_USERZ_HOME/
-# Make a place to keep installers "just in case..."
-mkdir -p $ADMIN_USERZ_HOME/installers
-echo export "INS=$INS" >> .bash_aliases
-#
-# Make a place to keep programs
-mkdir -p $ADMIN_USERZ_HOME/programs
-echo "export PRG=$PRG" >> .bash_aliases
-#
 # A test result variable
 echo "export FAILURE_NOTICE=$FAILURE_NOTICE" >> .bash_aliases
+#
+echo "Make a place to keep installers \"just in case...\""
+export INS="${ADMIN_USERZ_HOME}/installers"
+mkdir -p ${INS}
+echo export "INS=$INS" >> .bash_aliases
+#
+echo "Make a place to keep programs..."
+export PRG="${ADMIN_USERZ_HOME}/programs"
+mkdir -p ${PRG}
+echo "export PRG=$PRG" >> .bash_aliases
+#
+echo "Make a place for installation phase tools"
+sudo mkdir -p ${PRG}/installTools
+sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
+#
 #
 # Make them available permanently
 source .bashrc
 #
 echo "Obtain remotely customized environment variables."
 # Prepare
-cd $ADMIN_USERZ_HOME/programs
 # Get the master files of environment variables
-rm -f ./ConfigRequiredVars.sh*
+rm -f ${PRG}/installTools/ConfigRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/ConfigRequiredVars.sh
-chmod +x ./ConfigRequiredVars.sh
+chmod +x ${PRG}/installTools/ConfigRequiredVars.sh
 #
-rm -f ./MavenRequiredVars.sh*
+rm -f ${PRG}/installTools/MavenRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/MavenRequiredVars.sh
-chmod +x ./MavenRequiredVars.sh
+chmod +x ${PRG}/installTools/MavenRequiredVars.sh
 #
-rm -f ./TomcatRequiredVars.sh*
+rm -f ${PRG}/installTools/TomcatRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/TomcatRequiredVars.sh
-chmod +x ./TomcatRequiredVars.sh
+chmod +x ${PRG}/installTools/TomcatRequiredVars.sh
 #
-rm -f ./JenkinsRequiredVars.sh*
+rm -f ${PRG}/installTools/JenkinsRequiredVars.sh*
 wget ${SRV_CONFIG}/tools/JenkinsRequiredVars.sh
-chmod +x ./JenkinsRequiredVars.sh
+chmod +x ${PRG}/installTools/JenkinsRequiredVars.sh
 #
-rm -f ./MakeEnvironment.sh*
+rm -f ${PRG}/installTools/MakeEnvironment.sh*
 wget ${SRV_CONFIG}/tools/MakeEnvironment.sh
-chmod +x ./MakeEnvironment.sh
+chmod +x ${PRG}/installTools/MakeEnvironment.sh
 #
 #
 #
 echo "Generate a new environment file"
 # Generate a new environment
-source $ADMIN_USERZ_HOME/programs/ConfigRequiredVars.sh
-source $ADMIN_USERZ_HOME/programs/MavenRequiredVars.sh
-source $ADMIN_USERZ_HOME/programs/TomcatRequiredVars.sh
-source $ADMIN_USERZ_HOME/programs/JenkinsRequiredVars.sh
+source ${PRG}/installTools/ConfigRequiredVars.sh
+source ${PRG}/installTools/MavenRequiredVars.sh
+source ${PRG}/installTools/TomcatRequiredVars.sh
+source ${PRG}/installTools/JenkinsRequiredVars.sh
 #
 # Prepare
 mkdir -p $ADMIN_USERZ_WORK_DIR
 cd $ADMIN_USERZ_WORK_DIR
 #
 # Generate a new environment file
-$ADMIN_USERZ_HOME/programs/MakeEnvironment.sh
+${PRG}/installTools/MakeEnvironment.sh
 #
 # Make the variables available immediately
 source environment
