@@ -42,6 +42,8 @@ sudo aptitude -y upgrade
 echo "Ensure both $JENKINS_USERZ_UID user and $ADMIN_USERZ_UID can access RSA key.."
 sudo usermod -a -G $JENKINS_USERZ_UID $ADMIN_USERZ_UID
 #
+if [  0 == 1  ]
+then
 	echo "Make a place for the RSA key at $JENKINS_USERZ_HOME/.ssh ..."
 	#
 	sudo rm -fr $JENKINS_USERZ_HOME/.ssh
@@ -59,6 +61,7 @@ sudo usermod -a -G $JENKINS_USERZ_UID $ADMIN_USERZ_UID
 	sudo wget -cN ${LOCAL_MIRROR}/id_rsa
 	sudo wget -cN ${LOCAL_MIRROR}/id_rsa.pub
 	#
+fi
 echo "Provide initial settings files."
 sudo mkdir -p $SMARTGIT_CONFIG_DIR/${SMARTGIT_VERSION}
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID $SMARTGIT_CONFIG_DIR
