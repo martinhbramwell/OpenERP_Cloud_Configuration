@@ -19,9 +19,10 @@ echo "============  Some preparations for later use  ============="
 echo "============================================================"
 #
 # Obtain Download Confirmation script
+cd ${PRG}/installTools
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 wget ${SRV_CONFIG}/tools/waitForCompleteDownload.sh
-chmod +x ${PRG}/installTools/waitForCompleteDownload.sh
+sudo chmod +x ${PRG}/installTools/waitForCompleteDownload.sh
 #
 #
 # Initiate downloading the installers we're going to need.
