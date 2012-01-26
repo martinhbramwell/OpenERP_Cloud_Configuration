@@ -279,13 +279,14 @@ sudo rm -f K99tomcat
 sudo ln -sf ../init.d/Tomcat7.sh K99tomcat
 #
 cd $ADMIN_USERZ_HOME
-echo ""
-echo ""
-echo "Since we set TOMCAT_USER=jenkins in /etc/environment we must create that user now"
-echo ""
-# Create user jenkins
-# (notice : no sudoer capability)
-sudo useradd -Um -p "saEV5F6cIIjT2" -c "\"$TOMCAT_USER_UC\"" "$TOMCAT_USER" # saEV5F6cIIjT2 --> password okok
+#
+# echo ""
+# echo ""
+# echo "Since we set TOMCAT_USER=jenkins in /etc/environment we must create that user now"
+# echo ""
+# # Create user jenkins
+# # (notice : no sudoer capability)
+# sudo useradd -Um -p "saEV5F6cIIjT2" -c "\"$TOMCAT_USER_UC\"" "$TOMCAT_USER" # saEV5F6cIIjT2 --> password okok
 #
 # Now we make jenkins owner of the whole TomCat installation
 cd /usr/share

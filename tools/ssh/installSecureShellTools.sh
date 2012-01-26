@@ -4,8 +4,17 @@
 export LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 #
 export JENKINS_USERZ_UID=jenkins
+export JENKINS_USERZ_UID_UC=Jenkins
 export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
 #
+echo ""
+echo ""
+echo "We expect a user named ${JENKINS_USERZ_UID_UC}, so create it now."
+echo ""
+# Create user jenkins
+# (notice : no sudoer capability)
+sudo useradd -Um -p "saEV5F6cIIjT2" -c "\"$JENKINS_USERZ_UID_UC\"" "$JENKINS_USERZ_UID" # saEV5F6cIIjT2 --> password okok
+
 echo "Make a place for the RSA key at $JENKINS_USERZ_HOME/.ssh ..."
 #
 sudo rm -fr $JENKINS_USERZ_HOME/.ssh/
