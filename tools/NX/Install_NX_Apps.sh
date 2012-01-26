@@ -32,7 +32,7 @@ wget ${SRV_CONFIG}/tools/waitForLogFileEvent.sh
 chmod +x ./waitForLogFileEvent.sh
 #
 FAIL_PATTERN="nothing to do|ERROR"
-GENERIC_PATTERN="[_0-9A-Za-z'\.\-]* saved"
+GENERIC_PATTERN=".+ saved"
 SUCCESS_PATTERN="nxclient_3.5"$GENERIC_PATTERN
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldNXc.log -s ${SUCCESS_PATTERN} -f ${FAIL_PATTERN}
 sudo dpkg -i nxclient_3.5.0-7_amd64.deb
