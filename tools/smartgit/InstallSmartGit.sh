@@ -106,7 +106,15 @@ EOF_MARKER="\}"
 FILE=top
 ${PRG}/installTools/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
 
+#
+export GIT_MANAGED_PROJECT=OpenERP_Cloud_Configuration
+export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
+export JENKINS_VCS_PATH=servers/jenkins
+export JENKINS_VCS_DIR=${GIT_MANAGED_DIR}/${JENKINS_VCS_PATH}
+#
+
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID ${ADMIN_USERZ_HOME}
+sudo chown -R $JENKINS_USERZ_UID:$JENKINS_USERZ_UID ${JENKINS_VCS_DIR}
 mv top top.bk
 #
 mv -f ./top.new $PANEL_CONFIG/top
