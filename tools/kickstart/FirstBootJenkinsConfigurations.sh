@@ -209,11 +209,15 @@ echo "Setting it to $JENKINS_URL in case sudo can't see it."
 #
 echo "Make a quick access symbolic link for forcibly restarting TomCat."
 cd $CATALINA_HOME
+mkdir -p $ADMIN_USERZ_LINKS_DIR/tc
 sudo rm -f ./forceTomCatRestart.sh*
 sudo wget ${SRV_CONFIG}/tools/tomcat/forceTomCatRestart.sh
 sudo chmod +x ./forceTomCatRestart.sh
-mkdir -p $ADMIN_USERZ_LINKS_DIR/tc
 ln -s $CATALINA_HOME/forceTomCatRestart.sh $ADMIN_USERZ_LINKS_DIR/tc/ftcr
+sudo rm -f ./forceTomCatToStop.sh*
+sudo wget ${SRV_CONFIG}/tools/tomcat/forceTomCatToStop.sh
+sudo chmod +x ./forceTomCatToStop.sh
+ln -s $CATALINA_HOME/forceTomCatToStop.sh $ADMIN_USERZ_LINKS_DIR/tc/ftcs
 #
 #
 export JAVA_HOME=/usr/lib/jvm/jdk

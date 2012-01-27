@@ -28,7 +28,4 @@ do
 	sleep 6
 done
 #
-echo "Starting TomCat."
-sudo /etc/rc2.d/S99tomcat start
-echo "Done."
 
