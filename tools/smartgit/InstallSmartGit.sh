@@ -4,6 +4,7 @@
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
+export ADMIN_USERZ_DEV_DIR=/home/$ADMIN_USERZ_UID/dev
 #
 export JENKINS_USERZ_UID=jenkins
 export JENKINS_USERZ_HOME=/home/$JENKINS_USERZ_UID
@@ -90,6 +91,7 @@ PANEL_CONFIG=${ADMIN_USERZ_HOME}/.config/lxpanel/LXDE/panels
 cd ${ADMIN_USERZ_WORK_DIR}
 pwd
 #
+echo "Create app launcher..."
 LAUNCHER=smartgit.desktop
 APPLICATIONS=/usr/share/applications
 #
@@ -99,6 +101,7 @@ sudo chmod 644 $LAUNCHER
 echo sudo mv $LAUNCHER $APPLICATIONS
 sudo mv $LAUNCHER $APPLICATIONS
 #
+echo "Edit top panel configuration"
 cp $PANEL_CONFIG/top .
 #
 INSERTION="    Button \{\n            id=$APPLICATIONS/$LAUNCHER\n        }\n    "
@@ -106,21 +109,18 @@ EOF_MARKER="\}"
 FILE=top
 ${PRG}/installTools/InsertInFile.sh -i "${INSERTION}" -s "${EOF_MARKER}" -f ${FILE}
 
+mv top top.bk
+#
+mv -f ./top.new $PANEL_CONFIG/top
+#
+echo "Set ownership conditions"
 #
 export GIT_MANAGED_PROJECT=OpenERP_Cloud_Configuration
 export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
 export JENKINS_VCS_PATH=servers/jenkins
 export JENKINS_VCS_DIR=${GIT_MANAGED_DIR}/${JENKINS_VCS_PATH}
 #
-
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID ${ADMIN_USERZ_HOME}
 sudo chown -R $JENKINS_USERZ_UID:$JENKINS_USERZ_UID ${JENKINS_VCS_DIR}
-mv top top.bk
-#
-mv -f ./top.new $PANEL_CONFIG/top
-#
-# tail -n 25  $PANEL_CONFIG/top
-# ls -l
-# ls -l $APPLICATIONS/sma*
-# exit 0;
+
 
