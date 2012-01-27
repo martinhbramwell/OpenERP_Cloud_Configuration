@@ -18,6 +18,9 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootSSHConfigurations.sh
    chmod +x ./FirstBootSSHConfigurations.sh
 #
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootAntConfigurations.sh
+   chmod +x ./FirstBootAntConfigurations.sh
+#
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootJenkinsConfigurations.sh
    chmod +x ./FirstBootJenkinsConfigurations.sh
 #
@@ -38,6 +41,7 @@ start)
 #
    ./FirstBootConfigurations.sh 2>&1 | tee ini_1_initial.log
    ./FirstBootSSHConfigurations.sh 2>&1 | tee ini_2_ssh.log
+   ./FirstBootAntConfigurations.sh 2>&1 | tee ini_2_ant.log
    ./FirstBootJenkinsConfigurations.sh 2>&1 | tee ini_3_jenkins.log
    ./FirstBootLXDEConfigurations.sh 2>&1 | tee ini_4_lxde.log
    ./FirstBootEclipseConfigurations.sh 2>&1 | tee ini_5_eclipse.log
