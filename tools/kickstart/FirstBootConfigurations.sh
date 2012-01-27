@@ -117,6 +117,12 @@ sudo mv environment /etc/
 # Clean up
 rm -fr $ADMIN_USERZ_WORK_DIR
 #
+# Prerequisite : waitForLogFileEvent.sh * * * 
+#
+rm -f ${PRG}/installTools/waitForLogFileEvent.sh
+wget ${SRV_CONFIG}/tools/waitForLogFileEvent.sh
+chmod +x ${PRG}/installTools/waitForLogFileEvent.sh
+#
 #
 echo "Networking"
 echo "Set up static addressing with these steps :"
