@@ -37,7 +37,7 @@ sudo -u $JENKINS_USERZ_UID chmod 600 id_rsa*
 echo "Check it works..."
 sudo -Hu jenkins ssh -T git@github.com
 #
-echo "Permit SmartGit access too."
+echo "Permit SmartGit to have access too."
 sudo -u $JENKINS_USERZ_UID chmod 660 id_rsa*
 ls -la 
 
