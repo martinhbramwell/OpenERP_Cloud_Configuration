@@ -11,7 +11,7 @@
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
   <jdks>
     <jdk>
-      <name>JDK_1.7.4</name>
+      <name>JDK_1.7</name>
       <home>/usr/lib/jvm/jdk</home>
       <properties/>
     </jdk>
