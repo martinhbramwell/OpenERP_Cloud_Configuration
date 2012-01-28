@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tasks.Ant_-DescriptorImpl>
+  <helpRedirect/>
+  <installations>
+    <hudson.tasks.Ant_-AntInstallation>
+      <name>Ant 1.8.2</name>
+      <home>/usr/share/ant</home>
+      <properties/>
+    </hudson.tasks.Ant_-AntInstallation>
+  </installations>
+</hudson.tasks.Ant_-DescriptorImpl>
