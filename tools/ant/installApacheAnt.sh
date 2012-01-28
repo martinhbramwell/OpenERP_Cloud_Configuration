@@ -56,7 +56,7 @@ export ANT_HOME=/usr/share/ant
 #
 sudo cp /etc/environment envtmp
 sudo sed -i "/JAVA_HOME=/aANT_HOME=${ANT_HOME}" envtmp
-sudo sed -i "/^PATH=/ s/\$/:${ANT_HOME}\/bin/" envtmp
+sudo sed -i "/^PATH=/ s/\$/:\/usr\/share\/ant\/bin/" envtmp
 sudo mv envtmp /etc/environment
 #
 export PATH=$PATH:$ANT_HOME/bin
