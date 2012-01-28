@@ -19,10 +19,10 @@ cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 # Obtain Syntevo SmartGit
 SRV_SYNTEVO="http://www.syntevo.com"
-#wget -cNb --output-file=dldJdk.log ${SRV_SYNTEVO}/download/smartgit/smartgit-generic-2_1_6.tar.gz
+#wget -cNb --output-file=dldJdk.log ${SRV_SYNTEVO}/download/smartgit/smartgit-generic-2_1_7.tar.gz
 sudo rm -f dldSmartgit.log*
 echo "Obtaining SmartGit.."
-wget -cNb --output-file=dldSmartgit.log ${LOCAL_MIRROR}/smartgit-generic-2_1_6.tar.gz
+wget -cNb --output-file=dldSmartgit.log ${LOCAL_MIRROR}/smartgit-generic-2_1_7.tar.gz
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldSmartgit.log -p smartgit-generic
 #
@@ -30,9 +30,9 @@ export SYNTEVO_HOME=${PRG}/com/syntevo
 sudo mkdir -p ${SYNTEVO_HOME}
 cd ${SYNTEVO_HOME}
 echo "Expanding SmartGit.."
-sudo tar zxvf ${INS}/smartgit-generic-2_1_6.tar.gz
+sudo tar zxvf ${INS}/smartgit-generic-2_1_7.tar.gz
 echo "Symlinking SmartGit.."
-sudo ln -s smartgit-2_1_6 smartgit
+sudo ln -s smartgit-2_1_7 smartgit
 export SMARTGIT_HOME=${SYNTEVO_HOME}/smartgit
 #
 echo "Get RSA key generator dependencies ..."
