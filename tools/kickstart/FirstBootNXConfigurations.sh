@@ -28,3 +28,4 @@ chmod +x ./Install_NX_Apps.sh
 echo "Running NX installer now ..."
 #
 ./Install_NX_Apps.sh
+
