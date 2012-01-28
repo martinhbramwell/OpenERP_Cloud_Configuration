@@ -69,6 +69,7 @@
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
       <targets>clean jar</targets>
+      <antName>Ant 1.8.2</antName>
     </hudson.tasks.Ant>
   </builders>
   <publishers/>
