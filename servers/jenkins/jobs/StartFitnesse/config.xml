@@ -30,7 +30,8 @@ ps aux | grep fitnesse | grep -v grep | awk &apos;{print $2}&apos;&#xd;
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo Disable background job termination
-cp ../../BuildFitnesse/workspace/dist/fitnesse.jar .
+pwd
+cp ../BuildFitnesse/dist/fitnesse.jar .
 
 BUILD_ID=allow_to_run_as_daemon
 
