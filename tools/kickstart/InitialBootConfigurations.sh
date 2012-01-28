@@ -41,12 +41,12 @@ start)
 #
    ./FirstBootConfigurations.sh 2>&1 | tee ini_1_initial.log
    ./FirstBootSSHConfigurations.sh 2>&1 | tee ini_2_ssh.log
-   ./FirstBootAntConfigurations.sh 2>&1 | tee ini_2_ant.log
-   ./FirstBootJenkinsConfigurations.sh 2>&1 | tee ini_3_jenkins.log
-   ./FirstBootLXDEConfigurations.sh 2>&1 | tee ini_4_lxde.log
-   ./FirstBootEclipseConfigurations.sh 2>&1 | tee ini_5_eclipse.log
-   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee ini_6_smartgit.log
-   ./FirstBootNXConfigurations.sh 2>&1 | tee ini_7_NX.log
+   ./FirstBootAntConfigurations.sh 2>&1 | tee ini_3_ant.log
+   ./FirstBootJenkinsConfigurations.sh 2>&1 | tee ini_4_jenkins.log
+   ./FirstBootLXDEConfigurations.sh 2>&1 | tee ini_5_lxde.log
+   ./FirstBootEclipseConfigurations.sh 2>&1 | tee ini_6_eclipse.log
+   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee ini_7_smartgit.log
+   ./FirstBootNXConfigurations.sh 2>&1 | tee ini_8_NX.log
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
 
