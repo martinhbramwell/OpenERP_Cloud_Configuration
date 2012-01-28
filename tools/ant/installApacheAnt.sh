@@ -39,7 +39,7 @@ wget -cNb --output-file=dldApacheAnt.log ${LOCAL_MIRROR}/apache-ant-1.8.2-bin.ta
 #
 #
 echo "Wait for Ant to arrive ..."
-SEARCH_PATTERN="apache-ant' saved"
+SEARCH_PATTERN="apache-ant[_0-9A-Za-z'\.\-]* saved"
 FAILURE_PATTERN="nothing to do|ERROR"
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldApacheAnt.log -s "${SEARCH_PATTERN}" -f "${FAILURE_PATTERN}"
 #
