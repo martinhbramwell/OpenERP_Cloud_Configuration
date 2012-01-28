@@ -11,15 +11,15 @@ export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 sudo mkdir -p $ADMIN_USERZ_WORK_DIR
 sudo mkdir -p ${PRG}/installTools
 #
-echo "Get SSH tools installer"
+echo "Get Apache Ant installer"
 #
 cd ${PRG}/installTools
-# Obtain SSH tools installer script
-rm -f ${PRG}/installTools/installSecureShellTools.sh
-wget ${SRV_CONFIG}/tools/ssh/installSecureShellTools.sh
-chmod +x ${PRG}/installTools/installSecureShellTools.sh
+# Obtain Apache Ant installer script
+rm -f ${PRG}/installTools/installApacheAntTools
+wget ${SRV_CONFIG}/tools/ssh/installApacheAntTools
+chmod +x ${PRG}/installTools/installApacheAntTools
 #
 #
-echo "Running SSH tools installer now ..."
+echo "Running Apache Ant installer now ..."
 #
-${PRG}/installTools/installSecureShellTools.sh
+${PRG}/installTools/installApacheAntTools
