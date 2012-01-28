@@ -15,11 +15,11 @@ echo "Get Apache Ant installer"
 #
 cd ${PRG}/installTools
 # Obtain Apache Ant installer script
-rm -f ${PRG}/installTools/installApacheAntTools
-wget ${SRV_CONFIG}/tools/ssh/installApacheAntTools
-chmod +x ${PRG}/installTools/installApacheAntTools
+rm -f ${PRG}/installTools/installApacheAnt.sh
+wget ${SRV_CONFIG}/tools/ssh/installApacheAnt.sh
+chmod +x ${PRG}/installTools/installApacheAnt.sh
 #
 #
 echo "Running Apache Ant installer now ..."
 #
-${PRG}/installTools/installApacheAntTools
+${PRG}/installTools/installApacheAnt.sh
