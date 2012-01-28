@@ -39,14 +39,23 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCleanUp.sh
    chmod +x ./FirstBootCleanUp.sh
 #
-   ./FirstBootConfigurations.sh 2>&1 | tee ini_1_initial.log
-   ./FirstBootSSHConfigurations.sh 2>&1 | tee ini_2_ssh.log
-   ./FirstBootAntConfigurations.sh 2>&1 | tee ini_3_ant.log
-   ./FirstBootJenkinsConfigurations.sh 2>&1 | tee ini_4_jenkins.log
-   ./FirstBootLXDEConfigurations.sh 2>&1 | tee ini_5_lxde.log
-   ./FirstBootEclipseConfigurations.sh 2>&1 | tee ini_6_eclipse.log
-   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee ini_7_smartgit.log
-   ./FirstBootNXConfigurations.sh 2>&1 | tee ini_8_NX.log
+CNT=0
+   ./FirstBootConfigurations.sh 2>&1 | tee "ini_$CNT_initial.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootSSHConfigurations.sh 2>&1 | tee "ini_$CNT_ssh.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootAntConfigurations.sh 2>&1 | tee "ini_$CNT_ant.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootJenkinsConfigurations.sh 2>&1 | tee "ini_$CNT_jenkins.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootLXDEConfigurations.sh 2>&1 | tee "ini_$CNT_lxde.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootEclipseConfigurations.sh 2>&1 | tee "ini_$CNT_eclipse.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee "ini_$CNT_smartgit.log"
+CNT=$((  CNT += 1  ))
+   ./FirstBootNXConfigurations.sh 2>&1 | tee "ini_$CNT_NX.log"
+CNT=$((  CNT += 1  ))
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
 
