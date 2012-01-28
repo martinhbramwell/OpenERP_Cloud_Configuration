@@ -40,22 +40,14 @@ start)
    chmod +x ./FirstBootCleanUp.sh
 #
 CNT=0
-   ./FirstBootConfigurations.sh 2>&1 | tee "ini_$CNT_initial.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootSSHConfigurations.sh 2>&1 | tee "ini_$CNT_ssh.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootAntConfigurations.sh 2>&1 | tee "ini_$CNT_ant.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootJenkinsConfigurations.sh 2>&1 | tee "ini_$CNT_jenkins.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootLXDEConfigurations.sh 2>&1 | tee "ini_$CNT_lxde.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootEclipseConfigurations.sh 2>&1 | tee "ini_$CNT_eclipse.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee "ini_$CNT_smartgit.log"
-CNT=$((  CNT += 1  ))
-   ./FirstBootNXConfigurations.sh 2>&1 | tee "ini_$CNT_NX.log"
-CNT=$((  CNT += 1  ))
+   ./FirstBootConfigurations.sh 2>&1         | tee "ini_${CNT}_initial.log"  && CNT=$((  CNT += 1  ))
+   ./FirstBootSSHConfigurations.sh 2>&1      | tee "ini_${CNT}_ssh.log"      && CNT=$((  CNT += 1  ))
+   ./FirstBootAntConfigurations.sh 2>&1      | tee "ini_${CNT}_ant.log"      && CNT=$((  CNT += 1  ))
+   ./FirstBootJenkinsConfigurations.sh 2>&1  | tee "ini_${CNT}_jenkins.log"  && CNT=$((  CNT += 1  ))
+   ./FirstBootLXDEConfigurations.sh 2>&1     | tee "ini_${CNT}_lxde.log"     && CNT=$((  CNT += 1  ))
+   ./FirstBootEclipseConfigurations.sh 2>&1  | tee "ini_${CNT}_eclipse.log"  && CNT=$((  CNT += 1  ))
+   ./FirstBootSmartGitConfigurations.sh 2>&1 | tee "ini_${CNT}_smartgit.log" && CNT=$((  CNT += 1  ))
+   ./FirstBootNXConfigurations.sh 2>&1       | tee "ini_${CNT}_NX.log"       && CNT=$((  CNT += 1  ))
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
 
