@@ -30,6 +30,9 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootEclipseConfigurations.sh
    chmod +x ./FirstBootEclipseConfigurations.sh
 #
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootPlayFwkConfigurations.sh
+   chmod +x ./FirstBootPlayFwkConfigurations.sh
+#
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootSmartGitConfigurations.sh
    chmod +x ./FirstBootSmartGitConfigurations.sh
 #
@@ -46,6 +49,7 @@ CNT=0
    ./FirstBootJenkinsConfigurations.sh 2>&1  | tee "ini_${CNT}_jenkins.log"  && CNT=$((  CNT += 1  ))
    ./FirstBootLXDEConfigurations.sh 2>&1     | tee "ini_${CNT}_lxde.log"     && CNT=$((  CNT += 1  ))
    ./FirstBootEclipseConfigurations.sh 2>&1  | tee "ini_${CNT}_eclipse.log"  && CNT=$((  CNT += 1  ))
+   ./FirstBootPlayFwkConfigurations.sh 2>&1  | tee "ini_${CNT}_play.log"     && CNT=$((  CNT += 1  ))
    ./FirstBootSmartGitConfigurations.sh 2>&1 | tee "ini_${CNT}_smartgit.log" && CNT=$((  CNT += 1  ))
    ./FirstBootNXConfigurations.sh 2>&1       | tee "ini_${CNT}_NX.log"       && CNT=$((  CNT += 1  ))
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
