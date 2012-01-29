@@ -11,15 +11,15 @@ export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 sudo mkdir -p $ADMIN_USERZ_WORK_DIR
 sudo mkdir -p ${PRG}/installTools
 #
-echo "Get Apache Ant installer"
+echo "Get Play Framework installer"
 #
 cd ${PRG}/installTools
-# Obtain Apache Ant installer script
-rm -f ${PRG}/installTools/installApacheAnt.sh
-wget ${SRV_CONFIG}/tools/ant/installApacheAnt.sh
-chmod +x ${PRG}/installTools/installApacheAnt.sh
+# Obtain Play Framework installer script
+rm -f ${PRG}/installTools/installPlayFramework.sh
+wget ${SRV_CONFIG}/tools/playfwrk/installPlayFramework.sh
+chmod +x ${PRG}/installTools/installPlayFramework.sh
 #
 #
-echo "Running Apache Ant installer now ..."
+echo "Running Play Framework installer now ..."
 #
-${PRG}/installTools/installApacheAnt.sh
+${PRG}/installTools/installPlayFramework.sh
