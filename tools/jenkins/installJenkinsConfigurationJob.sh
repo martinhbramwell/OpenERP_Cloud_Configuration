@@ -73,20 +73,19 @@ echo "Prepare a Git Repo to contain the Jenkins Project : "
 export GIT_SOURCE=git@github.com:martinhbramwell
 export MASTER_PROJECT=${GIT_SOURCE}/${GIT_MANAGED_PROJECT}.git
 mkdir -p ${ADMIN_USERZ_DEV_DIR}
-echo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${ADMIN_USERZ_DEV_DIR}
 cd ${ADMIN_USERZ_DEV_DIR}
 rm -fr ${GIT_MANAGED_PROJECT} 
 #
-echo "Clone the Jenkins Project into the Git Repo :"
+echo "Clone the whole Cloud project into the Git managed directory :"
 # The next step requires tight security so use 600
 sudo -Hu ${JENKINS_USERZ_UID} chmod 600 ${JENKINS_USERZ_SSH_DIR}/*
 echo sudo -Hu ${JENKINS_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu $JENKINS_USERZ_UID git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 # Undo tight security so Jenkins & SmartGit can share the key
 sudo -Hu ${JENKINS_USERZ_UID} chmod 660 ${JENKINS_USERZ_SSH_DIR}/*
-# SmartGit needs to own it all ...
+echo "SmartGit needs to own the whole hierarchy ..."
 sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${GIT_MANAGED_PROJECT}
-#  ... Jenkins needs to own the subdirectory it uses.
+echo "... except where Jenkins needs to own the subdirectory it uses."
 sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${JENKINS_VCS_DIR}
 #
 #
