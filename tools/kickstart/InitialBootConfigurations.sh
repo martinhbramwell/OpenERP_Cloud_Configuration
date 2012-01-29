@@ -42,7 +42,8 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCleanUp.sh
    chmod +x ./FirstBootCleanUp.sh
 #
-CNT=0
+											CNT=0
+#
    ./FirstBootConfigurations.sh 2>&1         | tee "ini_${CNT}_initial.log"  && CNT=$((  CNT += 1  ))
    ./FirstBootSSHConfigurations.sh 2>&1      | tee "ini_${CNT}_ssh.log"      && CNT=$((  CNT += 1  ))
    ./FirstBootAntConfigurations.sh 2>&1      | tee "ini_${CNT}_ant.log"      && CNT=$((  CNT += 1  ))
