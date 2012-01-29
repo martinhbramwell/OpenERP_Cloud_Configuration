@@ -35,7 +35,7 @@ wget -cNb --output-file=dldPlayFrmwrk.log ${LOCAL_MIRROR}/play-${PLAY_VERSION}.z
 #
 #
 echo "Wait for Play Framework to arrive ..."
-SEARCH_PATTERN="play[_0-9A-Za-z'\.\-]*zip saved"
+SEARCH_PATTERN="play[_0-9A-Za-z'\.\-]*zip' saved"
 FAILURE_PATTERN="nothing to do|ERROR"
 ${PRG}/installTools/waitForLogFileEvent.sh -d 3600 -l ./dldPlayFrmwrk.log -s "${SEARCH_PATTERN}" -f "${FAILURE_PATTERN}"
 #
