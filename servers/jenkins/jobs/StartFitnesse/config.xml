@@ -16,18 +16,7 @@ ps aux | grep fitnesse | grep -v grep | awk &apos;{print $2}&apos;&#xd;
     <artifactNumToKeep>-1</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>FITNESSE_WIKI_DIR</name>
-          <description>The name of the Git managed directory hierarchy we&apos;ll use for testing.
-</description>
-          <defaultValue>Cloud-Fitnesse-Tester</defaultValue>
-        </hudson.model.StringParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
-  </properties>
+  <properties/>
   <scm class="hudson.scm.NullSCM"/>
   <quietPeriod>10</quietPeriod>
   <scmCheckoutRetryCount>2</scmCheckoutRetryCount>
@@ -38,17 +27,6 @@ ps aux | grep fitnesse | grep -v grep | awk &apos;{print $2}&apos;&#xd;
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>pushd ../../../../../
-GIT_ROOT=$( pwd ) &amp;&amp; echo ${GIT_ROOT}
-popd
-#
-pushd ${WORKSPACE}
-ln ${FITNESSE_ROOT} ${GIT_ROOT}/${FITNESSE_WIKI_DIR} 
-popd
-
-</command>
-    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>(curl http://localhost:8088/?responder=shutdown) &amp;</command>
     </hudson.tasks.Shell>
