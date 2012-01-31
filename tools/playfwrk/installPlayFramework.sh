@@ -52,7 +52,7 @@ export PLAY_HOME=/usr/share/play
 #
 sudo cp /etc/environment envtmp
 sudo sed -i "/JAVA_HOME=/aPLAY_HOME=${PLAY_HOME}" envtmp
-sudo sed -i "/^PATH=/ s/\$/:\/usr\/share\/play\/bin/" envtmp
+sudo sed -i "/^PATH=/ s/\$/:\/usr\/share\/play\/" envtmp
 sudo mv envtmp /etc/environment
 #
 export PATH=$PATH:$PLAY_HOME/bin
