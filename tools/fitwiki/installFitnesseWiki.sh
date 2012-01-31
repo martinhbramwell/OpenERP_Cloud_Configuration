@@ -26,7 +26,7 @@ export GIT_SOURCE=git@github.com:martinhbramwell
 export MASTER_PROJECT=${GIT_SOURCE}/${GIT_MANAGED_PROJECT}.git
 mkdir -p ${ADMIN_USERZ_DEV_DIR}
 cd ${ADMIN_USERZ_DEV_DIR}
-rm -fr ${GIT_MANAGED_PROJECT}
+sudo rm -fr ${GIT_MANAGED_PROJECT}
 mkdir -p ${GIT_MANAGED_PROJECT}
   echo "${JENKINS_USERZ_UID_UC} needs to own the whole hierarchy ..."
 sudo chown ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${GIT_MANAGED_PROJECT}
