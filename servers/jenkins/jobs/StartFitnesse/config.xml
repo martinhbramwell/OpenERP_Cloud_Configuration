@@ -37,6 +37,10 @@ BUILD_ID=allow_to_run_as_daemon
 
 ( java -jar fitnesse.jar  -p 8088 ) &amp;</command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>wget -q http://localhost:8088
+cat index.html</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers/>
