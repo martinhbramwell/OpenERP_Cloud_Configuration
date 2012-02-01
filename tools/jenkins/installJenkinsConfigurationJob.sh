@@ -201,8 +201,8 @@ sudo rm -fr /home/jenkins/.jenkins/plugins/fitnesse*
 sudo wget -cN ${LOCAL_MIRROR}/fitnesse.hpi
 #
 echo "Obtain Play! Framework plugin..."
-sudo rm -fr /home/jenkins/.jenkins/plugins/fitnesse*
-sudo wget -cN ${LOCAL_MIRROR}/fitnesse.hpi
+sudo rm -fr /home/jenkins/.jenkins/plugins/play-autotest-plugin*
+sudo wget -cN ${LOCAL_MIRROR}/play-autotest-plugin.hpi
 #
 echo "Pass new plugins to Jenkins."
 sudo chown $JENKINS_USERZ_UID:$JENKINS_USERZ_UID *.hpi
