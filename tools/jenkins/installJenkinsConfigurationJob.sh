@@ -200,6 +200,10 @@ echo "Obtain Fitnesse plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/fitnesse*
 sudo wget -cN ${LOCAL_MIRROR}/fitnesse.hpi
 #
+echo "Obtain Play! Framework plugin..."
+sudo rm -fr /home/jenkins/.jenkins/plugins/fitnesse*
+sudo wget -cN ${LOCAL_MIRROR}/fitnesse.hpi
+#
 echo "Pass new plugins to Jenkins."
 sudo chown $JENKINS_USERZ_UID:$JENKINS_USERZ_UID *.hpi
 sudo chmod 644 *.hpi
