@@ -187,6 +187,9 @@ echo "Obtain Subversion plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/subversion*
 sudo wget -cN ${LOCAL_MIRROR}/subversion.hpi
 #
+echo "Obtain CVS plugin..."
+sudo rm -fr /home/jenkins/.jenkins/plugins/cvs*
+sudo wget -cN ${LOCAL_MIRROR}/cvs.hpi
 #
 echo "Obtain PostBuild plugin..."
 sudo rm -fr /home/jenkins/.jenkins/plugins/postbuild-task*
