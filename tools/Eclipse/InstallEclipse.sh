@@ -31,7 +31,7 @@ sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk-x86_64.tar.gz
 echo "Preparing Helios ..."
 export ECLIPSE_HOME=${PRG}/org/eclipse
 cd ${ECLIPSE_HOME}
-unzip ../de.guhsoft.jinto-0.13.5.zip
+unzip ${INS}/de.guhsoft.jinto-0.13.5.zip
 sudo chown -R yourself:yourself ${ECLIPSE_HOME}
 #
 #
