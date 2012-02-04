@@ -1,5 +1,5 @@
 #! /bin/bash 
-# script to collect all my cloud DNS configuration into this directory.
+# script to go and get Cyclos complete packages.
 #
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
@@ -9,7 +9,7 @@ mkdir -p $ADMIN_USERZ_WORK_DIR
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
-# Obtain Eclipse
+# Obtain Cyclos
 SRV_ECLIPSE="http:///sourceforge.net/projects/cyclos/files/Cyclos3/3.6"
 
 #wget -cNb --output-file=dldCyclos.log ${SRV_ECLIPSE}/cyclos_3.6.zip
