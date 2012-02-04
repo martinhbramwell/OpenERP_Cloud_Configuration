@@ -28,7 +28,7 @@ sudo apt-get install libaio1
 #
 sudo groupadd mysql
 sudo useradd -r -g mysql mysql
-echo sudo dpkg -i ${INS}/${MYSQL_PKG}
+sudo dpkg -i ${INS}/${MYSQL_PKG}
          #
          #
          #
