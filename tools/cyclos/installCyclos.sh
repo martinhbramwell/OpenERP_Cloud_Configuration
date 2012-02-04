@@ -14,9 +14,9 @@ export JENKINS_USERZ_HOME=/home/${JENKINS_USERZ_UID}
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 # Obtain Cyclos
-SRV_ECLIPSE="http:///sourceforge.net/projects/cyclos/files/Cyclos3/3.6"
+SRV_CYCLOS="http:///sourceforge.net/projects/cyclos/files/Cyclos3/3.6"
 
-#wget -cNb --output-file=dldCyclos.log ${SRV_ECLIPSE}/cyclos_3.6.zip
+#wget -cNb --output-file=dldCyclos.log ${SRV_CYCLOS}/cyclos_3.6.zip
 sudo rm -f dldCyclos.log*
 echo "Obtaining Cyclos ..."
 wget -cNb --output-file=dldCyclos.log ${LOCAL_MIRROR}/cyclos_3.6.zip
