@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash 
 # script to collect all my cloud DNS configuration into this directory.
 #
 export ADMIN_USERZ_UID=yourself
@@ -19,16 +19,24 @@ wget -cNb --output-file=dldEclipse.log ${LOCAL_MIRROR}/eclipse-jee-helios-SR2-li
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldEclipse.log -p eclipse-jee-helios
 # 
+echo "Obtaining Jinto.."
+wget -cN ${LOCAL_MIRROR}/de.guhsoft.jinto-0.13.5.zip
+#
+#
+# 
 cd ${PRG}/org
 pwd
 echo "Expanding Helios ..."
 sudo tar zxvf ${INS}/eclipse-jee-helios-SR2-linux-gtk-x86_64.tar.gz
-echo "Symlinking Helios ..."
+echo "Preparing Helios ..."
 export ECLIPSE_HOME=${PRG}/org/eclipse
+cd ${ECLIPSE_HOME}
+unzip ../de.guhsoft.jinto-0.13.5.zip
 sudo chown -R yourself:yourself ${ECLIPSE_HOME}
 #
-echo "Creating panel button.."
 #
+#
+echo "Creating panel button.."
 mkdir -p ${PRG}/installTools
 cd ${PRG}/installTools
 #
@@ -62,4 +70,3 @@ tail -n 25  $PANEL_CONFIG/top
 ls -l
 ls -l $APPLICATIONS/ecl*
 exit 0;
-
