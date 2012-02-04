@@ -40,7 +40,7 @@ sudo mkdir -p /usr/share/tomcat/logs
 cd /usr/share/tomcat
 sudo ln -s logs log
 #
-sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} /usr/share/tomcat
+sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} /usr/share/tomcat/*
 #
 #
 exit 0;
