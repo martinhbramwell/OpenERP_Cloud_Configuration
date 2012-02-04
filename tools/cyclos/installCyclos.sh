@@ -6,6 +6,10 @@ export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
 export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
+export JENKINS_USERZ_UID=jenkins
+export JENKINS_USERZ_UID_UC=Jenkins
+export JENKINS_USERZ_HOME=/home/${JENKINS_USERZ_UID}
+#
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
@@ -29,7 +33,14 @@ echo "Preparing Cyclos ..."
 sudo ln -s cyclos_3.6 cyclos
 #
 export CYCLOS_HOME=${PRG}/org/cyclos
-sudo chown -R yourself:yourself ${CYCLOS_HOME}
+sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}
+#
+echo "Fiddling TomCat for Cyclos ..."
+sudo mkdir -p /usr/share/tomcat/logs
+cd /usr/share/tomcat
+sudo ln -s logs log
+#
+sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} /usr/share/tomcat
 #
 #
 exit 0;
