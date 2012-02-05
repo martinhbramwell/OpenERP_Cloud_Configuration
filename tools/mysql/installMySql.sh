@@ -65,62 +65,15 @@ sudo apt-get install libaio1
 sudo scripts/mysql_install_db --user=mysql
 #
 sudo cp support-files/my-medium.cnf /etc/my.cnf
-sudo bin/mysqld_safe --user=mysql &
 #
 echo "Start/Stop scripts for MySql ..."
 sudo cp support-files/mysql.server /etc/init.d/mysql.server
 sudo ln -s /etc/init.d/mysql.server /etc/rc1.d/K99mysql
 sudo ln -s /etc/init.d/mysql.server /etc/rc2.d/S99mysql
-         #
-         #
-         #
 #
-exit;
-         #
-         #
-         #
-
-cd /usr/local/mysql/bin
-./mysql -u root -D mysql -ss -n -q <<EOF
+sudo /etc/init.d/mysql.server restart
 #
-CREATE DATABASE redorademo;
-CREATE USER 'redora'@'openerpdbs.warehouseman.com' IDENTIFIED BY 'password';
-GRANT ALL ON redorademo.* TO 'redora'@'openerpdbs.warehouseman.com';
-FLUSH PRIVILEGES;
 #
-
-EOF
-exit
-
-
-# # Installing MySQL system tables...
-# OK
-# Filling help tables...
-# OK
-# 
-# To start mysqld at boot time you have to copy
-# support-files/mysql.server to the right place for your system
-# 
-# PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
-# To do so, start the server, then issue the following commands:
-# 
-# ./bin/mysqladmin -u root password 'new-password'
-# ./bin/mysqladmin -u root -h OpenERP-DatabaseServer password 'new-password'
-# 
-# Alternatively you can run:
-# ./bin/mysql_secure_installation
-# 
-# which will also give you the option of removing the test
-# databases and anonymous user created by default.  This is
-# strongly recommended for production servers.
-# 
-# See the manual for more instructions.
-# 
-# You can start the MySQL daemon with:
-# cd . ; ./bin/mysqld_safe &
-# 
-# You can test the MySQL daemon with mysql-test-run.pl
-# cd ./mysql-test ; perl mysql-test-run.pl
-# 
-# Please report any problems with the ./bin/mysqlbug script!
+#
+exit 0;
 
