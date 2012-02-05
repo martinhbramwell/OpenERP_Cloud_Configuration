@@ -42,6 +42,9 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootNXConfigurations.sh
    chmod +x ./FirstBootNXConfigurations.sh
 #
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootMySqlConfigurations.sh
+   chmod +x ./FirstBootMySqlConfigurations.sh
+#
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCyclosConfigurations.sh
    chmod +x ./FirstBootCyclosConfigurations.sh
 #
@@ -60,6 +63,7 @@ start)
    ./FirstBootSmartGitConfigurations.sh 2>&1     | tee "ini_${CNT}_smartgit.log" && CNT=$((  CNT += 1  ))
    ./FirstBootFitnesseWikiConfigurations.sh 2>&1 | tee "ini_${CNT}_fitwiki.log"  && CNT=$((  CNT += 1  ))
    ./FirstBootNXConfigurations.sh 2>&1           | tee "ini_${CNT}_NX.log"       && CNT=$((  CNT += 1  ))
+   ./FirstBootMySqlConfigurations.sh 2>&1        | tee "ini_${CNT}_mysql.log"    && CNT=$((  CNT += 1  ))
    ./FirstBootCyclosConfigurations.sh 2>&1       | tee "ini_${CNT}_cyclos.log"   && CNT=$((  CNT += 1  ))
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
