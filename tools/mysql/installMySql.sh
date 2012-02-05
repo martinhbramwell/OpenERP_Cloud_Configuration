@@ -2,9 +2,21 @@
 # script to go and get MySql complete packages.
 #
 export ADMIN_USERZ_UID=yourself
-export ADMIN_USERZ_HOME=/home/$ADMIN_USERZ_UID
-export ADMIN_USERZ_WORK_DIR=/home/$ADMIN_USERZ_UID/tmp
-mkdir -p $ADMIN_USERZ_WORK_DIR
+export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
+export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
+mkdir -p ${ADMIN_USERZ_WORK_DIR}
+#
+export INS="${ADMIN_USERZ_HOME}/installers"
+export PRG="${ADMIN_USERZ_HOME}/programs"
+#
+export MYSQL_USERZ_UID=mysql
+export MYSQL_USERZ_HOME=/home/${MYSQL_USERZ_UID}
+export MYSQL_USERZ_WORK_DIR=/home/${MYSQL_USERZ_UID}/tmp
+mkdir -p ${MYSQL_USERZ_WORK_DIR}
+#
+export MYSQL_HOME=${PRG}/com/${MYSQL_USERZ_UID}
+export MYSQL_BIN_DIR=${MYSQL_HOME}/bin
+mkdir -p ${MYSQL_BIN_DIR}
 #
 # Initiate downloading the installers we're going to need.
 cd ${INS}
@@ -30,9 +42,8 @@ sudo dpkg -i ${INS}/${MYSQL_PKG}
 #
 echo "Preparing access ..."
 sudo mkdir -p ${PRG}/com
-cd ${PRG}/com/mysql
-#
-sudo ln -s /opt/mysql/server-5.5 mysql
+sudo ln -s /opt/mysql/server-5.5 ${MYSQL_HOME}
+cd ${MYSQL_HOME}
 #
 sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}/*
 #
