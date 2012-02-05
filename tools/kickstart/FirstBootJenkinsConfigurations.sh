@@ -293,11 +293,14 @@ cd $ADMIN_USERZ_HOME
 # # (notice : no sudoer capability)
 # sudo useradd -Um -p "saEV5F6cIIjT2" -c "\"$TOMCAT_USER_UC\"" "$TOMCAT_USER" # saEV5F6cIIjT2 --> password okok
 #
-# Now we make jenkins owner of the whole TomCat installation
+echo "Make jenkins owner of the whole TomCat installation..."
 cd /usr/share
 sudo chown -R "$TOMCAT_USER":"$TOMCAT_USER" ./tomcat
 sudo chown -R "$TOMCAT_USER":"$TOMCAT_USER" ./apache-tomcat-7.0.23/
 echo ""
+echo "... but as part of group."
+sudo chmod -R g+rw ./tomcat
+sudo chmod -R g+rw ./apache-tomcat-7.0.23/
 #
 echo $(hostname)
 ifconfig eth0
