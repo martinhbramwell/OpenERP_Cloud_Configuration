@@ -11,6 +11,7 @@ export JENKINS_USERZ_UID_UC=Jenkins
 export JENKINS_USERZ_HOME=/home/${JENKINS_USERZ_UID}
 #
 #
+export MYSQL_USERZ_UID=mysql
 export MYSQL_HOME=${PRG}/com/${MYSQL_USERZ_UID}
 export MYSQL_BIN_DIR=${MYSQL_HOME}/bin
 #
@@ -32,7 +33,7 @@ ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldCyclos.log -p cyc
 cd ${PRG}/org
 pwd
 echo "Expanding Cyclos ..."
-sudo unzip ${INS}/cyclos_3.6.zip
+sudo unzip -f ${INS}/cyclos_3.6.zip
 echo "Preparing Cyclos ..."
 sudo ln -s cyclos_3.6 cyclos
 #
