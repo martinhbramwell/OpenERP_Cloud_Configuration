@@ -24,42 +24,44 @@ SUCCESS_PATTERN="mysql-5.5.20"$GENERIC_PATTERN
 ${PRG}/installTools/waitForLogFileEvent.sh -d 360 -l ./dldMySql.log -s ${SUCCESS_PATTERN} -f ${FAIL_PATTERN}
 #
 #
-sudo apt-get install libaio1
+#
+echo "Installing MySql ..."
+sudo dpkg -i ${INS}/${MYSQL_PKG}
+#
+echo "Preparing access ..."
+sudo mkdir -p ${PRG}/com
+sudo ln -s /opt/mysql/server-5.5 mysql
+#
+#
+sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}/*
 #
 sudo groupadd mysql
 sudo useradd -r -g mysql mysql
-sudo dpkg -i ${INS}/${MYSQL_PKG}
+cd ${PRG}/com/mysql
+sudo chown -R mysql .
+sudo chgrp -R mysql .
+#
+# sudo chown -R root .
+# sudo chown -R mysql data
+#
+echo "Default MySql internals ..."
+# Requires libaio1
+sudo apt-get install libaio1
+sudo scripts/mysql_install_db --user=mysql
+#
+sudo cp support-files/my-medium.cnf /etc/my.cnf
+sudo bin/mysqld_safe --user=mysql &
+#
+echo "Start/Stop scripts for MySql ..."
+sudo cp support-files/mysql.server /etc/init.d/mysql.server
          #
          #
          #
-         #
-         #
-         #
-         #
+#
 exit;
          #
          #
          #
-         #
-         #
-         #
-         #
-sudo ln -s mysql-5.5.19-linux2.6-i686 mysql
-cd mysql
-sudo chown -R mysql .
-sudo chgrp -R mysql .
-sudo apt-get install libaio
-#
-# Requires libaio1
-sudo scripts/mysql_install_db --user=mysql
-#
-sudo chown -R root .
-sudo chown -R mysql data
-# Next command is optional
-sudo cp support-files/my-medium.cnf /etc/my.cnf
-sudo bin/mysqld_safe --user=mysql &
-# Next command is optional
-sudo cp support-files/mysql.server /etc/init.d/mysql.server
 
 cd /usr/local/mysql/bin
 ./mysql -u root -D mysql -ss -n -q <<EOF
@@ -69,6 +71,7 @@ CREATE USER 'redora'@'openerpdbs.warehouseman.com' IDENTIFIED BY 'password';
 GRANT ALL ON redorademo.* TO 'redora'@'openerpdbs.warehouseman.com';
 FLUSH PRIVILEGES;
 #
+
 EOF
 exit
 
