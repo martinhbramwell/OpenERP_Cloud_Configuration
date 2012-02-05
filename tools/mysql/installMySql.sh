@@ -69,6 +69,8 @@ sudo bin/mysqld_safe --user=mysql &
 #
 echo "Start/Stop scripts for MySql ..."
 sudo cp support-files/mysql.server /etc/init.d/mysql.server
+sudo ln -s /etc/init.d/mysql.server /etc/rc1.d/K99mysql
+sudo ln -s /etc/init.d/mysql.server /etc/rc2.d/S99mysql
          #
          #
          #
