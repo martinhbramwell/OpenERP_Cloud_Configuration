@@ -18,6 +18,9 @@ export MYSQL_HOME=${PRG}/com/${MYSQL_USERZ_UID}
 export MYSQL_BIN_DIR=${MYSQL_HOME}/bin
 mkdir -p ${MYSQL_BIN_DIR}
 #
+sudo groupadd ${MYSQL_USERZ_UID}
+sudo useradd -r -g ${MYSQL_USERZ_UID} ${MYSQL_USERZ_UID}
+#
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
@@ -37,22 +40,20 @@ ${PRG}/installTools/waitForLogFileEvent.sh -d 360 -l ./dldMySql.log -s ${SUCCESS
 #
 #
 #
-if [  0 == 1  ]; then
+if [  1 == 1  ]; then
 echo "Installing MySql ..."
 sudo dpkg -i ${INS}/${MYSQL_PKG}
 #
 fi
 echo "Preparing access ..."
+#
 sudo mkdir -p ${PRG}/com
+rm -fr ${MYSQL_HOME}
 sudo ln -s /opt/mysql/server-5.5 ${MYSQL_HOME}
 cd ${MYSQL_HOME}
 #
-sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}/*
-#
-sudo groupadd mysql
-sudo useradd -r -g mysql mysql
-sudo chown -R mysql .
-sudo chgrp -R mysql .
+sudo chown    ${MYSQL_USERZ_UID}:${MYSQL_USERZ_UID} /opt/mysql
+sudo chown -R ${MYSQL_USERZ_UID}:${MYSQL_USERZ_UID} /opt/mysql/*
 #
 # sudo chown -R root .
 # sudo chown -R mysql data
