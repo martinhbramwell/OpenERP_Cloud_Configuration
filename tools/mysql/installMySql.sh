@@ -30,14 +30,14 @@ sudo dpkg -i ${INS}/${MYSQL_PKG}
 #
 echo "Preparing access ..."
 sudo mkdir -p ${PRG}/com
-sudo ln -s /opt/mysql/server-5.5 mysql
+cd ${PRG}/com/mysql
 #
+sudo ln -s /opt/mysql/server-5.5 mysql
 #
 sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}/*
 #
 sudo groupadd mysql
 sudo useradd -r -g mysql mysql
-cd ${PRG}/com/mysql
 sudo chown -R mysql .
 sudo chgrp -R mysql .
 #
