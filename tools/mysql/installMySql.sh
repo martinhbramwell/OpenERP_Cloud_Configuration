@@ -37,9 +37,11 @@ ${PRG}/installTools/waitForLogFileEvent.sh -d 360 -l ./dldMySql.log -s ${SUCCESS
 #
 #
 #
+if [  0 == 1  ]; then
 echo "Installing MySql ..."
 sudo dpkg -i ${INS}/${MYSQL_PKG}
 #
+fi
 echo "Preparing access ..."
 sudo mkdir -p ${PRG}/com
 sudo ln -s /opt/mysql/server-5.5 ${MYSQL_HOME}
@@ -55,6 +57,7 @@ sudo chgrp -R mysql .
 # sudo chown -R root .
 # sudo chown -R mysql data
 #
+pwd
 echo "Default MySql internals ..."
 # Requires libaio1
 sudo apt-get install libaio1
