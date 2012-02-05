@@ -10,6 +10,10 @@ export JENKINS_USERZ_UID=jenkins
 export JENKINS_USERZ_UID_UC=Jenkins
 export JENKINS_USERZ_HOME=/home/${JENKINS_USERZ_UID}
 #
+#
+export MYSQL_HOME=${PRG}/com/${MYSQL_USERZ_UID}
+export MYSQL_BIN_DIR=${MYSQL_HOME}/bin
+#
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
@@ -42,5 +46,22 @@ sudo ln -s logs log
 #
 sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} /usr/share/tomcat/*
 #
+cd ${MYSQL_BIN_DIR}
+echo "Define root password ..."
+./mysqladmin -u root password 'okok' > /dev/null 2>&1
+#
+echo "Create Cyclos user and set privileges ..."
+./mysql -u root -pokok -D mysql -ss -n -q <<EOF
+CREATE DATABASE cyclos3;
+CREATE USER 'cyclos'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'cyclos'@'127.0.0.1' IDENTIFIED BY 'password';
+CREATE USER 'cyclos'@'192.168.1.%' IDENTIFIED BY 'password';
+CREATE USER 'cyclos'@'192.168.122.%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON cyclos3.* TO 'cyclos'@'localhost' IDENTIFIED BY 'okok';
+GRANT ALL PRIVILEGES ON cyclos3.* TO 'cyclos'@'127.0.0.1' IDENTIFIED BY 'okok';
+GRANT ALL PRIVILEGES ON cyclos3.* TO 'cyclos'@'192.168.1.%' IDENTIFIED BY 'okok';
+GRANT ALL PRIVILEGES ON cyclos3.* TO 'cyclos'@'192.168.122.%' IDENTIFIED BY 'okok';
+FLUSH PRIVILEGES;
+EOF
 #
 exit 0;
