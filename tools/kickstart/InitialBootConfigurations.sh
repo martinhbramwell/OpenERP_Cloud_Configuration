@@ -45,6 +45,9 @@ start)
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootMySqlConfigurations.sh
    chmod +x ./FirstBootMySqlConfigurations.sh
 #
+   wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootRunDeckConfigurations.sh
+   chmod +x ./FirstBootRunDeckConfigurations.sh
+#
    wget https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master/tools/kickstart/FirstBootCyclosConfigurations.sh
    chmod +x ./FirstBootCyclosConfigurations.sh
 #
@@ -56,6 +59,7 @@ start)
    ./FirstBootConfigurations.sh 2>&1             | tee "ini_${CNT}_initial.log"  && CNT=$((  CNT += 1  ))
    ./FirstBootSSHConfigurations.sh 2>&1          | tee "ini_${CNT}_ssh.log"      && CNT=$((  CNT += 1  ))
    ./FirstBootAntConfigurations.sh 2>&1          | tee "ini_${CNT}_ant.log"      && CNT=$((  CNT += 1  ))
+   ./FirstBootRunDeckConfigurations.sh 2>&1      | tee "ini_${CNT}_cyclos.log"   && CNT=$((  CNT += 1  ))
    ./FirstBootJenkinsConfigurations.sh 2>&1      | tee "ini_${CNT}_jenkins.log"  && CNT=$((  CNT += 1  ))
    ./FirstBootLXDEConfigurations.sh 2>&1         | tee "ini_${CNT}_lxde.log"     && CNT=$((  CNT += 1  ))
    ./FirstBootEclipseConfigurations.sh 2>&1      | tee "ini_${CNT}_eclipse.log"  && CNT=$((  CNT += 1  ))
