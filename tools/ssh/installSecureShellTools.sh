@@ -24,7 +24,7 @@ sudo chmod 770 $JENKINS_USERZ_HOME/.ssh
 #
 #     echo "Make RSA key.."  ##   Better to get it locally.  See below.
 #
-#     sudo -u jenkins ssh-keygen -N "okokok" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
+#     sudo -u jenkins ssh-keygen -N "aPassword" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 #     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
 #     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
 echo "Get RSA key from local file server."
