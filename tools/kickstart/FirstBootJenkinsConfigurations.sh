@@ -159,7 +159,7 @@ echo "Configure TomCat"
 cd $ADMIN_USERZ_WORK_DIR
 sudo cp $CATALINA_HOME/conf/server.xml server.xml.tmp
 sudo chown yourself:yourself server.xml.tmp
-sed 's|Connector port="8080" |Connector port="80" URIEncoding="UTF-8" |' <server.xml.tmp >server.xml
+sed 's|Connector port="8080" |Connector port="8008" URIEncoding="UTF-8" |' <server.xml.tmp >server.xml
 sudo chown root:root server.xml
 sudo cp server.xml $CATALINA_HOME/conf
 sudo rm -f server.xml*

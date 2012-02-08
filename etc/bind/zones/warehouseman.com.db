@@ -20,6 +20,14 @@ openerpweb		IN	A	192.168.122.13
 
 continuous		IN	A	192.168.122.3
 test			IN	A	192.168.122.4
+test5			IN	A	192.168.122.5
+test6			IN	A	192.168.122.6
+test7			IN	A	192.168.122.7
+test8			IN	A	192.168.122.8
+
+www			IN	A	199.127.226.145
+meta			IN	A	199.127.226.145
+gateway			IN	A	199.127.226.145
 
 openerpns		IN	CNAME	OpenERP-NameServer
 postgres		IN	CNAME	openerpdbs
@@ -27,4 +35,3 @@ postgres		IN	CNAME	openerpdbs
 openerp			IN	CNAME	openerpapp
 
 jenkins			IN	CNAME	continuous
-
