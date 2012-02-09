@@ -2,6 +2,7 @@
 # 
 sudo apt-get -y update
 sudo apt-get -y upgrade
+sudo apt-get -f install
 #
 export INS="/home/yourself/installers"
 export PRG="/home/yourself/programs"
