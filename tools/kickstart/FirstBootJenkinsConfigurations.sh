@@ -79,6 +79,10 @@ sudo ln -sf jdk1.7.0_02/ jdk
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk/jre/bin/java 1
 sudo update-alternatives --config java
 cd $ADMIN_USERZ_HOME
+echo "export JAVA_HOME=/usr/lib/jvm/jdk" >> .bashrc 
+echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc 
+echo "" >> .bashrc 
+
 #
 echo "Expect :"
 echo " java version \"1.7.0_02\""
