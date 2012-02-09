@@ -13,8 +13,9 @@ mkdir -p $ADMIN_USERZ_LINKS_DIR
 export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 #
 echo "Complete the installation with all updates & upgrades"
-sudo apt-get -y update
-sudo apt-get -y upgrade
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
 #
 echo "Temporarily set some environment variables pertinent only for the currently executing scripts."
 #
@@ -157,11 +158,11 @@ echo "=======   Overwrite existing networking definitions  ======="
 echo "============================================================"
 sudo cp -R ./etc/* /etc
 echo "          Removing DHCP ..."
-sudo apt-get -y purge isc-dhcp-client
+sudo aptitude -y purge isc-dhcp-client
 echo "          Restarting networking ..."
 sudo ifdown eth0; sudo ifup eth0
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -f install
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
 #
 

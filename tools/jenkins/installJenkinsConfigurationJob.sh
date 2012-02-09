@@ -38,6 +38,11 @@ sudo rm -fr ${ADMIN_USERZ_DEV_DIR}
 mkdir ${ADMIN_USERZ_DEV_DIR}
 sudo chown -R ${JENKINS_USERZ_UID}:${JENKINS_USERZ_UID} ${ADMIN_USERZ_DEV_DIR}
 #
+echo "Clear any problem packages"
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
+#
 echo "Jenkins Continuous Integration"
 echo "Obtain Jenkins"
 cd ${INS}
@@ -244,10 +249,11 @@ if [ 0 == 1 ]; then
 	echo "Restart Jenkins using SafeRestart plugin..."
 	java -jar ${JENKINS_COMMAND_DIR}/jenkins-cli.jar -s $JENKINS_URL safe-restart
 fi
+#
 echo "Clear any problem packages"
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -f install
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
 #
 echo "Make sure default user owns the installation phase tools"
 cd ${PRG}
