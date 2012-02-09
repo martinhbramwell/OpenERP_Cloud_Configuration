@@ -10,6 +10,11 @@ export OUR_USER=rundeck
 export OUR_USER_HOME=/home/${OUR_USER}
 echo "Preparing RunDeck for ${OUR_USER}."
 #
+echo "Clear any problem packages"
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
+#
 export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
 echo ${PASS_HASH}
 sudo useradd -Ds /bin/bash
@@ -38,5 +43,10 @@ source .bash_profile
 #
 echo "Installing RunDeck where it wants to go ..."
 sudo dpkg -i ${INS}/rundeck-1.4.1-1.deb
+#
+echo "Clear any problem packages"
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
 #
 exit 0;
