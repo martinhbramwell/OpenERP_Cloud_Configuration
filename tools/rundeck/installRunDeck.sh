@@ -19,18 +19,16 @@ wget -cNb --output-file=dldRunDeck.log ${LOCAL_MIRROR}/rundeck-1.4.1-1.deb
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldRunDeck.log -p rundeck
 #
+echo "Installing RunDeck where it wants to go ..."
+sudo dpkg -i ${INS}/rundeck-1.4.1-1.deb
 #
-# 
-cd ${PRG}/org
-pwd
-echo "Expanding RunDeck ..."
-sudo unzip -f ${INS}/rundeck-1.4.1-1.deb
-echo "Preparing RunDeck ..."
-sudo ln -s cyclos_3.6 cyclos
+export OUR_USER="rundeck"
+echo "Preparing RunDeck for ${OUR_USER}."
 #
-export CYCLOS_HOME=${PRG}/org/cyclos
-sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}
-#
-echo "Fiddling TomCat for RunDeck ..."
+export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
+echo ${PASS_HASH}
+sudo useradd -Ds /bin/bash
+sudo useradd -m -G admin,sudo -p ${PASS_HASH} ${OUR_USER}
+sudo passwd -e ${OUR_USER}
 #
 exit 0;
