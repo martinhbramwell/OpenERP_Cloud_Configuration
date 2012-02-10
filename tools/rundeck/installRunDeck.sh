@@ -40,6 +40,7 @@ sudo rm -fr $OUR_USERZ_HOME/.ssh/
 #
 sudo -u $OUR_USERZ_UID mkdir -p $OUR_USERZ_HOME/.ssh
 sudo chmod 770 $OUR_USERZ_HOME/.ssh
+sudo chown -R $OUR_USERZ_UID:$OUR_USERZ_UID $OUR_USERZ_HOME
 #
 echo "Make RSA key.."  ##   It'd be better to get it locally.  See below.
 #
@@ -70,6 +71,8 @@ source .bash_profile
 #
 echo "Installing RunDeck where it wants to go ..."
 sudo dpkg -i ${INS}/rundeck-1.4.1-1.deb
+#
+sudo chown -R $OUR_USERZ_UID:$OUR_USERZ_UID $OUR_USERZ_HOME
 #
 echo "Clear any problem packages"
 sudo aptitude -y update
