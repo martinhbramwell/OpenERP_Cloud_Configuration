@@ -33,7 +33,6 @@ export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
 echo ${PASS_HASH}
 sudo useradd -Ds /bin/bash
 sudo useradd -m -G admin,sudo -p ${PASS_HASH} ${OUR_USERZ_UID}
-sudo passwd -e ${OUR_USERZ_UID}
 
 echo "Make a place for the RSA key at $OUR_USERZ_HOME/.ssh ..."
 #
@@ -54,6 +53,7 @@ sudo chmod -R 660 $OUR_USERZ_HOME/.ssh/id_rsa.pub
 # sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/id_rsa.pub
 # sudo -u $OUR_USERZ_UID chmod 600 id_rsa*
 #
+sudo passwd -e ${OUR_USERZ_UID}
 #
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldRunDeck.log -p rundeck
