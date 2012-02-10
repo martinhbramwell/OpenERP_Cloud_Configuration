@@ -55,20 +55,21 @@ start)
    chmod +x ./FirstBootCleanUp.sh
 #
 											CNT=0
+											NUM=0
 #
-   ./FirstBootConfigurations.sh 2>&1             | tee "ini_${CNT}_initial.log"  && CNT=$((  CNT += 1  ))
-   ./FirstBootSSHConfigurations.sh 2>&1          | tee "ini_${CNT}_ssh.log"      && CNT=$((  CNT += 1  ))
-   ./FirstBootJenkinsConfigurations.sh 2>&1      | tee "ini_${CNT}_jenkins.log"  && CNT=$((  CNT += 1  ))
-   ./FirstBootAntConfigurations.sh 2>&1          | tee "ini_${CNT}_ant.log"      && CNT=$((  CNT += 1  ))
-   ./FirstBootRunDeckConfigurations.sh 2>&1      | tee "ini_${CNT}_cyclos.log"   && CNT=$((  CNT += 1  ))
-   ./FirstBootLXDEConfigurations.sh 2>&1         | tee "ini_${CNT}_lxde.log"     && CNT=$((  CNT += 1  ))
-   ./FirstBootEclipseConfigurations.sh 2>&1      | tee "ini_${CNT}_eclipse.log"  && CNT=$((  CNT += 1  ))
-   ./FirstBootPlayFwkConfigurations.sh 2>&1      | tee "ini_${CNT}_play.log"     && CNT=$((  CNT += 1  ))
-   ./FirstBootSmartGitConfigurations.sh 2>&1     | tee "ini_${CNT}_smartgit.log" && CNT=$((  CNT += 1  ))
-   ./FirstBootFitnesseWikiConfigurations.sh 2>&1 | tee "ini_${CNT}_fitwiki.log"  && CNT=$((  CNT += 1  ))
-   ./FirstBootNXConfigurations.sh 2>&1           | tee "ini_${CNT}_NX.log"       && CNT=$((  CNT += 1  ))
-   ./FirstBootMySqlConfigurations.sh 2>&1        | tee "ini_${CNT}_mysql.log"    && CNT=$((  CNT += 1  ))
-   ./FirstBootCyclosConfigurations.sh 2>&1       | tee "ini_${CNT}_cyclos.log"   && CNT=$((  CNT += 1  ))
+   ./FirstBootConfigurations.sh 2>&1             | tee "ini_${NUM: -3}_initial.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootSSHConfigurations.sh 2>&1          | tee "ini_${NUM: -3}_ssh.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootJenkinsConfigurations.sh 2>&1      | tee "ini_${NUM: -3}_jenkins.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootAntConfigurations.sh 2>&1          | tee "ini_${NUM: -3}_ant.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootRunDeckConfigurations.sh 2>&1      | tee "ini_${NUM: -3}_cyclos.log"   && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootLXDEConfigurations.sh 2>&1         | tee "ini_${NUM: -3}_lxde.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootEclipseConfigurations.sh 2>&1      | tee "ini_${NUM: -3}_eclipse.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootPlayFwkConfigurations.sh 2>&1      | tee "ini_${NUM: -3}_play.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootSmartGitConfigurations.sh 2>&1     | tee "ini_${NUM: -3}_smartgit.log" && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootFitnesseWikiConfigurations.sh 2>&1 | tee "ini_${NUM: -3}_fitwiki.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootNXConfigurations.sh 2>&1           | tee "ini_${NUM: -3}_NX.log"       && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootMySqlConfigurations.sh 2>&1        | tee "ini_${NUM: -3}_mysql.log"    && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootCyclosConfigurations.sh 2>&1       | tee "ini_${NUM: -3}_cyclos.log"   && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootCleanUp.sh			# Don't allow these scripts to be called ever again.
 #
 
