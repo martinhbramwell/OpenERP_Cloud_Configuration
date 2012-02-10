@@ -61,7 +61,7 @@ start)
    ./FirstBootSSHConfigurations.sh           2>&1 | tee "ini_${NUM: -3}_ssh.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootJenkinsConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_jenkins.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootAntConfigurations.sh           2>&1 | tee "ini_${NUM: -3}_ant.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
-   ./FirstBootRunDeckConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_cyclos.log"   && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+   ./FirstBootRunDeckConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_rundeck.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootLXDEConfigurations.sh          2>&1 | tee "ini_${NUM: -3}_lxde.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootEclipseConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_eclipse.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootPlayFwkConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_play.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
