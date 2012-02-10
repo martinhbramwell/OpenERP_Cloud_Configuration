@@ -1,5 +1,5 @@
 #! /bin/bash 
-# script to go and get RunDeck complete packages.
+# script to get and install RunDeck complete packages.
 #
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
