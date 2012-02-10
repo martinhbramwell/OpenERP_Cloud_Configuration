@@ -19,6 +19,13 @@ rm -f ${PRG}/installTools/installSecureShellTools.sh
 wget ${SRV_CONFIG}/tools/ssh/installSecureShellTools.sh
 chmod +x ${PRG}/installTools/installSecureShellTools.sh
 #
+echo "Get SSH keygen tool"
+#
+# Obtain SSH tools installer script
+rm -f ${PRG}/installTools/genSSH_key.sh
+wget ${SRV_CONFIG}/tools/ssh/genSSH_key.sh
+chmod +x ${PRG}/installTools/genSSH_key.sh
+#
 #
 echo "Running SSH tools installer now ..."
 #

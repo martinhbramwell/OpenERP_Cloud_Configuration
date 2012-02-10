@@ -4,7 +4,7 @@
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
-mkdir -p $ADMIN_USERZ_WORK_DIR
+mkdir -p ${ADMIN_USERZ_WORK_DIR}
 #
 export INS="${ADMIN_USERZ_HOME}/installers"
 export PRG="${ADMIN_USERZ_HOME}/programs"
@@ -33,36 +33,15 @@ export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
 echo ${PASS_HASH}
 sudo useradd -Ds /bin/bash
 sudo useradd -m -G admin,sudo -p ${PASS_HASH} ${OUR_USERZ_UID}
-
-echo "Make a place for the RSA key at $OUR_USERZ_HOME/.ssh ..."
 #
-sudo rm -fr $OUR_USERZ_HOME/.ssh/
-#
-sudo -u $OUR_USERZ_UID mkdir -p $OUR_USERZ_HOME/.ssh
-sudo chmod 770 $OUR_USERZ_HOME/.ssh
-sudo chown -R $OUR_USERZ_UID:$OUR_USERZ_UID $OUR_USERZ_HOME
-#
-echo "Make RSA key.."  ##   It'd be better to get it locally.  See below.
-#
-sudo -u ${OUR_USERZ_UID} ssh-keygen -N "aPassword" -t rsa -f $OUR_USERZ_HOME/.ssh/id_rsa
-sudo chmod -R 660 $OUR_USERZ_HOME/.ssh/id_rsa
-sudo chmod -R 660 $OUR_USERZ_HOME/.ssh/id_rsa.pub
-# echo "Get RSA key from local file server."
-# cd $OUR_USERZ_HOME/.ssh
-# sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/known_hosts
-# sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/id_rsa
-# sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/id_rsa.pub
-# sudo -u $OUR_USERZ_UID chmod 600 id_rsa*
+sudo su - ${OUR_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
 #
 sudo passwd -e ${OUR_USERZ_UID}
 #
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldRunDeck.log -p rundeck
 #
-#
-
-#
-cd $OUR_USERZ_HOME
+cd ${OUR_USERZ_HOME}
 echo "export JAVA_HOME=/usr/lib/jvm/jdk" >> .bashrc 
 echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc 
 echo "" >> .bashrc 
@@ -72,7 +51,7 @@ source .bash_profile
 echo "Installing RunDeck where it wants to go ..."
 sudo dpkg -i ${INS}/rundeck-1.4.1-1.deb
 #
-sudo chown -R $OUR_USERZ_UID:$OUR_USERZ_UID $OUR_USERZ_HOME
+sudo chown -R ${OUR_USERZ_UID}:${OUR_USERZ_UID} ${OUR_USERZ_HOME}
 #
 echo "Clear any problem packages"
 sudo aptitude -y update
