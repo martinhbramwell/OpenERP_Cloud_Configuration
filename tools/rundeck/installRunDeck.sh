@@ -1,25 +1,17 @@
 #! /bin/bash 
 # script to get and install RunDeck complete packages.
 #
+export INS="${ADMIN_USERZ_HOME}/installers"
+export PRG="${ADMIN_USERZ_HOME}/programs"
+#
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
 mkdir -p $ADMIN_USERZ_WORK_DIR
 #
-export OUR_USER=rundeck
-export OUR_USER_HOME=/home/${OUR_USER}
-echo "Preparing RunDeck for ${OUR_USER}."
-#
-echo "Clear any problem packages"
-sudo aptitude -y update
-sudo aptitude -y upgrade
-sudo aptitude -fy install
-#
-export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
-echo ${PASS_HASH}
-sudo useradd -Ds /bin/bash
-sudo useradd -m -G admin,sudo -p ${PASS_HASH} ${OUR_USER}
-sudo passwd -e ${OUR_USER}
+export OUR_USERZ_UID=rundeck
+export OUR_USERZ_HOME=/home/${OUR_USERZ_UID}
+echo "Preparing RunDeck for ${OUR_USERZ_UID}."
 #
 # Initiate downloading the installers we're going to need.
 cd ${INS}
@@ -32,9 +24,44 @@ sudo rm -f dldRunDeck.log*
 echo "Obtaining RunDeck ..."
 wget -cNb --output-file=dldRunDeck.log ${LOCAL_MIRROR}/rundeck-1.4.1-1.deb
 #
+echo "Clear any problem packages"
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
+#
+export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
+echo ${PASS_HASH}
+sudo useradd -Ds /bin/bash
+sudo useradd -m -G admin,sudo -p ${PASS_HASH} ${OUR_USERZ_UID}
+sudo passwd -e ${OUR_USERZ_UID}
+
+echo "Make a place for the RSA key at $OUR_USERZ_HOME/.ssh ..."
+#
+sudo rm -fr $OUR_USERZ_HOME/.ssh/
+#
+sudo -u $OUR_USERZ_UID mkdir -p $OUR_USERZ_HOME/.ssh
+sudo chmod 770 $OUR_USERZ_HOME/.ssh
+#
+echo "Make RSA key.."  ##   It'd be better to get it locally.  See below.
+#
+sudo -u jenkins ssh-keygen -N "aPassword" -t rsa -f $OUR_USERZ_HOME/.ssh/id_rsa
+sudo chmod -R 660 $OUR_USERZ_HOME/.ssh/id_rsa
+sudo chmod -R 660 $OUR_USERZ_HOME/.ssh/id_rsa.pub
+# echo "Get RSA key from local file server."
+# cd $OUR_USERZ_HOME/.ssh
+# sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/known_hosts
+# sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/id_rsa
+# sudo -u $OUR_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/id_rsa.pub
+# sudo -u $OUR_USERZ_UID chmod 600 id_rsa*
+#
+#
+#
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldRunDeck.log -p rundeck
 #
-cd $OUR_USER_HOME
+#
+
+#
+cd $OUR_USERZ_HOME
 echo "export JAVA_HOME=/usr/lib/jvm/jdk" >> .bashrc 
 echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc 
 echo "" >> .bashrc 
