@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # 
 
 
@@ -55,7 +55,7 @@ start)
    chmod +x ./FirstBootCleanUp.sh
 #
 											CNT=0
-											NUM=0
+											NUM=0000
 #
    ./FirstBootConfigurations.sh 2>&1             | tee "ini_${NUM: -3}_initial.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootSSHConfigurations.sh 2>&1          | tee "ini_${NUM: -3}_ssh.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
