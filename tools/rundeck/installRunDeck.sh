@@ -1,13 +1,13 @@
 #! /bin/bash 
 # script to get and install RunDeck complete packages.
 #
-export INS="${ADMIN_USERZ_HOME}/installers"
-export PRG="${ADMIN_USERZ_HOME}/programs"
-#
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
 mkdir -p $ADMIN_USERZ_WORK_DIR
+#
+export INS="${ADMIN_USERZ_HOME}/installers"
+export PRG="${ADMIN_USERZ_HOME}/programs"
 #
 export OUR_USERZ_UID=rundeck
 export OUR_USERZ_HOME=/home/${OUR_USERZ_UID}
