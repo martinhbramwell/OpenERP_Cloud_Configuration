@@ -47,8 +47,18 @@ sudo useradd -m -G admin,sudo -d ${RUNDECK_USERZ_HOME} -p ${PASS_HASH} ${RUNDECK
 #
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
 #
-echo "Generate a key ..........."
-sudo su - ${RUNDECK_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
+echo "Establish an SSH key pair for  ........"
+#  Get one OR make one?
+echo "Go get a key ..........."
+pushd ${RUNDECK_USERZ_SSH_DIR}
+sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/known_hosts
+sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/id_rsa
+sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/id_rsa.pub
+popd
+#
+# echo "Generate a key ..........."
+# sudo su - ${RUNDECK_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
+#
 #
 echo "Terminate the password of ${RUNDECK_USERZ_UID} ..........."
 sudo passwd -e ${RUNDECK_USERZ_UID}
