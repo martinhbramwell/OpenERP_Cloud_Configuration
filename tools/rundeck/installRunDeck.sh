@@ -37,6 +37,7 @@ wget -cNb --output-file=dldRunDeck.log ${LOCAL_MIRROR}/rundeck-1.4.1-1.deb
 echo "Clear any problem packages.............."
 sudo aptitude -y update
 sudo aptitude -y upgrade
+sudo aptitude -y install java6-runtime
 sudo aptitude -fy install
 #
 echo "Create the ${RUNDECK_USERZ_UID} user..........."
