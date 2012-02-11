@@ -50,6 +50,7 @@ sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
 echo "Establish an SSH key pair for  ........"
 #  Get one OR make one?
 echo "Go get a key ..........."
+mkdir -p ${RUNDECK_USERZ_SSH_DIR}
 pushd ${RUNDECK_USERZ_SSH_DIR}
 sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/known_hosts
 sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/id_rsa
