@@ -81,7 +81,7 @@ echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc
 echo "" >> .bashrc 
 #
 echo "if [ -f ./.bashrc ]; then" > .bash_profile
-echo "   source ./.bashrc >" >> .bash_profile
+echo "   source ./.bashrc" >> .bash_profile
 echo "fi" >> .bash_profile
 echo "" >> .bash_profile
 #
