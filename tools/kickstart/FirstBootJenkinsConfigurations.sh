@@ -77,7 +77,7 @@ cd /usr/lib/jvm
 sudo tar zxvf ${INS}/jdk-7u2-linux-x64.tar.gz
 sudo ln -sf jdk1.7.0_02/ jdk
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk/jre/bin/java 1
-sudo update-alternatives --config java
+sudo update-alternatives --set java /usr/lib/jvm/java-6-openjdk/jre/bin/java
 cd $ADMIN_USERZ_HOME
 echo "export JAVA_HOME=/usr/lib/jvm/jdk" >> .bashrc 
 echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc 
