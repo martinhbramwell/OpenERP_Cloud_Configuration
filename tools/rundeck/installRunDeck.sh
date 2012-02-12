@@ -68,12 +68,8 @@ sudo passwd -e ${RUNDECK_USERZ_UID}
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldRunDeck.log -p rundeck
 #
-cd ${RUNDECK_USERZ_HOME}
-echo "export JAVA_HOME=/usr/lib/jvm/jdk" >> .bashrc 
-echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc 
-echo "" >> .bashrc 
-#
-source .bash_profile
+export JAVA_HOME=/usr/lib/jvm/jdk
+PATH=\$PATH:\$JAVA_HOME/bin
 #
 echo "Installing RunDeck where it wants to go ..."
 sudo dpkg -i ${INS}/rundeck-1.4.1-1.deb
