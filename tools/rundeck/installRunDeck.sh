@@ -10,7 +10,7 @@ mkdir -p ${ADMIN_USERZ_WORK_DIR}
 export GIT_MANAGED_PROJECT=RunDeckToolSet
 export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
 #
-export GIT_SOURCE=git@github.com:martinhbramwell
+export GIT_SOURCE=git@github.com:HummingCloud
 export MASTER_PROJECT=${GIT_SOURCE}/${GIT_MANAGED_PROJECT}.git
 #
 export INS="${ADMIN_USERZ_HOME}/installers"
