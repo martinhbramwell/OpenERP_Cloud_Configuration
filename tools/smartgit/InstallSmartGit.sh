@@ -75,6 +75,19 @@ wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/projects.xml
 wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/settings.xml
 wget -cN ${SRV_CONFIG}${SMARTGIT_CONFIG_URI}/${SMARTGIT_VERSION}/uiSettings.xml
 #
+cd ${ADMIN_USERZ_HOME}
+echo "export JAVA_HOME=/usr/lib/jvm/jdk" >> .bashrc 
+echo "PATH=\$PATH:\$JAVA_HOME/bin" >> .bashrc 
+echo "" >> .bashrc 
+#
+echo "if [ -f ./.bashrc ]; then" > .bash_profile
+echo "   source ./.bashrc >" >> .bash_profile
+echo "fi" >> .bash_profile
+echo "" >> .bash_profile
+#
+source .bash_profile
+#
+#
 #
 echo "Creating panel button.."
 #
@@ -123,4 +136,7 @@ export JENKINS_VCS_DIR=${GIT_MANAGED_DIR}/${JENKINS_VCS_PATH}
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID ${ADMIN_USERZ_HOME}
 sudo chown -R $JENKINS_USERZ_UID:$JENKINS_USERZ_UID ${JENKINS_VCS_DIR}
 
+echo "Leave it running with Oracle Java ........"
+cd /etc/alternatives/
+sudo ln -s /usr/lib/jvm/jdk/jre/bin/java java
 
