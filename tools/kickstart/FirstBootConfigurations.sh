@@ -62,6 +62,15 @@ echo "Make a place for installation phase tools"
 sudo mkdir -p ${PRG}/installTools
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID  $ADMIN_USERZ_HOME
 #
+echo "Make a file for final adjustments"
+sudo mkdir -p ${ADMIN_USERZ_HOME}/Desktop
+sudo touch ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+sudo chmod a+x ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_HOME}/Desktop
+echo "#!/bin/bash" > ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+echo "# Starts simple test" >> ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+echo "#" >> ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+#
 #
 # Make them available permanently
 source ~/.bashrc

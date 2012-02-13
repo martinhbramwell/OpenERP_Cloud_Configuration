@@ -136,7 +136,9 @@ export JENKINS_VCS_DIR=${GIT_MANAGED_DIR}/${JENKINS_VCS_PATH}
 sudo chown -R $ADMIN_USERZ_UID:$ADMIN_USERZ_UID ${ADMIN_USERZ_HOME}
 sudo chown -R $JENKINS_USERZ_UID:$JENKINS_USERZ_UID ${JENKINS_VCS_DIR}
 
-echo "Leave it running with Oracle Java ........"
-cd /etc/alternatives/
-sudo ln -s /usr/lib/jvm/jdk/jre/bin/java java
+#
+echo "Script to choose correct Java for SmartGit ..."
+echo "sudo update-alternatives --set java /usr/lib/jvm/jdk/jre/bin/java" >> ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+echo "#" >> ${ADMIN_USERZ_HOME}/Desktop/FinalTweaks.sh
+
 
