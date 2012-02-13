@@ -20,6 +20,9 @@ export RUNDECK_USER=RunDeck
 export RUNDECK_USERZ_UID=rundeck
 export RUNDECK_GROUPZ_UID=${RUNDECK_USERZ_UID}
 export RUNDECK_USERZ_HOME=/var/lib/${RUNDECK_USERZ_UID}
+export RUNDECK_USERZ_WORK_DIR=/var/${RUNDECK_USERZ_UID}
+export RUNDECK_PROJECTZ_HOME=${RUNDECK_USERZ_WORK_DIR}/projects
+export GIT_MANAGED_RUNDECK_PROJECTS=${GIT_MANAGED_DIR}/projects
 export RUNDECK_USERZ_SSH_DIR=${RUNDECK_USERZ_HOME}/.ssh
 echo "Preparing the RunDeck server for user : ${RUNDECK_USERZ_UID}."
 #
@@ -92,15 +95,20 @@ echo "Clone the whole Cloud project into the Git managed directory :"
 echo "The next step requires tight security so use 600 ...."
 sudo -Hu ${RUNDECK_USERZ_UID} chmod 600 ${RUNDECK_USERZ_SSH_DIR}/*
 echo sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
-sudo -Hu $RUNDECK_USERZ_UID git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
+sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
+sudo -Hu ${RUNDECK_USERZ_UID} mkdir -p ${GIT_MANAGED_RUNDECK_PROJECTS} # Just in case there are no projects yet.
 echo "Undo tight security so ${RUNDECK_USER} & SmartGit can share the key"
 sudo -Hu ${RUNDECK_USERZ_UID} chmod 660 ${RUNDECK_USERZ_SSH_DIR}/*
 echo "${RUNDECK_USER} needs to own the whole hierarchy ..."
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_PROJECT}
 #
 echo "But SmartGit needs read & write privileges ..."
+sudo -Hu ${RUNDECK_USERZ_UID} rm -fr ${RUNDECK_PROJECTZ_HOME}
+sudo -Hu ${RUNDECK_USERZ_UID} ln -s ${GIT_MANAGED_RUNDECK_PROJECTS} ${RUNDECK_PROJECTZ_HOME}
+#
 sudo usermod -a -G ${RUNDECK_GROUPZ_UID} ${ADMIN_USERZ_UID}
 chmod -R g+rw ${GIT_MANAGED_DIR}
+chmod -R g+rw ${RUNDECK_USERZ_WORK_DIR}
 #
 #
 #
