@@ -5,12 +5,12 @@ export TOOLS_DIR=/home/hasan/projects/OpenERP_Cloud_Configuration$KCKSTRT_DIR
 export WORKING_DIR=~/Desktop/ISOwork
 
 # Characteristics of the final target VM
-export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
+export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM_test
 export VIRTUAL_RAM_SIZE=1024
 # export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
 # export VIRTUAL_RAM_SIZE=512
 
-export VIRTUAL_DISK_NAME=OO64ExpVDK
+export VIRTUAL_DISK_NAME=OO64ExpVDK_test
 export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
 export VIRTUAL_DISK_SIZE=6
 # export VIRTUAL_DISK_NAME=OO64ExpVDK
