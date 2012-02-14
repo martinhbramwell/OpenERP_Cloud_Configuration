@@ -3,9 +3,12 @@
 #
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
+export ADMIN_USERZ_DESKTOP=${ADMIN_USERZ_HOME}/desktop
 export ADMIN_USERZ_DEV_DIR=/home/${ADMIN_USERZ_UID}/dev
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
 mkdir -p ${ADMIN_USERZ_WORK_DIR}
+#
+export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configuration/master"
 #
 export GIT_MANAGED_PROJECT=RunDeckToolSet
 export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
@@ -110,6 +113,13 @@ sudo -Hu ${RUNDECK_USERZ_UID} ln -s ${GIT_MANAGED_RUNDECK_PROJECTS} ${RUNDECK_PR
 sudo usermod -a -G ${RUNDECK_GROUPZ_UID} ${ADMIN_USERZ_UID}
 chmod -R g+rw ${GIT_MANAGED_DIR}
 chmod -R g+rw ${RUNDECK_USERZ_WORK_DIR}
+#
+echo "Get RunDeck restore script"
+sudo mkdir -p ${ADMIN_USERZ_DESKTOP}
+pushd ${ADMIN_USERZ_DESKTOP}
+rm -f ./RestoreRunDeckProjects.sh
+wget ${SRV_CONFIG}/tools/rundeck/RestoreRunDeckProjects.sh
+chmod +x ./RestoreRunDeckProjects.sh
 #
 #
 #
