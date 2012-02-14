@@ -3,7 +3,7 @@
 #
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
-export ADMIN_USERZ_DESKTOP=${ADMIN_USERZ_HOME}/desktop
+export ADMIN_USERZ_DESKTOP=${ADMIN_USERZ_HOME}/Desktop
 export ADMIN_USERZ_DEV_DIR=/home/${ADMIN_USERZ_UID}/dev
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
 mkdir -p ${ADMIN_USERZ_WORK_DIR}
@@ -120,6 +120,7 @@ pushd ${ADMIN_USERZ_DESKTOP}
 rm -f ./RestoreRunDeckProjects.sh
 wget ${SRV_CONFIG}/tools/rundeck/RestoreRunDeckProjects.sh
 chmod +x ./RestoreRunDeckProjects.sh
+popd
 #
 #
 #
