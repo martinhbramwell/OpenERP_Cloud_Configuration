@@ -46,6 +46,9 @@ sudo -u ${JENKINS_USERZ_UID} chmod 665 id_rsa.pub
 ls -la 
 #
 echo "The admin user needs a copy too ....................."
+sudo rm -fr ${ADMIN_USERZ_SSH_DIR}
+sudo mkdir -p ${ADMIN_USERZ_SSH_DIR}
+sudo chmod 770 ${ADMIN_USERZ_SSH_DIR}
 sudo cp * ${ADMIN_USERZ_SSH_DIR}
 sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_SSH_DIR}
 #
