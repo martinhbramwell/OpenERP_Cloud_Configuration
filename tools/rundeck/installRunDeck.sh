@@ -32,10 +32,11 @@ LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 # Obtain RunDeck
 SRV_RUNDECK="https://github.com/downloads/dtolabs/rundeck"
 
-#wget -cNb --output-file=dldRunDeck.log ${SRV_RUNDECK}/rundeck-1.4.1-1.deb
+# wget -cNb --output-file=dldRunDeck.log ${SRV_RUNDECK}/rundeck-1.4.2-1.deb
+# mv rundeck-1.4.2-1.deb rundeck.deb
 sudo rm -f dldRunDeck.log*
 echo "Obtaining RunDeck ..."
-wget -cNb --output-file=dldRunDeck.log ${LOCAL_MIRROR}/rundeck-1.4.1-1.deb
+wget -cNb --output-file=dldRunDeck.log ${LOCAL_MIRROR}/rundeck.deb
 #
 echo "Clear any problem packages.............."
 sudo aptitude -y update
@@ -75,7 +76,7 @@ export JAVA_HOME=/usr/lib/jvm/jdk
 export PATH=$PATH:$JAVA_HOME/bin
 #
 echo "Installing RunDeck where it wants to go ..."
-sudo dpkg -i ${INS}/rundeck-1.4.1-1.deb
+sudo dpkg -i ${INS}/rundeck.deb
 #
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
 #
