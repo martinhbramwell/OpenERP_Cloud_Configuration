@@ -1,6 +1,10 @@
 #!/bin/bash
 # Script to create an SSH key pair and provide it to SSH-AGENT.
 #
+export ADMIN_USERZ_UID=yourself
+export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
+export ADMIN_USERZ_SSH_DIR=${ADMIN_USERZ_HOME}/.ssh
+#
 export LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
 #
 export JENKINS_USERZ_UID=jenkins
@@ -9,7 +13,7 @@ export JENKINS_USERZ_HOME=/home/${JENKINS_USERZ_UID}
 #
 echo ""
 echo ""
-echo "We expect a user named ${JENKINS_USERZ_UID_UC}, so create it now."
+echo "We expect a user named ${JENKINS_USERZ_UID_UC}, so create it now....."
 echo ""
 # Create user jenkins
 # (notice : no sudoer capability)
@@ -27,23 +31,22 @@ sudo chmod 770 $JENKINS_USERZ_HOME/.ssh
 #     sudo -u jenkins ssh-keygen -N "aPassword" -t rsa -f $JENKINS_USERZ_HOME/.ssh/id_rsa
 #     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa
 #     sudo chmod -R 660 $JENKINS_USERZ_HOME/.ssh/id_rsa.pub
-echo "Get RSA key from local file server."
+echo "Get RSA key from local file server...................."
 cd $JENKINS_USERZ_HOME/.ssh
 sudo -u ${JENKINS_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${JENKINS_USERZ_UID}/known_hosts
 sudo -u ${JENKINS_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${JENKINS_USERZ_UID}/id_rsa
 sudo -u ${JENKINS_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${JENKINS_USERZ_UID}/id_rsa.pub
 sudo -u ${JENKINS_USERZ_UID} chmod 600 id_rsa*
 #
-echo "Check it works..."
+echo "Check it works ......................................"
 sudo -Hu jenkins ssh -T git@github.com
 #
-echo "Permit SmartGit to have access too."
-sudo -u ${JENKINS_USERZ_UID} chmod 660 id_rsa*
+echo "Set privileges ......................................"
+sudo -u ${JENKINS_USERZ_UID} chmod 665 id_rsa.pub
 ls -la 
-
-
-
-
-
-
+#
+echo "The admin user needs a copy too ....................."
+sudo cp * ${ADMIN_USERZ_SSH_DIR}
+sudo chown -R ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${ADMIN_USERZ_SSH_DIR}
+#
 
