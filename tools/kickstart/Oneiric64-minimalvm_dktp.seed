@@ -67,8 +67,9 @@ d-i	netcfg/dhcp_options					select Configure network manually
 
 # Static network configuration.	(This has no effect after running of FirstBootCongigurations.sh)
 d-i	netcfg/get_nameservers					string 192.168.122.10
+d-i	netcfg/get_ipaddress					string 192.168.122.2
 # d-i	netcfg/get_ipaddress					string 192.168.122.3
-d-i	netcfg/get_ipaddress					string 192.168.122.4
+# d-i	netcfg/get_ipaddress					string 192.168.122.4
 d-i	netcfg/get_netmask					string 255.255.255.240
 d-i	netcfg/get_gateway					string 192.168.122.1
 d-i	netcfg/confirm_static					boolean true
@@ -76,8 +77,9 @@ d-i	netcfg/confirm_static					boolean true
 # Any hostname and domain names assigned from dhcp take precedence over
 # values set here. However, setting the values still prevents the questions
 # from being shown, even if values come from dhcp.
+d-i	netcfg/get_hostname					string temporary
 # d-i	netcfg/get_hostname					string continuous
-d-i	netcfg/get_hostname					string test
+# d-i	netcfg/get_hostname					string test
 d-i	netcfg/get_domain					string warehouseman.com
 
 # Mirror servers

@@ -136,12 +136,16 @@ chmod +x ${PRG}/installTools/waitForLogFileEvent.sh
 #
 echo "Networking"
 echo "Set up static addressing with these steps :"
+
 # Define new settings
-# vFixMe=continuous
-# vFixMe2=3
-## 
-vFixMe=test
-vFixMe2=4
+
+if [ 1 == 1 ]; then
+	vFixMe=continuous
+	vFixMe2=3
+else 
+	vFixMe=test
+	vFixMe2=4
+fi
 #
 vFixMe1=192.168.122
 #
