@@ -3,7 +3,7 @@
 #
 export ADMIN_USERZ_UID=yourself
 export ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
-export ADMIN_USERZ_DESKTOP=${ADMIN_USERZ_HOME}/Desktop
+export ADMIN_USERZ_QWIK_SCRIPTS=${ADMIN_USERZ_HOME}/q
 export ADMIN_USERZ_DEV_DIR=/home/${ADMIN_USERZ_UID}/dev
 export ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
 mkdir -p ${ADMIN_USERZ_WORK_DIR}
@@ -13,7 +13,7 @@ export SRV_CONFIG="https://raw.github.com/martinhbramwell/OpenERP_Cloud_Configur
 export GIT_MANAGED_PROJECT=RunDeckToolSet
 export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
 #
-export GIT_SOURCE=git@github.com:HummingCloud
+export GIT_SOURCE=git@github.com:FleetingClouds
 export MASTER_PROJECT=${GIT_SOURCE}/${GIT_MANAGED_PROJECT}.git
 #
 export INS="${ADMIN_USERZ_HOME}/installers"
@@ -26,6 +26,7 @@ export RUNDECK_USERZ_HOME=/var/lib/${RUNDECK_USERZ_UID}
 export RUNDECK_USERZ_WORK_DIR=/var/${RUNDECK_USERZ_UID}
 export RUNDECK_PROJECTZ_HOME=${RUNDECK_USERZ_WORK_DIR}/projects
 export GIT_MANAGED_RUNDECK_PROJECTS=${GIT_MANAGED_DIR}/projects
+export RUNDECK_QWIK_SCRIPTS=${ADMIN_USERZ_QWIK_SCRIPTS}/rd
 export RUNDECK_USERZ_SSH_DIR=${RUNDECK_USERZ_HOME}/.ssh
 echo "Preparing the RunDeck server for user : ${RUNDECK_USERZ_UID}."
 #
@@ -114,12 +115,19 @@ sudo usermod -a -G ${RUNDECK_GROUPZ_UID} ${ADMIN_USERZ_UID}
 chmod -R g+rw ${GIT_MANAGED_DIR}
 chmod -R g+rw ${RUNDECK_USERZ_WORK_DIR}
 #
-echo "Get RunDeck restore script"
-sudo mkdir -p ${ADMIN_USERZ_DESKTOP}
-pushd ${ADMIN_USERZ_DESKTOP}
+echo "Get RunDeck backup and restore scripts"
+sudo mkdir -p ${RUNDECK_QWIK_SCRIPTS}
+pushd ${RUNDECK_QWIK_SCRIPTS}
+#
+rm -f ./BackupRunDeckProjects.sh
+wget ${SRV_CONFIG}/tools/rundeck/BackupRunDeckProjects.sh
+chmod +x ./BackupRunDeckProjects.sh
+ln -s ./BackupRunDeckProjects.sh bkp
+#
 rm -f ./RestoreRunDeckProjects.sh
 wget ${SRV_CONFIG}/tools/rundeck/RestoreRunDeckProjects.sh
 chmod +x ./RestoreRunDeckProjects.sh
+ln -s ./RestoreRunDeckProjects.sh rst
 popd
 #
 #
