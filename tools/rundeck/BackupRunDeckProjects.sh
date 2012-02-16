@@ -10,11 +10,20 @@ export GIT_MANAGED_DIR=${ADMIN_USERZ_DEV_DIR}/${GIT_MANAGED_PROJECT}
 #
 pushd ${GIT_MANAGED_DIR}
 #
-echo "Pull the latest version from GitHub ........................"
+echo "Pull in all remote changes to Git-managed repo  ............"
 git pull
 #
-echo "Restore them into RunDeck .................................."
-rd-jobs load -f ./projects/PrepareGenericVPS/jobs.xml
+echo "Extract RunDeck jobs to Git-managed repo  .................."
+rd-jobs list -f ./projects/PrepareGenericVPS/jobs.yaml -F yaml -p PrepareGenericVPS
+#
+echo "Add new files if any  ......................................"
+git add --all -- *.yaml
+#
+echo "Commit the changed files  .................................."
+git commit --allow-empty -a -m "New/changed for PrepareGenericVPS"
+#
+echo "Syncchronize with master repository  ......................."
+git push
 #
 echo "Done  ......................................................"
 #
