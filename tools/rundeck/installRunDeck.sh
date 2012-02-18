@@ -39,10 +39,10 @@ SRV_RUNDECK="https://github.com/downloads/dtolabs/rundeck"
 # wget -cNb --output-file=dldRunDeck.log ${SRV_RUNDECK}/rundeck-1.4.2-1.deb
 # mv rundeck-1.4.2-1.deb rundeck.deb
 sudo rm -f dldRunDeck.log*
-echo "Obtaining RunDeck ..."
+echo "Obtaining RunDeck .........................................."
 wget -cNb --output-file=dldRunDeck.log ${LOCAL_MIRROR}/rundeck.deb
 #
-echo "Clear any problem packages.............."
+echo "Clear any problem packages.................................."
 sudo aptitude -y update
 sudo aptitude -y upgrade
 sudo aptitude -y install java6-runtime
@@ -56,9 +56,9 @@ sudo useradd -m -G admin,sudo -d ${RUNDECK_USERZ_HOME} -p ${PASS_HASH} ${RUNDECK
 #
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
 #
-echo "Establish an SSH key pair for  ........"
+echo "Establish an SSH key pair for ${RUNDECK_USERZ_UID} ........"
 #  Get one OR make one?
-echo "Go get a key ..........."
+echo "Go get a key ..............................................."
 sudo -u $RUNDECK_USERZ_UID mkdir -p ${RUNDECK_USERZ_SSH_DIR}
 pushd ${RUNDECK_USERZ_SSH_DIR}
 sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/known_hosts
@@ -70,7 +70,7 @@ popd
 # sudo su - ${RUNDECK_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
 #
 #
-echo "Terminate the password of ${RUNDECK_USERZ_UID} ..........."
+echo "Terminate the password of ${RUNDECK_USERZ_UID} ............."
 sudo passwd -e ${RUNDECK_USERZ_UID}
 #
 #
@@ -79,12 +79,12 @@ ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldRunDeck.log -p ru
 export JAVA_HOME=/usr/lib/jvm/jdk
 export PATH=$PATH:$JAVA_HOME/bin
 #
-echo "Installing RunDeck where it wants to go ..."
+echo "Installing RunDeck where it wants to go ...................."
 sudo dpkg -i ${INS}/rundeck.deb
 #
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
 #
-echo "Obtain our RunDeck projects .............."
+echo "Obtain our RunDeck projects ................................"
 
 #
 echo "Prepare a Git Repo to contain the ${RUNDECK_USER} Project : "
@@ -97,14 +97,14 @@ mkdir -p ${GIT_MANAGED_DIR}
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_DIR}
 #
 echo "Clone the whole Cloud project into the Git managed directory :"
-echo "The next step requires tight security so use 600 ...."
+echo "The next step requires tight security so use 600 ..........."
 sudo -Hu ${RUNDECK_USERZ_UID} chmod 600 ${RUNDECK_USERZ_SSH_DIR}/*
 echo sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu ${RUNDECK_USERZ_UID} mkdir -p ${GIT_MANAGED_RUNDECK_PROJECTS} # Just in case there are no projects yet.
 echo "Undo tight security so ${RUNDECK_USER} & SmartGit can share the key"
 sudo -Hu ${RUNDECK_USERZ_UID} chmod 660 ${RUNDECK_USERZ_SSH_DIR}/*
-echo "${RUNDECK_USER} needs to own the whole hierarchy ..."
+echo "${RUNDECK_USER} needs to own the whole hierarchy ..........."
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_PROJECT}
 #
 echo "But SmartGit needs read & write privileges ..."
@@ -115,7 +115,7 @@ sudo usermod -a -G ${RUNDECK_GROUPZ_UID} ${ADMIN_USERZ_UID}
 chmod -R g+rw ${GIT_MANAGED_DIR}
 chmod -R g+rw ${RUNDECK_USERZ_WORK_DIR}
 #
-echo "Get RunDeck backup and restore scripts"
+echo "Get RunDeck backup and restore scripts  ...................."
 sudo mkdir -p ${RUNDECK_QWIK_SCRIPTS}
 pushd ${RUNDECK_QWIK_SCRIPTS}
 #
@@ -130,11 +130,18 @@ chmod +x ./RestoreRunDeckProjects.sh
 ln -s ./RestoreRunDeckProjects.sh rst
 popd
 #
+echo "Append required environment variables ......................"
+export TARGET_FILE=/etc/environment
+export NEW_VARIABLE_NAME=RUNDECK_PROJECTS
+export NEW_VARIABLE_VALUE=/var/rundeck/projects
+grep -q ${NEW_VARIABLE_NAME} ${TARGET_FILE} || echo ${NEW_VARIABLE_NAME}=${NEW_VARIABLE_VALUE}  | sudo tee -a ${TARGET_FILE}
 #
 #
-echo "Clear any problem packages ..............."
+echo "Clear any problem packages ................................."
 sudo aptitude -y update
 sudo aptitude -y upgrade
 sudo aptitude -fy install
 #
 exit 0;
+
+
