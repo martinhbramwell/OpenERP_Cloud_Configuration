@@ -102,8 +102,8 @@ sudo -Hu ${RUNDECK_USERZ_UID} chmod 600 ${RUNDECK_USERZ_SSH_DIR}/*
 echo sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
 sudo -Hu ${RUNDECK_USERZ_UID} mkdir -p ${GIT_MANAGED_RUNDECK_PROJECTS} # Just in case there are no projects yet.
-echo "Undo tight security so ${RUNDECK_USER} & SmartGit can share the key"
-sudo -Hu ${RUNDECK_USERZ_UID} chmod 660 ${RUNDECK_USERZ_SSH_DIR}/*
+### echo "Undo tight security so ${RUNDECK_USER} & SmartGit can share the key"
+### sudo -Hu ${RUNDECK_USERZ_UID} chmod 660 ${RUNDECK_USERZ_SSH_DIR}/*
 echo "${RUNDECK_USER} needs to own the whole hierarchy ..........."
 sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_PROJECT}
 #
