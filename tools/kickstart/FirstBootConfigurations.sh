@@ -139,7 +139,7 @@ echo "Set up static addressing with these steps :"
 
 # Define new settings
 
-if [ 1 == 1 ]; then
+if [ 1 == 0 ]; then
 	vFixMe=continuous
 	vFixMe2=3
 else 

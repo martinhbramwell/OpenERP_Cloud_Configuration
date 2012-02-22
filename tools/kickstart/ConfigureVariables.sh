@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export EXTENSION=""
+export EXTENSION="_test"
 #
 #
 export KCKSTRT_DIR=/tools/kickstart
