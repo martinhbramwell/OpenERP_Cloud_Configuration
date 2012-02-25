@@ -23,6 +23,7 @@ export RUNDECK_USER=RunDeck
 export RUNDECK_USERZ_UID=rundeck
 export RUNDECK_GROUPZ_UID=${RUNDECK_USERZ_UID}
 export RUNDECK_USERZ_HOME=/var/lib/${RUNDECK_USERZ_UID}
+export RUNDECK_CONF_DIR=/etc/${RUNDECK_USERZ_UID}
 export RUNDECK_USERZ_WORK_DIR=/var/${RUNDECK_USERZ_UID}
 export RUNDECK_PROJECTZ_HOME=${RUNDECK_USERZ_WORK_DIR}/projects
 export GIT_MANAGED_RUNDECK_PROJECTS=${GIT_MANAGED_DIR}/projects
@@ -130,11 +131,20 @@ chmod +x ./RestoreRunDeckProjects.sh
 ln -s ./RestoreRunDeckProjects.sh rst
 popd
 #
+echo "Fix configuration defect ..................................."
+pushd ${RUNDECK_CONF_DIR}
+cp apitoken.aclpolicy apitoken.aclpolicy.old
+sed 's|,kill] # allow read/write|,create,kill] # allow create/read/write|' <apitoken.aclpolicy.old >apitoken.aclpolicy
+popd
+#
 echo "Append required environment variables ......................"
 export TARGET_FILE=/etc/environment
 export NEW_VARIABLE_NAME=RUNDECK_PROJECTS
 export NEW_VARIABLE_VALUE=/var/rundeck/projects
 grep -q ${NEW_VARIABLE_NAME} ${TARGET_FILE} || echo ${NEW_VARIABLE_NAME}=${NEW_VARIABLE_VALUE}  | sudo tee -a ${TARGET_FILE}
+#
+echo "Now start up rundeck ......................................"
+sudo /etc/init.d/rundeckd start
 #
 #
 echo "Clear any problem packages ................................."
