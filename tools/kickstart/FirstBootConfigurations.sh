@@ -166,6 +166,7 @@ sed s/FixMe/$vFixMe/ <hosts_FixMe >./etc/hosts
 sed s/FixMe1/$vFixMe1/ <interfaces_FixMe >tmp
 sed s/FixMe2/$vFixMe2/ <tmp >./etc/network/interfaces
 #
+sudo hostname $vFixMe
 #
 echo "=======   Overwrite existing networking definitions  ======="
 echo "============================================================"
