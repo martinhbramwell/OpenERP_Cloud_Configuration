@@ -62,6 +62,8 @@ start)
    ./FirstBootJenkinsConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_jenkins.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootAntConfigurations.sh           2>&1 | tee "ini_${NUM: -3}_ant.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootRunDeckConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_rundeck.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+
+if [  0 == 1 ]; then
    ./FirstBootLXDEConfigurations.sh          2>&1 | tee "ini_${NUM: -3}_lxde.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootEclipseConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_eclipse.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootPlayFwkConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_play.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
@@ -73,6 +75,7 @@ start)
 # Don't allow these scripts to be called ever again.
    ./FirstBootCleanUp.sh                     2>&1 | tee "ini_${NUM: -3}_final.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 			
 #
+fi
 
 ;;
 

@@ -131,6 +131,11 @@ chmod +x ./RestoreRunDeckProjects.sh
 ln -s ./RestoreRunDeckProjects.sh rst
 popd
 #
+
+
+echo "* * * * * *   CONTINUE THE REST BY HAND NOW    * * * * * * * * "
+exit;
+
 echo "Fix configuration defect ..................................."
 pushd ${RUNDECK_CONF_DIR}
 cp apitoken.aclpolicy apitoken.aclpolicy.old
@@ -141,7 +146,7 @@ echo "Append required environment variables ......................"
 export TARGET_FILE=/etc/environment
 export NEW_VARIABLE_NAME=RUNDECK_PROJECTS
 export NEW_VARIABLE_VALUE=/var/rundeck/projects
-grep -q ${NEW_VARIABLE_NAME} ${TARGET_FILE} || echo ${NEW_VARIABLE_NAME}=${NEW_VARIABLE_VALUE}  | sudo tee -a ${TARGET_FILE}
+sudo grep -q ${NEW_VARIABLE_NAME} ${TARGET_FILE} || echo ${NEW_VARIABLE_NAME}=${NEW_VARIABLE_VALUE}  | sudo tee -a ${TARGET_FILE}
 #
 echo "Now start up rundeck ......................................"
 sudo /etc/init.d/rundeckd start
@@ -152,6 +157,6 @@ sudo aptitude -y update
 sudo aptitude -y upgrade
 sudo aptitude -fy install
 #
-exit 0;
+exit;
 
 
