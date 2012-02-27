@@ -74,8 +74,6 @@ start)
 # Don't allow these scripts to be called ever again.
    ./FirstBootCleanUp.sh                     2>&1 | tee "ini_${NUM: -3}_final.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 			
 #
-if [  0 == 1 ]; then
-fi
 
 ;;
 
