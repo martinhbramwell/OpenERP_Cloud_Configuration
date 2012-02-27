@@ -131,22 +131,22 @@ chmod +x ./RestoreRunDeckProjects.sh
 ln -s ./RestoreRunDeckProjects.sh rst
 popd
 #
+echo "Fix configuration defect ..................................."
+pushd ${RUNDECK_CONF_DIR}
+cp apitoken.aclpolicy apitoken.aclpolicy.old
+sed 's|,kill] # allow read/write|,create,kill] # allow create/read/write|' <apitoken.aclpolicy.old >apitoken.aclpolicy
+popd
+#
 if [  0 == 1 ]; then
-	echo "Fix configuration defect ..................................."
-	pushd ${RUNDECK_CONF_DIR}
-	cp apitoken.aclpolicy apitoken.aclpolicy.old
-	sed 's|,kill] # allow read/write|,create,kill] # allow create/read/write|' <apitoken.aclpolicy.old >apitoken.aclpolicy
-	popd
-	#
 	echo "Append required environment variables ......................"
 	export TARGET_FILE=/etc/environment
 	export NEW_VARIABLE_NAME=RUNDECK_PROJECTS
 	export NEW_VARIABLE_VALUE=/var/rundeck/projects
 	sudo grep -q ${NEW_VARIABLE_NAME} ${TARGET_FILE} || echo ${NEW_VARIABLE_NAME}=${NEW_VARIABLE_VALUE}  | sudo tee -a ${TARGET_FILE}
+	#
+	echo "Now start up rundeck ......................................"
+	sudo /etc/init.d/rundeckd start
 fi
-#
-echo "Now start up rundeck ......................................"
-sudo /etc/init.d/rundeckd start
 #
 #
 echo "Clear any problem packages ................................."
