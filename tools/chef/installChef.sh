@@ -73,23 +73,26 @@ popd
 # sudo su - ${CHEF_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
 #
 #
-echo "Terminate the password of ${CHEF_USERZ_UID} ............."
+echo "Terminate the password of ${CHEF_USERZ_UID} ................"
 sudo passwd -e ${CHEF_USERZ_UID}
 #
-#
 echo "Clear any problem packages.................................."
-# sudo aptitude -y update
-# sudo aptitude -y upgrade
+sudo aptitude -y update
+sudo aptitude -y upgrade
 #
-echo "Get ${CHEF_USER} dependencies . . . . . . . . . . . . . . . . . . . "
+echo "Get ${CHEF_USER} dependencies . . . . . . . . . . . . . . . "
 sudo aptitude -y install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert git-core
 #
 sudo aptitude -fy install
 #
+echo "Configure git for first time use . . . . . . . . . . . . . ."
+sudo -Hu ${CHEF_USERZ_UID} git config --global user.email "martinhbramwell@yahoo.com"
+sudo -Hu ${CHEF_USERZ_UID} git config --global user.name "Hasan"
+
 #
 ${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./${LOGFILE_GEMS} -p rubygems
 #
-echo "Install Ruby Gems .................................."
+echo "Install Ruby Gems . . . . . . . . . . . . . . . . . . . . . "
 sudo mkdir -p ${PRG}/org
 cd ${PRG}/org
 #
@@ -102,7 +105,7 @@ gem -v
 #
 # -----------------------------------------------------------
 #
-echo "Ready to install ${CHEF_USER} . . . . . . . . . . . . . . . . . . . "
+echo "Ready to install ${CHEF_USER} . . . . . . . . . . . . . . . "
 #
 sudo gem install chef
 #
@@ -133,9 +136,6 @@ sudo -Hu ${CHEF_USERZ_UID} knife client list
 #
 #
 echo "Clear any problem packages ................................."
-# sudo aptitude -y update
-# sudo aptitude -y upgrade
-# sudo aptitude -fy install
 #
 exit;
 
