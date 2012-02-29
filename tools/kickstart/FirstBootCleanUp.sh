@@ -1,3 +1,7 @@
+declare ADMIN_USERZ_UID=yourself
+declare ADMIN_USERZ_HOME=/home/${ADMIN_USERZ_UID}
+declare ADMIN_USERZ_WORK_DIR=/home/${ADMIN_USERZ_UID}/tmp
+
 echo "Clean up."
 cd $ADMIN_USERZ_HOME/
 
