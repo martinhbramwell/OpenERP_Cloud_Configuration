@@ -99,6 +99,11 @@ rm -f ${PRG}/installTools/MakeEnvironment.sh*
 wget ${SRV_CONFIG}/tools/MakeEnvironment.sh
 chmod +x ${PRG}/installTools/MakeEnvironment.sh
 #
+rm -f ${PRG}/installTools/waitForCompleteDownload.sh*
+wget ${SRV_CONFIG}/tools/waitForCompleteDownload.sh
+sudo chmod +x ${PRG}/installTools/waitForCompleteDownload.sh
+
+#
 #
 #
 echo "Generate a new environment file"
