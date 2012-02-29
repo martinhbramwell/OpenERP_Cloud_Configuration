@@ -19,139 +19,124 @@ export MASTER_PROJECT=${GIT_SOURCE}/${GIT_MANAGED_PROJECT}.git
 export INS="${ADMIN_USERZ_HOME}/installers"
 export PRG="${ADMIN_USERZ_HOME}/programs"
 #
-export RUNDECK_USER=Chef
-export RUNDECK_USERZ_UID=chef
-export RUNDECK_GROUPZ_UID=${RUNDECK_USERZ_UID}
-export RUNDECK_USERZ_HOME=/var/lib/${RUNDECK_USERZ_UID}
-export RUNDECK_CONF_DIR=/etc/${RUNDECK_USERZ_UID}
-export RUNDECK_USERZ_WORK_DIR=/var/${RUNDECK_USERZ_UID}
-export RUNDECK_PROJECTZ_HOME=${RUNDECK_USERZ_WORK_DIR}/projects
-export GIT_MANAGED_RUNDECK_PROJECTS=${GIT_MANAGED_DIR}/projects
-export RUNDECK_QWIK_SCRIPTS=${ADMIN_USERZ_QWIK_SCRIPTS}/rd
-export RUNDECK_USERZ_SSH_DIR=${RUNDECK_USERZ_HOME}/.ssh
-echo "Preparing the Chef server for user : ${RUNDECK_USERZ_UID}."
+export CHEF_USER=Chef
+export CHEF_USERZ_UID=chef
+export CHEF_GROUPZ_UID=${CHEF_USERZ_UID}
+export CHEF_USERZ_HOME=/home/${CHEF_USERZ_UID}
+# export CHEF_CONF_DIR=/etc/${CHEF_USERZ_UID}
+# export CHEF_USERZ_WORK_DIR=/var/${CHEF_USERZ_UID}
+# export CHEF_PROJECTZ_HOME=${CHEF_USERZ_WORK_DIR}/projects
+# export GIT_MANAGED_CHEF_PROJECTS=${GIT_MANAGED_DIR}/projects
+# export CHEF_QWIK_SCRIPTS=${ADMIN_USERZ_QWIK_SCRIPTS}/rd
+export CHEF_USERZ_SSH_DIR=${CHEF_USERZ_HOME}/.ssh
+echo "Preparing the ${CHEF_USER} server for user : ${CHEF_USERZ_UID}."
 #
 # Initiate downloading the installers we're going to need.
 cd ${INS}
 LOCAL_MIRROR=http://openerpns.warehouseman.com/downloads
-# Obtain Chef
-SRV_RUNDECK="https://github.com/downloads/dtolabs/chef"
+#
+# Obtain Gems
+SRV_GEMS="http://production.cf.rubygems.org/rubygems"
+PATH_GEMS="rubygems-1.8.10"
+INSTALLER_GEMS=${PATH_GEMS}".tgz"
+LOGFILE_GEMS=dldGems.log
 
-# wget -cNb --output-file=dldChef.log ${SRV_RUNDECK}/chef-1.4.2-1.deb
-# mv chef-1.4.2-1.deb chef.deb
-sudo rm -f dldChef.log*
-echo "Obtaining Chef .........................................."
-wget -cNb --output-file=dldChef.log ${LOCAL_MIRROR}/chef.deb
+# wget -cNb --output-file=${LOGFILE_GEMS} ${SRV_GEMS}/${INSTALLER_GEMS}
+sudo rm -f ${LOGFILE_GEMS}*
+sudo rm -f ${INSTALLER_GEMS}*
+echo "Obtaining Gems .........................................."
+wget -cNb --output-file=${LOGFILE_GEMS} ${LOCAL_MIRROR}/${INSTALLER_GEMS}
+sudo chown ${ADMIN_USERZ_UID}:${ADMIN_USERZ_UID} ${INS}
 #
-echo "Clear any problem packages.................................."
-sudo aptitude -y update
-sudo aptitude -y upgrade
-sudo aptitude -y install java6-runtime
-sudo aptitude -fy install
-#
-echo "Create the ${RUNDECK_USERZ_UID} user..........."
+echo "Create the ${CHEF_USERZ_UID} user..........."
 export PASS_HASH=$(perl -e 'print crypt($ARGV[0], "password")' "okokok")
 echo ${PASS_HASH}
 sudo useradd -Ds /bin/bash
-sudo useradd -m -G admin,sudo -d ${RUNDECK_USERZ_HOME} -p ${PASS_HASH} ${RUNDECK_USERZ_UID}
+sudo useradd -m -G admin,sudo -d ${CHEF_USERZ_HOME} -p ${PASS_HASH} ${CHEF_USERZ_UID}
 #
-sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
+sudo chown -R ${CHEF_USERZ_UID}:${CHEF_USERZ_UID} ${CHEF_USERZ_HOME}
 #
-echo "Establish an SSH key pair for ${RUNDECK_USERZ_UID} ........"
+echo "Establish an SSH key pair for ${CHEF_USERZ_UID} ........"
 #  Get one OR make one?
 echo "Go get a key ..............................................."
-sudo -u $RUNDECK_USERZ_UID mkdir -p ${RUNDECK_USERZ_SSH_DIR}
-pushd ${RUNDECK_USERZ_SSH_DIR}
-sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/known_hosts
-sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/id_rsa
-sudo -u $RUNDECK_USERZ_UID wget -cN ${LOCAL_MIRROR}/ssh/$RUNDECK_USERZ_UID/id_rsa.pub
+sudo -u ${CHEF_USERZ_UID} mkdir -p ${CHEF_USERZ_SSH_DIR}
+pushd ${CHEF_USERZ_SSH_DIR}
+sudo rm -f kn*
+sudo rm -f id_*
+#
+sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/known_hosts
+sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/id_rsa
+sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/id_rsa.pub
 popd
 #
 # echo "Generate a key ..........."
-# sudo su - ${RUNDECK_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
+# sudo su - ${CHEF_USERZ_UID} -c "${PRG}/installTools/genSSH_key.sh"
 #
 #
-echo "Terminate the password of ${RUNDECK_USERZ_UID} ............."
-sudo passwd -e ${RUNDECK_USERZ_UID}
+echo "Terminate the password of ${CHEF_USERZ_UID} ............."
+sudo passwd -e ${CHEF_USERZ_UID}
 #
 #
-${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./dldChef.log -p chef
+echo "Clear any problem packages.................................."
+# sudo aptitude -y update
+# sudo aptitude -y upgrade
 #
-export JAVA_HOME=/usr/lib/jvm/jdk
-export PATH=$PATH:$JAVA_HOME/bin
+echo "Get ${CHEF_USER} dependencies . . . . . . . . . . . . . . . . . . . "
+sudo aptitude -y install ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert git-core
 #
-echo "Installing Chef where it wants to go ...................."
-sudo dpkg -i ${INS}/chef.deb
+sudo aptitude -fy install
 #
-sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${RUNDECK_USERZ_HOME}
 #
-echo "Obtain our Chef projects ................................"
-
+${PRG}/installTools/waitForCompleteDownload.sh -d 3600 -l ./${LOGFILE_GEMS} -p rubygems
 #
-echo "Prepare a Git Repo to contain the ${RUNDECK_USER} Project : "
+echo "Install Ruby Gems .................................."
+sudo mkdir -p ${PRG}/org
+cd ${PRG}/org
 #
-mkdir -p ${ADMIN_USERZ_DEV_DIR}
-cd ${ADMIN_USERZ_DEV_DIR}
-rm -fr ${GIT_MANAGED_PROJECT} 
+tar zxf ${INS}/${INSTALLER_GEMS}
+cd ./${PATH_GEMS}
+sudo ruby setup.rb --no-format-executable
 #
-mkdir -p ${GIT_MANAGED_DIR}
-sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_DIR}
+echo "Which gem version did we get . . . . . . . . . . . . . . . "
+gem -v
 #
-echo "Clone the whole Cloud project into the Git managed directory :"
-echo "The next step requires tight security so use 600 ..........."
-sudo -Hu ${RUNDECK_USERZ_UID} chmod 600 ${RUNDECK_USERZ_SSH_DIR}/*
-echo sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
-sudo -Hu ${RUNDECK_USERZ_UID} git clone ${MASTER_PROJECT} ${GIT_MANAGED_PROJECT}
-sudo -Hu ${RUNDECK_USERZ_UID} mkdir -p ${GIT_MANAGED_RUNDECK_PROJECTS} # Just in case there are no projects yet.
-### echo "Undo tight security so ${RUNDECK_USER} & SmartGit can share the key"
-### sudo -Hu ${RUNDECK_USERZ_UID} chmod 660 ${RUNDECK_USERZ_SSH_DIR}/*
-echo "${RUNDECK_USER} needs to own the whole hierarchy ..........."
-sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_PROJECT}
+# -----------------------------------------------------------
 #
-echo "But SmartGit needs read & write privileges ..."
-sudo -Hu ${RUNDECK_USERZ_UID} rm -fr ${RUNDECK_PROJECTZ_HOME}
-sudo -Hu ${RUNDECK_USERZ_UID} ln -s ${GIT_MANAGED_RUNDECK_PROJECTS} ${RUNDECK_PROJECTZ_HOME}
+echo "Ready to install ${CHEF_USER} . . . . . . . . . . . . . . . . . . . "
 #
-sudo usermod -a -G ${RUNDECK_GROUPZ_UID} ${ADMIN_USERZ_UID}
-chmod -R g+rw ${GIT_MANAGED_DIR}
-chmod -R g+rw ${RUNDECK_USERZ_WORK_DIR}
+sudo gem install chef
 #
-echo "Get Chef backup and restore scripts  ...................."
-sudo mkdir -p ${RUNDECK_QWIK_SCRIPTS}
-pushd ${RUNDECK_QWIK_SCRIPTS}
+echo "How does it look? . . . . . . . . . . . . . . . . . . . . . "
+chef-client -v
 #
-rm -f ./BackupChefProjects.sh
-wget ${SRV_CONFIG}/tools/chef/BackupChefProjects.sh
-chmod +x ./BackupChefProjects.sh
-ln -s ./BackupChefProjects.sh bkp
 #
-rm -f ./RestoreChefProjects.sh
-wget ${SRV_CONFIG}/tools/chef/RestoreChefProjects.sh
-chmod +x ./RestoreChefProjects.sh
-ln -s ./RestoreChefProjects.sh rst
-popd
+echo "Get all the other files from GitHub . . . . . . . . . . . . "
+sudo rm -fr ${CHEF_USERZ_HOME}/chef-repo
+cd ${CHEF_USERZ_HOME}
+pwd
+sudo -Hu ${CHEF_USERZ_UID} git clone https://github.com/opscode/chef-repo.git
 #
-echo "Fix configuration defect ..................................."
-pushd ${RUNDECK_CONF_DIR}
-cp apitoken.aclpolicy apitoken.aclpolicy.old
-sed 's|,kill] # allow read/write|,create,kill] # allow create/read/write|' <apitoken.aclpolicy.old >apitoken.aclpolicy
-popd
+echo "Prepare an authentication keys directory for ${CHEF_USER} Hosting . "
+sudo -Hu ${CHEF_USERZ_UID} mkdir -p ${CHEF_USERZ_HOME}/chef-repo/.chef
+cd ${CHEF_USERZ_HOME}/chef-repo/.chef
+sudo rm *.rb*
+sudo rm *.pem*
 #
-echo "Append required environment variables ......................"
-export TARGET_FILE=/etc/environment
-export NEW_VARIABLE_NAME=RUNDECK_PROJECTS
-export NEW_VARIABLE_VALUE=/var/chef/projects
-grep -q ${NEW_VARIABLE_NAME} ${TARGET_FILE} || echo ${NEW_VARIABLE_NAME}=${NEW_VARIABLE_VALUE}  | sudo tee -a ${TARGET_FILE}
+sudo -Hu ${CHEF_USERZ_UID} wget ${LOCAL_MIRROR}/chef/knife.rb
+sudo -Hu ${CHEF_USERZ_UID} wget ${LOCAL_MIRROR}/chef/hasanb.pem
+sudo -Hu ${CHEF_USERZ_UID} wget ${LOCAL_MIRROR}/chef/fltgclds-validator.pem 
 #
-echo "Now start up chef ......................................"
-sudo /etc/init.d/rundeckd start
+#
+echo "Are we able to connect . . . .  . . . .  . . . .  . . . . . "
+cd ..
+sudo -Hu ${CHEF_USERZ_UID} knife client list
 #
 #
 echo "Clear any problem packages ................................."
-sudo aptitude -y update
-sudo aptitude -y upgrade
-sudo aptitude -fy install
+# sudo aptitude -y update
+# sudo aptitude -y upgrade
+# sudo aptitude -fy install
 #
-exit 0;
+exit;
 
 
