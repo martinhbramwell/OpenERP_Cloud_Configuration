@@ -136,6 +136,10 @@ sudo -Hu ${CHEF_USERZ_UID} knife client list
 #
 #
 echo "Clear any problem packages ................................."
+sudo aptitude -y update
+sudo aptitude -y upgrade
+sudo aptitude -fy install
+#
 #
 exit;
 
