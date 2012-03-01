@@ -106,7 +106,8 @@ sudo -Hu ${RUNDECK_USERZ_UID} mkdir -p ${GIT_MANAGED_RUNDECK_PROJECTS} # Just in
 ### echo "Undo tight security so ${RUNDECK_USER} & SmartGit can share the key"
 ### sudo -Hu ${RUNDECK_USERZ_UID} chmod 660 ${RUNDECK_USERZ_SSH_DIR}/*
 echo "${RUNDECK_USER} needs to own the whole hierarchy ..........."
-sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_PROJECT}
+sudo chown -R ${RUNDECK_USERZ_UID}:${RUNDECK_USERZ_UID} ${GIT_MANAGED_DIR}
+ls -la ${GIT_MANAGED_DIR}
 #
 echo "But SmartGit needs read & write privileges ..."
 sudo -Hu ${RUNDECK_USERZ_UID} rm -fr ${RUNDECK_PROJECTZ_HOME}
