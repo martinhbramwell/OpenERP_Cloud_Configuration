@@ -17,7 +17,8 @@ chmod 770 ${SSH_DIR}
 #
 echo "Make RSA key.."  ##   It'd be better to get it locally.  See below.
 #
-ssh-keygen -N "aPassword" -t rsa -f ${SSH_DIR}/id_rsa
+# ssh-keygen -N "aPassword" -t rsa -f ${SSH_DIR}/id_rsa
+ssh-keygen -N "" -t rsa -f ${SSH_DIR}/id_rsa
 chmod -R 660 ${SSH_DIR}/id_rsa
 chmod -R 660 ${SSH_DIR}/id_rsa.pub
 
