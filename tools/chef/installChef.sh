@@ -65,8 +65,9 @@ sudo rm -f kn*
 sudo rm -f id_*
 #
 sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/known_hosts
-sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/id_rsa
 sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/id_rsa.pub
+sudo -u ${CHEF_USERZ_UID} wget -cN ${LOCAL_MIRROR}/ssh/${CHEF_USERZ_UID}/id_rsa
+sudo -u ${CHEF_USERZ_UID} chmod 600 id_rsa
 popd
 #
 # echo "Generate a key ..........."
