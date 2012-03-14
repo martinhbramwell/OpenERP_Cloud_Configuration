@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export EXTENSION="_test"
+# export EXTENSION="_test"
+export EXTENSION="_ERP_db_srv"
 #
 #
 export KCKSTRT_DIR=/tools/kickstart
