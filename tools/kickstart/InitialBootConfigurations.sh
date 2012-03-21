@@ -62,11 +62,11 @@ start)
 #
    ./FirstBootConfigurations.sh              2>&1 | tee "ini_${NUM: -3}_initial.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootSSHConfigurations.sh           2>&1 | tee "ini_${NUM: -3}_ssh.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
-   ./FirstBootJenkinsConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_jenkins.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+#   ./FirstBootJenkinsConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_jenkins.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
    ./FirstBootLXDEConfigurations.sh          2>&1 | tee "ini_${NUM: -3}_lxde.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
-   ./FirstBootChefConfigurations.sh          2>&1 | tee "ini_${NUM: -3}_chef.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
-   ./FirstBootRunDeckConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_rundeck.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
-   ./FirstBootSmartGitConfigurations.sh      2>&1 | tee "ini_${NUM: -3}_smartgit.log" && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+#   ./FirstBootChefConfigurations.sh          2>&1 | tee "ini_${NUM: -3}_chef.log"     && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+#   ./FirstBootRunDeckConfigurations.sh       2>&1 | tee "ini_${NUM: -3}_rundeck.log"  && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
+#   ./FirstBootSmartGitConfigurations.sh      2>&1 | tee "ini_${NUM: -3}_smartgit.log" && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
 
 if [ 0 == 1 ]; then
    ./FirstBootAntConfigurations.sh           2>&1 | tee "ini_${NUM: -3}_ant.log"      && CNT=$((  CNT += 1  ))  &&  NUM=000${CNT} 
