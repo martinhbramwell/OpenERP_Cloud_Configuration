@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # export EXTENSION="_test"
-export EXTENSION="_Cyclos_srv"
+export EXTENSION="_blank_VPS_golden.img"
 #
 #
 export KCKSTRT_DIR=/tools/kickstart
@@ -9,14 +9,14 @@ export TOOLS_DIR=/home/hasan/projects/OpenERP_Cloud_Configuration$KCKSTRT_DIR
 export WORKING_DIR=~/Desktop/ISOwork
 
 # Characteristics of the final target VM
-export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM${EXTENSION}
+export VIRTUAL_MACHINE_NAME=Oneiric64${EXTENSION}
 export VIRTUAL_RAM_SIZE=1024
 # export VIRTUAL_MACHINE_NAME=Oneiric64ExpVM
 # export VIRTUAL_RAM_SIZE=512
 
 export VIRTUAL_DISK_NAME=OO64ExpVDK${EXTENSION}
 export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
-export VIRTUAL_DISK_SIZE=6
+export VIRTUAL_DISK_SIZE=5
 # export VIRTUAL_DISK_NAME=OO64ExpVDK
 # export VIRTUAL_DISK_PATH=/var/lib/libvirt/images
 #export VIRTUAL_DISK_SIZE=4
