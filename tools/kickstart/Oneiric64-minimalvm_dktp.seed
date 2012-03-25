@@ -259,7 +259,8 @@ tasksel	tasksel/first						multiselect standard, OpenSSH server
 # Individual additional packages to install
 #d-i pkgsel/include string build-essential, git-core, unzip, pkg-config, sqlite3, libsqlite3-dev
 # d-i 	pkgsel/include 						string build-essential wget unzip pkg-config curl unzip gcc autoconf make git-core aptitude
-d-i 	pkgsel/include 						string build-essential traceroute lxde wget unzip pkg-config curl unzip gcc autoconf make git-core expect aptitude default-jre libxml-xpath-perl
+# d-i 	pkgsel/include 						string build-essential traceroute lxde wget unzip pkg-config curl unzip gcc autoconf make git-core expect aptitude default-jre libxml-xpath-perl
+d-i 	pkgsel/include 						   string build-essential traceroute lxde wget unzip pkg-config curl unzip gcc autoconf make git-core expect aptitude             libxml-xpath-perl
 
 
 ############### Boot loader installation ##################
